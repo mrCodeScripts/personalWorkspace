@@ -140,6 +140,11 @@ let multiply: MathFucn = (x, y) => {
 };
 // multiply(2, 3);
 
+
+
+
+
+
 // GENERICS
 function multNum<T>(mult: T): T {
   // GENERICS on parameter and return type
@@ -184,3 +189,64 @@ function arrayGenerics2<T>(arr: T[]): T[] {
   return arr;
 }
 // console.log(arrayGenerics2<number>([1, 2, 3]));
+
+
+
+
+
+// TYPE NARROWING (SMART TYPE CHECKING) 
+// TYPEOF
+function print(val: number | string): void {
+  if (typeof val == "number")  {
+    console.log(`A number: ${val}.`);
+  } else if (typeof val == "string") {
+    console.log(`A string: ${val.toUpperCase()}`);
+  }
+};
+// print("lksajdf");
+// INSTANEOF
+class UserA {};
+class UserB {};
+function printSomeShit(val: UserA | UserB) {
+  if (val instanceof UserA) console.log("User A");
+  else if (val instanceof UserA) console.log("User A");
+};
+printSomeShit((new UserA()));
+
+// ADVANCED OBJECT TYPES
+// READONLY
+interface UserZ {
+  readonly id: number | string;
+  name: string;
+};
+let user: UserZ = {id: 12345, name: "John Doe"};
+// user.id = 1; // error READ-ONLY
+// PARTIAL USER (Partial<T>)
+interface UserReference {
+  id: string | number;
+  name: string;
+  age: number;
+};
+type PartialUser = Partial<UserReference>;
+let aPartialUser: PartialUser = { // other parts of teh UserReference are partial (or optional)
+  name: "John Doe"
+};
+// REQUIRED (Required<T, K>)
+interface UserK {
+  id: number | string;
+  name?: string; // can still be null
+};
+type FullUser = Required<UserK>;
+let aRequiredUser: FullUser = {
+  id: 12345,
+  name: "John Doe" // now required
+};
+// PICK<T, K>
+interface User1 {name: string, id?: number | string};
+type pickUserProp = Pick<User1, "id">;
+const u: pickUserProp = {id: "slkjsdf"};
+
+
+
+
+

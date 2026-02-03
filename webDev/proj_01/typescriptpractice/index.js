@@ -140,4 +140,44 @@ function arrayGenerics2(arr) {
     return arr;
 }
 // console.log(arrayGenerics2<number>([1, 2, 3]));
+// TYPE NARROWING (SMART TYPE CHECKING) 
+// TYPEOF
+function print(val) {
+    if (typeof val == "number") {
+        console.log(`A number: ${val}.`);
+    }
+    else if (typeof val == "string") {
+        console.log(`A string: ${val.toUpperCase()}`);
+    }
+}
+;
+// print("lksajdf");
+// INSTANEOF
+class UserA {
+}
+;
+class UserB {
+}
+;
+function printSomeShit(val) {
+    if (val instanceof UserA)
+        console.log("User A");
+    else if (val instanceof UserA)
+        console.log("User A");
+}
+;
+printSomeShit((new UserA()));
+;
+let user = { id: 12345, name: "John Doe" };
+;
+let aPartialUser = {
+    name: "John Doe"
+};
+;
+let aRequiredUser = {
+    id: 12345,
+    name: "John Doe" // now required
+};
+;
+const u = { id: "slkjsdf" };
 //# sourceMappingURL=index.js.map
