@@ -1,0 +1,106 @@
+# 💻 Full Stack Development Setup — Next.js + Express.js
+
+# =========================
+# Project Structure
+# =========================
+# webDev/proj_01/
+# ├─ frontend/            # Next.js (React + TypeScript + Tailwind CSS)
+# ├─ backend/             # Express.js (Full stack dependencies)
+# └─ typescriptpractice/  # Optional TypeScript practice
+
+# =========================
+# 1️⃣ Backend (Express.js)
+# =========================
+
+# Create backend folder
+mkdir webDev\proj_01\backend
+
+# Navigate to backend
+cd webDev\proj_01\backend
+
+# Initialize npm project
+npm init -y
+
+# Install core dependency
+npm install express
+
+# Install additional dependencies for full-stack dev
+npm install cors dotenv helmet morgan nodemon mongoose bcryptjs jsonwebtoken
+
+# =========================
+# 2️⃣ Frontend (Next.js)
+# =========================
+
+# Create frontend directory
+mkdir webDev\proj_01\frontend
+
+# Navigate to frontend
+cd webDev\proj_01\frontend
+
+# Create Next.js app with default settings
+npx create-next-app@latest . --yes
+
+# Install additional dependencies
+npm install axios swr
+
+# =========================
+# 3️⃣ TypeScript Practice (Optional)
+# =========================
+
+# Create TypeScript practice folder
+mkdir webDev\proj_01\typescriptpractice
+
+# Navigate to TypeScript folder
+cd webDev\proj_01\typescriptpractice
+
+# Initialize npm project
+npm init -y
+
+# Install TypeScript and Node.js types
+npm install typescript @types/node
+
+# Initialize TypeScript configuration
+npx tsc --init
+
+# Build TypeScript (compile to JS)
+npm run build
+
+# Run compiled JavaScript
+npm start
+
+# =========================
+# 4️⃣ Running the Application
+# =========================
+
+# Backend
+cd webDev/proj_01/backend
+npm run dev   # uses nodemon for hot reload
+
+# Frontend
+cd webDev/proj_01/frontend
+npm run dev   # runs Next.js dev server
+
+# =========================
+# Notes
+# =========================
+# Ports
+# Backend: 3001 (configurable via .env)
+# Frontend: 3000
+
+# Backend Dependencies & Purpose
+# express      → Core server
+# cors         → Cross-Origin Requests
+# dotenv       → Environment variables
+# helmet       → Security headers
+# morgan       → Logging HTTP requests
+# nodemon      → Hot reload in dev
+# mongoose     → MongoDB ORM
+# bcryptjs     → Password hashing
+# jsonwebtoken → Auth & token handling
+
+# Frontend Dependencies
+# axios → HTTP requests
+# swr   → Data fetching & caching
+
+# Optional: Tailwind CSS for styling, TypeScript for type safety
+# Recommended: Keep frontend and backend dependencies separate to avoid conflicts

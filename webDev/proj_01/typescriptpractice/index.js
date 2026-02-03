@@ -1,0 +1,143 @@
+"use strict";
+// TypeScript Practice File
+Object.defineProperty(exports, "__esModule", { value: true });
+// Basic types
+let name = "John Doe";
+let age = 19;
+let isActive = false;
+let anyItem = false; // bypasses type checking; avoid if possible
+let unknown = 5; // safer than any; you have to check type before using
+let aVoid; // void no value
+let nullValue = null; // null value
+let arr = [1, 2, 3, 4]; // array
+let tuple = ["Boss", 25]; // tuple
+var Colors;
+(function (Colors) {
+    Colors[Colors["RED"] = 0] = "RED";
+    Colors[Colors["GREEN"] = 1] = "GREEN";
+    Colors[Colors["BLUE"] = 2] = "BLUE";
+})(Colors || (Colors = {})); // symbolic names for numbers
+var Status;
+(function (Status) {
+    Status["PENDING"] = "pending";
+    Status["DONE"] = "done";
+    Status["CANCELLED"] = "cancelled";
+})(Status || (Status = {})); // symbolic names for numbers
+let obj = { name: "John Doe", age: 19 };
+// STRONG OBJECTS INSIDE ARRAYS
+// there are two types, either using types for what specific type of
+// objects are stored inside the array, using explicit specification of what
+// to store inside the array, or using interfaces (almost similart to types).
+// -> using explicit specification
+let people1 = [{ name: "John doe", age: 19 }];
+let people2 = [
+    { name: "John Doe", age: 19 },
+    { name: "John Doe", age: 19 },
+    { name: "John Doe", age: 19 },
+    { name: "John Doe", age: 19 },
+    { name: "John Doe", age: 19 },
+];
+let people3 = [
+    { name: "Jane Doe", age: 19 },
+    { name: "Jane Doe", age: 19 },
+];
+let student = {
+    name: "John Doe",
+    age: 19,
+    grade: 90,
+};
+let theObject = {
+    property: "Property I",
+    item: "Item I",
+};
+class Admin {
+    username;
+    constructor(username) {
+        this.username = username;
+    }
+    login() {
+        console.log(`You are now logged in ${this.username.toLocaleUpperCase()}!`);
+    }
+}
+const anAdmin = new Admin("John Doe");
+// FUNCTIONS
+function log() {
+    console.log("This is a void function!");
+}
+// log();
+function crash() {
+    throw new Error("Something went wrong!");
+}
+// crash();
+function forever() {
+    while (true) {
+        console.log("I never stop");
+    }
+}
+// forever();
+function add(a, b) {
+    // PARAMETERS + RETURN TYPES
+    return a + b;
+}
+// console.log(add(2, 3));
+function greet(name, age) {
+    // ? -> OPTIONAL PARAMETERS
+    console.log(`Hello ${name}${age ? `, you are ${age} years old` : `.`}`);
+}
+// greet("John Doe");
+function greet2(name = "Boss") {
+    console.log(`Hello ${name}!`);
+}
+let multiply = (x, y) => {
+    let answer = x * y;
+    console.log(answer);
+    return answer;
+};
+// multiply(2, 3);
+// GENERICS
+function multNum(mult) {
+    // GENERICS on parameter and return type
+    if (typeof mult == "number") {
+        console.log(mult * 3);
+        return (mult * 3);
+    }
+    console.log("Not a number!");
+    return mult;
+}
+// multNum<Number>(40);
+function arrayGenerics1(arr) {
+    // Genererics for arrays, extends to allow numbers (optional)
+    // this function only accepts numbers (T extends numbers)
+    if (arr.length > 0 && typeof arr[0] == "number") {
+        let newArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            newArr.push(Number(arr[i] * 3)); // ! -> "trust me this is not undefined"
+            console.log(`Number ${arr[i]}.`);
+        }
+        return newArr;
+    }
+    return arr;
+}
+// console.log(arrayGenerics1<number>([1, 2, 3]));
+function arrayGenerics2(arr) {
+    // Genererics for arrays, extends to allow numbers (optional)
+    const newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        const val = arr[i]; // trust me its not empty
+        if (typeof val == "string") {
+            newArr.push(val.repeat(3));
+            console.log(`String: ${val}.`);
+        }
+        else if (typeof val == "number") {
+            newArr.push((val * 3)); // ! -> "trust me this is not undefined"
+            console.log(`Number ${newArr[i]}.`);
+        }
+        else {
+            newArr.push(val);
+            console.log(`Other: ${val}.`);
+        }
+    }
+    return arr;
+}
+// console.log(arrayGenerics2<number>([1, 2, 3]));
+//# sourceMappingURL=index.js.map
