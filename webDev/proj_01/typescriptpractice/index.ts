@@ -213,7 +213,13 @@ function printSomeShit(val: UserA | UserB) {
 };
 printSomeShit((new UserA()));
 
+
+
+
+
+
 // ADVANCED OBJECT TYPES
+
 // READONLY
 interface UserZ {
   readonly id: number | string;
@@ -221,7 +227,8 @@ interface UserZ {
 };
 let user: UserZ = {id: 12345, name: "John Doe"};
 // user.id = 1; // error READ-ONLY
-// PARTIAL USER (Partial<T>)
+
+// PARTIAL USER (Partial<T>) -> makes all properties optional
 interface UserReference {
   id: string | number;
   name: string;
@@ -231,7 +238,8 @@ type PartialUser = Partial<UserReference>;
 let aPartialUser: PartialUser = { // other parts of teh UserReference are partial (or optional)
   name: "John Doe"
 };
-// REQUIRED (Required<T, K>)
+
+// REQUIRED (Required<T, K>) -> makes all optional properties required
 interface UserK {
   id: number | string;
   name?: string; // can still be null
@@ -241,10 +249,33 @@ let aRequiredUser: FullUser = {
   id: 12345,
   name: "John Doe" // now required
 };
-// PICK<T, K>
+
+// PICK<T, K> -> select specific properties from a type
 interface User1 {name: string, id?: number | string};
 type pickUserProp = Pick<User1, "id">;
 const u: pickUserProp = {id: "slkjsdf"};
+
+// OMIT<T, K> -> excludes certain properties
+interface UserExamp {name: string, id?: number | string};
+type omitUserProp = Omit<UserExamp, "id">;
+const omittedUser: omitUserProp = {
+  name: "John Doe",
+  // id: 123454, // ERROR not allowed (was omitted)
+};
+
+// REAL-WORDL USAGE COMBO
+interface UserAcc {
+  id: string | number;
+  username: string;
+  age: number;
+};
+function updateUser(user: UserAcc, updates: Partial<UserAcc>): any {
+  return {...user, ...updates};
+}
+const currentUser: UserAcc = {id: 123, username: "John Doe", age: 19};
+const updatedUser: UserAcc = updateUser(currentUser, {age: 20});
+
+
 
 
 

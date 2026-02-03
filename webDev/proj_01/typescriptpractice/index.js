@@ -180,4 +180,15 @@ let aRequiredUser = {
 };
 ;
 const u = { id: "slkjsdf" };
+;
+const omittedUser = {
+    name: "John Doe",
+    // id: 123454, // ERROR not allowed (was omitted)
+};
+;
+function updateUser(user, updates) {
+    return { ...user, ...updates };
+}
+const currentUser = { id: 123, username: "John Doe", age: 19 };
+const updatedUser = updateUser(currentUser, { age: 20 });
 //# sourceMappingURL=index.js.map
