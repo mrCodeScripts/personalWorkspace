@@ -1,6 +1,7 @@
 "use strict";
 // TypeScript Practice File
 Object.defineProperty(exports, "__esModule", { value: true });
+const ts = require("typescript");
 // Basic types
 let name = "John Doe";
 let age = 19;
@@ -140,7 +141,7 @@ function arrayGenerics2(arr) {
     return arr;
 }
 // console.log(arrayGenerics2<number>([1, 2, 3]));
-// TYPE NARROWING (SMART TYPE CHECKING) 
+// TYPE NARROWING (SMART TYPE CHECKING)
 // TYPEOF
 function print(val) {
     if (typeof val == "number") {
@@ -150,45 +151,103 @@ function print(val) {
         console.log(`A string: ${val.toUpperCase()}`);
     }
 }
-;
 // print("lksajdf");
 // INSTANEOF
 class UserA {
 }
-;
 class UserB {
 }
-;
 function printSomeShit(val) {
     if (val instanceof UserA)
         console.log("User A");
     else if (val instanceof UserA)
         console.log("User A");
 }
-;
-printSomeShit((new UserA()));
-;
 let user = { id: 12345, name: "John Doe" };
-;
 let aPartialUser = {
-    name: "John Doe"
+    // other parts of teh UserReference are partial (or optional)
+    name: "John Doe",
 };
-;
 let aRequiredUser = {
     id: 12345,
-    name: "John Doe" // now required
+    name: "John Doe", // now required
 };
-;
 const u = { id: "slkjsdf" };
-;
 const omittedUser = {
     name: "John Doe",
     // id: 123454, // ERROR not allowed (was omitted)
 };
-;
 function updateUser(user, updates) {
     return { ...user, ...updates };
 }
 const currentUser = { id: 123, username: "John Doe", age: 19 };
 const updatedUser = updateUser(currentUser, { age: 20 });
+// PRODUCTION TYPESCRIPT
+// 1. STRICT MODE + NULL SAFETY (VERY IMPORTANT)
+let userName1;
+// userName1 = null; // ERROR
+// username1 = undefined; // ERROR
+// 2. UNION TYPES WITH NULL
+let userName2;
+userName2 = "Boss"; // ALLOWED
+userName2 = null; // ALLOWED
+// you are then forced to check the type
+const RandUser = { name: "John Doe" };
+if (RandUser.age !== undefined) {
+    RandUser.age.toFixed();
+}
+// Optional Chaining
+RandUser.age?.toFixed(); // works the same as if statement (?.)
+// 4. NULL COALESCING ??
+const userAge = RandUser.age ?? 0; // if user age is null, use 0.
+// const userAge: number = RandUser.age || 0; // INVALID
+// 5. NON-NULL ASSERTION ! (USE CAREFULLY)
+// arr[i]! -> "trust me arr[i] is not null"
+let iTem = null;
+function findUser(id) {
+    if (id === 1) {
+        return { name: "John Doe", age: 20 };
+    }
+    return null;
+}
+const aUser = findUser(1);
+function isAdmin(acc) {
+    return acc.role == "Admin";
+}
+const adminUser = {
+    name: "John Doe",
+    age: 19,
+    isActive: true,
+    role: "Admin",
+    permissions: ["shit"],
+};
+const func = (acc) => {
+    if (isAdmin(acc)) {
+        console.log(`Admin name: ${acc.name}.`);
+    }
+    else {
+        console.log(`Default-User name: ${acc.name}.`);
+    }
+};
+function handleResult(res) {
+    if ("status" in res && "message" in res && res.status == "success") {
+        console.log(res.message);
+    }
+    else if ("status" in res && "message" in res && res.status == "failed") {
+        console.log(res.message);
+    }
+    else if (!("status" in res) && "message" in res) {
+        console.log(res.message);
+    }
+}
+function handleAPI(res) {
+    if ("ok" in res && res.ok) {
+        console.log(`User: Name -> ${res.data.name}, Age -> ${res.data.age}.`);
+    }
+    else if ("ok" in res && !res.ok) {
+        console.log(`Error message: ${res.message}`);
+    }
+}
+const currentStatus = { ok: true, data: { name: "John Doe", age: 19 } };
+// handleAPI(currentStatus);
 //# sourceMappingURL=index.js.map
