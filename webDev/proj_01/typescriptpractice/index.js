@@ -1,7 +1,8 @@
 "use strict";
-// TypeScript Practice File
 Object.defineProperty(exports, "__esModule", { value: true });
-const ts = require("typescript");
+// TypeScript Practice File
+// import ts = require("typescript");
+require("typescript");
 // Basic types
 let name = "John Doe";
 let age = 19;

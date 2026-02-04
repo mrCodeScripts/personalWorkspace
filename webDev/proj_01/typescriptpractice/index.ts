@@ -1,6 +1,6 @@
 // TypeScript Practice File
-
-import ts = require("typescript");
+// import ts = require("typescript");
+import 'typescript'
 
 // Basic types
 let name: string = "John Doe";
