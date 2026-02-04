@@ -271,6 +271,10 @@ const recordedUsers: Record<number, Required<userAB>> = {
   3: { id: 3, name: "Jack Doe", age: 19 },
 };
 
+// EXCLUDE<Type, What to exclude in that type>
+// excludes a property
+type Result12 = "succ"
+
 // REAL-WORDL USAGE COMBO
 interface UserAcc {
   id: string | number;
