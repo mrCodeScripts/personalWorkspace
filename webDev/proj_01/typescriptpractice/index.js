@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // TypeScript Practice File
 // import ts = require("typescript");
 require("typescript");
+const isParameter = require("typescript");
 // Basic types
 let name = "John Doe";
 let age = 19;
@@ -183,6 +184,25 @@ const recordedUsers = {
     2: { id: 2, name: "Jane Doe", age: 19 },
     3: { id: 3, name: "Jack Doe", age: 19 },
 };
+// SafeUser is {name: string; age: number}; and will never accept null undefined 
+// RETURNTYPE<T>
+function getUser() {
+    return { name: "Boss", age: 19 };
+}
+function someReturnType() {
+    return true;
+}
+const item123 = true;
+const item1234 = { name: "Someone", age: 20 };
+// console.log(item123);
+// console.log(item1234);
+// PARAMETERS<typeof function>
+function someBullshitFn(id, name) {
+    return { id, name };
+}
+;
+let PossibleParameter = [1, "someString"];
+someBullshitFn(...PossibleParameter);
 function updateUser(user, updates) {
     return { ...user, ...updates };
 }

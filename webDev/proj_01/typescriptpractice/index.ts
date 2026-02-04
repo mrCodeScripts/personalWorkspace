@@ -1,6 +1,7 @@
 // TypeScript Practice File
 // import ts = require("typescript");
 import 'typescript'
+import isParameter = require('typescript');
 
 // Basic types
 let name: string = "John Doe";
@@ -272,8 +273,44 @@ const recordedUsers: Record<number, Required<userAB>> = {
 };
 
 // EXCLUDE<Type, What to exclude in that type>
-// excludes a property
-type Result12 = "succ"
+// excludes a property of something
+// "only works on union types, not objects or interfaces"
+type hasPending = "success" | "failed" | "pending";
+type noPending = Exclude<hasPending, "pending">;
+
+// EXCTRACT<Union Type, what to keep>
+// it keeps only that exist on both unions.
+type allStats = "success" | "failed" | "pending";
+type noFailed = Exclude<allStats, "success" | "pending">;
+
+// NONNULLABLE<Union Type>
+// removes null and undfined from a type
+type UserApi = {name: string; age: number} | null | undefined;
+type SafeUser = NonNullable<UserApi>;
+// SafeUser is {name: string; age: number}; and will never accept null undefined 
+
+// RETURNTYPE<T>
+function getUser() {
+  return {name: "Boss", age: 19};
+}
+function someReturnType() {
+  return true;
+}
+type aReturnType = ReturnType<typeof someReturnType>;
+type UserReturn = ReturnType<typeof getUser>;
+const item123: aReturnType = true;
+const item1234: UserReturn = {name: "Someone", age: 20};
+// console.log(item123);
+// console.log(item1234);
+
+// PARAMETERS<typeof function>
+function someBullshitFn(id: number, name: string) {
+  return {id, name};
+};
+// will be used for tupples
+type UserParams = Parameters<typeof someBullshitFn>; // [number, string]
+let PossibleParameter: UserParams = [1, "someString"];
+someBullshitFn(...PossibleParameter);
 
 // REAL-WORDL USAGE COMBO
 interface UserAcc {
