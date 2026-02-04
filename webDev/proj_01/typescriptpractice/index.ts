@@ -469,6 +469,7 @@ type Validation3<T> = T extends string ? any : "error";
 function printSomeShi<T extends string> (value: Validation3<T>) {
   console.log(value);
 };
+
 printSomeShi(33);
 
 
