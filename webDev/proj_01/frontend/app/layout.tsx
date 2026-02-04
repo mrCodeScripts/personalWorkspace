@@ -157,16 +157,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{ fontFamily: "sans-serif", padding: "2rem" }}>
-        <header style={{ marginBottom: "2rem" }}>
+        {/* <header style={{ marginBottom: "2rem" }}>
           <h1>My Next.js App</h1>
           <nav style={{ display: "flex", gap: "1rem" }}>
             <a href="/">Home</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
           </nav>
-        </header>
+        </header> */}
         <main>{children}</main>
-        <footer
+        {/* <footer
           style={{
             marginTop: "2rem",
             borderTop: "1px solid #ccc",
@@ -174,7 +174,7 @@ export default function RootLayout({
           }}
         >
           Footer © 2026
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

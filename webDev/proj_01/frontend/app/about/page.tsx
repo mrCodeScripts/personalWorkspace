@@ -1,4 +1,5 @@
 // app/about/page.tsx
+/*
 export default function About() {
   return (
     <div>
@@ -7,3 +8,4 @@ export default function About() {
     </div>
   );
 }
+*/

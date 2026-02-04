@@ -7,9 +7,6 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 // import { IconHeart } from 'tabler-icons-react';
 import { FaHeart } from 'react-icons/fa';
 
-
-
-
 /**
  * ================= ICON LIBRARIES CHEAT SHEET =================
  * 
@@ -61,18 +58,18 @@ import { FaHeart } from 'react-icons/fa';
 export default function Home() {
   return (
     <div>
-      <h2>Welcome to the Home Page!</h2>
-      <p>This is your first Next.js page.</p>
+      {/* <h2>Welcome to the Home Page!</h2> */}
+      {/* <p>This is your first Next.js page.</p> */}
 
-      <h3>Icon Examples:</h3>
-      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-        <Heart size={24} color="red" />
+      {/* <h3>Icon Examples:</h3> */}
+      {/* <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}> */}
+        {/* <Heart size={24} color="red" />
         <HeartIcon className="h-6 w-6 text-red-500" />
         <FontAwesomeIcon icon={faHeart} size="lg" color="red" />
         {/* <IconHeart size={24} color="red" /> */}
-        <FaHeart size={24} color="red" />
-      </div>
-      <PanelsTopLeft />
+        {/* <FaHeart size={24} color="red" /> */} 
+      {/* </div> */}
+      {/* <PanelsTopLeft /> */}
     </div>
   );
 }
