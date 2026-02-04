@@ -451,6 +451,7 @@ const currentStatus: APISTAT = {
 
 
 
+
 // CONDITIONAL TYPES
 type IsString<T> = T extends string ? true : false;
 type a = IsString<"shit">;
