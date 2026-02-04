@@ -55,6 +55,7 @@ import { FaHeart } from 'react-icons/fa';
  */
 
 
+import ButtonExample1 from './components/examples/componentExamples';
 export default function Home() {
   return (
     <div>
@@ -70,6 +71,7 @@ export default function Home() {
         {/* <FaHeart size={24} color="red" /> */} 
       {/* </div> */}
       {/* <PanelsTopLeft /> */}
+      <ButtonExample1 text='Click Me' onClick={() => {console.log("shit")}} />
     </div>
   );
 }
