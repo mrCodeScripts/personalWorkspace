@@ -257,6 +257,20 @@ const omittedUser: omitUserProp = {
   // id: 123454, // ERROR not allowed (was omitted)
 };
 
+// RECORDS<key, type|interface> -> used for listing some data.
+// Record<> -> used for controlling the key and data.
+// Omit, Partial, Required, etc. -> used for controling the data type.
+interface userAB {
+  id: string | number;
+  name: string;
+  age: number;
+}
+const recordedUsers: Record<number, Required<userAB>> = {
+  1: { id: 1, name: "John Doe", age: 19 },
+  2: { id: 2, name: "Jane Doe", age: 19 },
+  3: { id: 3, name: "Jack Doe", age: 19 },
+};
+
 // REAL-WORDL USAGE COMBO
 interface UserAcc {
   id: string | number;
@@ -378,12 +392,15 @@ interface UserAPI {
   age: number;
 }
 type APISTAT = { ok: true; data: UserAPI } | { ok: false; message: string };
-function handleAPI (res: APISTAT) {
-  if ("ok" in res && res.ok)  {
+function handleAPI(res: APISTAT) {
+  if ("ok" in res && res.ok) {
     console.log(`User: Name -> ${res.data.name}, Age -> ${res.data.age}.`);
   } else if ("ok" in res && !res.ok) {
     console.log(`Error message: ${res.message}`);
   }
-} 
-const currentStatus: APISTAT = {ok: true, data: {name: "John Doe", age: 19}};
+}
+const currentStatus: APISTAT = {
+  ok: true,
+  data: { name: "John Doe", age: 19 },
+};
 // handleAPI(currentStatus);

@@ -177,6 +177,11 @@ const omittedUser = {
     name: "John Doe",
     // id: 123454, // ERROR not allowed (was omitted)
 };
+const recordedUsers = {
+    1: { id: 1, name: "John Doe", age: 19 },
+    2: { id: 2, name: "Jane Doe", age: 19 },
+    3: { id: 3, name: "Jack Doe", age: 19 },
+};
 function updateUser(user, updates) {
     return { ...user, ...updates };
 }
@@ -248,6 +253,9 @@ function handleAPI(res) {
         console.log(`Error message: ${res.message}`);
     }
 }
-const currentStatus = { ok: true, data: { name: "John Doe", age: 19 } };
+const currentStatus = {
+    ok: true,
+    data: { name: "John Doe", age: 19 },
+};
 // handleAPI(currentStatus);
 //# sourceMappingURL=index.js.map
