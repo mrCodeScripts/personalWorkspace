@@ -1,6 +1,7 @@
 // TypeScript Practice File
 // import ts = require("typescript");
 import 'typescript'
+import isStringLiteral = require('typescript');
 import isParameter = require('typescript');
 
 // Basic types
@@ -445,3 +446,39 @@ const currentStatus: APISTAT = {
   data: { name: "John Doe", age: 19 },
 };
 // handleAPI(currentStatus);
+
+
+
+
+
+// CONDITIONAL TYPES
+type IsString<T> = T extends string ? true : false;
+type a = IsString<"shit">;
+
+type OnlyString<T> = T extends string ? T : never; // Remove non-strings
+type Ashit = OnlyString<string>; // will be string type
+type Bshit = OnlyString<number>; // will be any type
+type Xshit = OnlyString<string | number | boolean>; // becomes string
+
+type Validate<T> = T extends string ? T : "Error must be string!";
+type Ashits = Validate<number>;
+
+// you can use this for type checking
+type Validation3<T> = T extends string ? any : "error";
+function printSomeShi<T extends string> (value: Validation3<T>) {
+  console.log(value);
+};
+printSomeShi(33);
+
+
+
+
+
+
+
+
+
+
+
+
+

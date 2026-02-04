@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // TypeScript Practice File
 // import ts = require("typescript");
 require("typescript");
+const isStringLiteral = require("typescript");
 const isParameter = require("typescript");
 // Basic types
 let name = "John Doe";
@@ -278,5 +279,9 @@ const currentStatus = {
     ok: true,
     data: { name: "John Doe", age: 19 },
 };
-// handleAPI(currentStatus);
+function printSomeShi(value) {
+    console.log(value);
+}
+;
+printSomeShi(33);
 //# sourceMappingURL=index.js.map
