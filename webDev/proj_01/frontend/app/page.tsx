@@ -1,10 +1,11 @@
 // app/page.tsx
 import { Heart, PanelsTopLeft } from 'lucide-react';
 import { HeartIcon } from '@heroicons/react/24/solid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 // import { IconHeart } from 'tabler-icons-react';
 import { FaHeart } from 'react-icons/fa';
+import DashboardDisplayExample, { ButtonComponent1 } from './components/examples/clientComponentExamples';
 
 
 /**
@@ -54,8 +55,13 @@ import { FaHeart } from 'react-icons/fa';
  * - For React Icons wrapper: each library prefix differs (Fa = FontAwesome, Md = Material, Ai = AntDesign, etc.)
  */
 
-import { ButtonExample1 } from './components/examples/componentExamples';
 export default function Home() {
+  const button: ButtonComponent1 = {
+    text: "Click this shit",
+    classNames: undefined,
+    onClick: undefined
+  };
+
   return (
     <div>
       {/* <h2>Welcome to the Home Page!</h2> */}
@@ -70,7 +76,8 @@ export default function Home() {
         {/* <FaHeart size={24} color="red" /> */} 
       {/* </div> */}
       {/* <PanelsTopLeft /> */}
-      <ButtonExample1 text='Click Me' onClick={() => {console.log("shit")}} />
+
+          <DashboardDisplayExample title='List of Users' classStyle='text-center p-3  text-white border-2' button={button} />
     </div>
   );
 }

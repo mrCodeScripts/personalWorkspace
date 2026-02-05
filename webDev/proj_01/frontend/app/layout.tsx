@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   authors: [{ name: "John Doe", url: "https://mySampleWebsite.com" }],
   creator: "John Doe",
   publisher: "Boss Inc",
-  metadataBase: new URL("https://mySampleWebsite.com"),
+  // metadataBase: new URL("https://mySampleWebsite.com"),
   openGraph: {
     title: "My next.js web application",
     description: "Professional web application with NextJS",
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     shortcut: "favicon.ico",
     apple: "favicon.ico"
   },
-  themeColor: "#0ea5e9",
-  manifest: "/site.webmanifest",
+  // themeColor: "#0ea5e9",
+  // manifest: "/site.webmanifest",
 };
 /**
  * COMMON METADATA PROPERTIES (Next.js 13+ App Router)
