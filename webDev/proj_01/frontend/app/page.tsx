@@ -1,4 +1,3 @@
-
 // app/page.tsx
 import { Heart, PanelsTopLeft } from 'lucide-react';
 import { HeartIcon } from '@heroicons/react/24/solid';
@@ -6,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 // import { IconHeart } from 'tabler-icons-react';
 import { FaHeart } from 'react-icons/fa';
+
 
 /**
  * ================= ICON LIBRARIES CHEAT SHEET =================
@@ -54,8 +54,7 @@ import { FaHeart } from 'react-icons/fa';
  * - For React Icons wrapper: each library prefix differs (Fa = FontAwesome, Md = Material, Ai = AntDesign, etc.)
  */
 
-
-import ButtonExample1 from './components/examples/componentExamples';
+import { ButtonExample1 } from './components/examples/componentExamples';
 export default function Home() {
   return (
     <div>
