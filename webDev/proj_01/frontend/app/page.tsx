@@ -9,6 +9,8 @@ import DashboardDisplayExample, { ButtonComponent1 } from './components/examples
 import ForwardRefExamples from './components/examples/HooksAndExamples/forwardRef';
 import UseEffectExamples from './components/examples/HooksAndExamples/useEffect';
 import UseIdExamples from './components/examples/HooksAndExamples/useId';
+import UseCallbackExamples from './components/examples/HooksAndExamples/useCallback';
+import ReactMemoExamples from './components/examples/HooksAndExamples/reactMemo';
 
 
 /**
@@ -85,6 +87,8 @@ export default function Home() {
       {/* <ForwardRefExamples /> */}
       {/* <UseEffectExamples /> */}
       {/* <UseIdExamples /> */}
+      {/* <UseCallbackExamples /> */}
+      <ReactMemoExamples />
     </div>
   );
 }
