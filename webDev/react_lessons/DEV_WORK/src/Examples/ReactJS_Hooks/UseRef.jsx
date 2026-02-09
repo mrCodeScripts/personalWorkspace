@@ -64,7 +64,9 @@ function UseRefExample2 () {
 export default function TryUseRef () {
   return (
     <>
-      <UseRefExample2 />
+      {/* <UseRefExample2 /> */}
+      {/* <UseRefExample1 /> */}
+      <Buttons />
     </>
   )
 }
@@ -170,3 +172,5 @@ styleRef.current.style.transform = `translateX(${x.current}px)`;
 
 -------------------------------------------------------------
 */
+
+

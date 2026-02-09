@@ -46,7 +46,7 @@ export default function App() {
       {/* <TryTaskManager /> */}
       {/* <TryUseOptimistic /> */}
       {/* <TryUseCallback /> */}
-      {/* <TryUseRef /> */}
+      <TryUseRef />
       {/* <SnakeGame /> */}
       {/* <TryForwardRef /> */}
       {/* <TryImperativeHandle /> */}
