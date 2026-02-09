@@ -156,7 +156,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "sans-serif", padding: "2rem" }}>
+      <body style={{ fontFamily: "sans-serif", padding: "2rem", backgroundColor: "#ffffff"}}>
         {/* <header style={{ marginBottom: "2rem" }}>
           <h1>My Next.js App</h1>
           <nav style={{ display: "flex", gap: "1rem" }}>

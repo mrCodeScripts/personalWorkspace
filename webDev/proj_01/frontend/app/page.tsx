@@ -8,6 +8,7 @@ import { FaHeart } from 'react-icons/fa';
 import DashboardDisplayExample, { ButtonComponent1 } from './components/examples/clientComponentExamples';
 import ForwardRefExamples from './components/examples/HooksAndExamples/forwardRef';
 import UseEffectExamples from './components/examples/HooksAndExamples/useEffect';
+import UseIdExamples from './components/examples/HooksAndExamples/useId';
 
 
 /**
@@ -82,7 +83,8 @@ export default function Home() {
       {/* <DashboardDisplayExample title='List of Users' classStyle='text-center p-3  text-white border-2' button={button} /> */}
 
       {/* <ForwardRefExamples /> */}
-      <UseEffectExamples />
+      {/* <UseEffectExamples /> */}
+      {/* <UseIdExamples /> */}
     </div>
   );
 }
