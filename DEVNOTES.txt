@@ -104,3 +104,23 @@ npm run dev   # runs Next.js dev server
 
 # Optional: Tailwind CSS for styling, TypeScript for type safety
 # Recommended: Keep frontend and backend dependencies separate to avoid conflicts
+
+
+
+
+
+
+
+
+
+
+
+
+OBJECTIVES:
+1. Finish reviewing all React Hooks with NextJS + TypeScript.
+2. Start learning how to use server side of NextJS.
+3. Start learning ExpressJS + NextJS:
+	-> connect and form a server, while learning different ways of sending data.
+	-> learn live server with ExpressJS + NextJS.
+	-> Create a chat app.
+

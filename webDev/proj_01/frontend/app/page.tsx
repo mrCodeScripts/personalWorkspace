@@ -7,6 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FaHeart } from 'react-icons/fa';
 import DashboardDisplayExample, { ButtonComponent1 } from './components/examples/clientComponentExamples';
 import ForwardRefExamples from './components/examples/HooksAndExamples/forwardRef';
+import UseEffectExamples from './components/examples/HooksAndExamples/useEffect';
 
 
 /**
@@ -70,16 +71,18 @@ export default function Home() {
 
       {/* <h3>Icon Examples:</h3> */}
       {/* <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}> */}
-        {/* <Heart size={24} color="red" />
+      {/* <Heart size={24} color="red" />
         <HeartIcon className="h-6 w-6 text-red-500" />
         <FontAwesomeIcon icon={faHeart} size="lg" color="red" />
         {/* <IconHeart size={24} color="red" /> */}
-        {/* <FaHeart size={24} color="red" /> */} 
+      {/* <FaHeart size={24} color="red" /> */}
       {/* </div> */}
       {/* <PanelsTopLeft /> */}
 
-          {/* <DashboardDisplayExample title='List of Users' classStyle='text-center p-3  text-white border-2' button={button} /> */}
-          <ForwardRefExamples />
+      {/* <DashboardDisplayExample title='List of Users' classStyle='text-center p-3  text-white border-2' button={button} /> */}
+
+      {/* <ForwardRefExamples /> */}
+      <UseEffectExamples />
     </div>
   );
 }
