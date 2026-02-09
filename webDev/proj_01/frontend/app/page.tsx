@@ -6,6 +6,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 // import { IconHeart } from 'tabler-icons-react';
 import { FaHeart } from 'react-icons/fa';
 import DashboardDisplayExample, { ButtonComponent1 } from './components/examples/clientComponentExamples';
+import ForwardRefExamples from './components/examples/HooksAndExamples/forwardRef';
 
 
 /**
@@ -77,7 +78,8 @@ export default function Home() {
       {/* </div> */}
       {/* <PanelsTopLeft /> */}
 
-          <DashboardDisplayExample title='List of Users' classStyle='text-center p-3  text-white border-2' button={button} />
+          {/* <DashboardDisplayExample title='List of Users' classStyle='text-center p-3  text-white border-2' button={button} /> */}
+          <ForwardRefExamples />
     </div>
   );
 }
