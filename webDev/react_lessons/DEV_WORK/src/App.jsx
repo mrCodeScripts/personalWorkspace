@@ -39,14 +39,14 @@ export default function App() {
       {/* <TryUseEffect /> */}
       {/* <UseMemoExample></UseMemoExample> */}
       {/* <UserApp></UserApp> */}
-      {/* <TryUseActionState /> */}
+      <TryUseActionState />
       {/* <TheCart /> */}
       {/* <TryReactMemo /> */}
       {/* <TryUseMemo /> */}
       {/* <TryTaskManager /> */}
       {/* <TryUseOptimistic /> */}
       {/* <TryUseCallback /> */}
-      <TryUseRef />
+      {/* <TryUseRef /> */}
       {/* <SnakeGame /> */}
       {/* <TryForwardRef /> */}
       {/* <TryImperativeHandle /> */}

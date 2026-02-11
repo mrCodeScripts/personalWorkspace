@@ -54,12 +54,17 @@ function UseMemoExample2() {
     { name: "Garlic (250g)", price: 60 },
   ];
 
-  const ProductListComponent = React.memo((props: {products: Product[], priceRange: number}) => {
-    const price = props.priceRange;
-    const filteredProducts = price > 0 ? props.products.filter(e => e.price <= price) : props.products;
+  const ExpensiveProductCalc = useMemo(() => {
+    const price = Number(filterPrice);
+    const products = ExistingProducts;
+    const filteredProducts = price > 0 ? products.filter(e => e.price <= price) : products;
+    return filteredProducts;
+  }, [filterPrice]);
+  
+  const ProductListComponent = React.memo((props: {products: Product[]}) => {
     return (
       <ul style={{color: "red"}}>
-        {filteredProducts.map((e, i) => <li key={i}>{e.name} ${e.price}</li>)}
+        {props.products.map((e, i) => <li key={i}>{e.name} ${e.price}</li>)}
       </ul>
     );
   });
@@ -67,7 +72,7 @@ function UseMemoExample2() {
   return (
     <>
       <input type="number" value={Number(filterPrice)} onInput={(e: React.InputEvent<HTMLInputElement>) => newFilterPrice(e.currentTarget.value)} />
-      <ProductListComponent products={ExistingProducts} priceRange={Number(filterPrice)} />
+      <ProductListComponent products={ExpensiveProductCalc} />
     </>
   );
 }
