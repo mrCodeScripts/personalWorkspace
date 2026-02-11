@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useCallback, useEffect, useId, useMemo, useState } from "react";
 
 function UseMemoExample1() {
   const [state, newState] = useState<number>(0);
@@ -24,13 +24,22 @@ function UseMemoExample1() {
 }
 
 function UseMemoExample2() {
-
-
+  // --------------------------
+  // 1️⃣ Type
+  // --------------------------
   type Product = {
     name: string;
     price: number;
   };
 
+  // --------------------------
+  // 2️⃣ State
+  // --------------------------
+  const [filterPrice, setFilterPrice] = useState<number>(1000);
+
+  // --------------------------
+  // 3️⃣ Data
+  // --------------------------
   const ExistingProducts: Product[] = [
     { name: "Fish", price: 200 },
     { name: "Chicken Breast", price: 180 },
@@ -52,32 +61,69 @@ function UseMemoExample2() {
     { name: "Garlic (250g)", price: 60 },
   ];
 
-  const ProductContainer: { products: Product[] } = { products: [] };
+  // --------------------------
+  // 4️⃣ Memoized Filtered Products
+  // --------------------------
+  const FilteredProducts = useMemo(() => {
+    return ExistingProducts.filter((p) => p.price <= filterPrice);
+  }, [filterPrice]);
 
+  // --------------------------
+  // 5️⃣ Child Components
+  // --------------------------
   const FilteredProductsDisplay = React.memo(
-    (props: { products: Product[] }) => {
+    ({ products }: { products: Product[] }) => {
       return (
-        <>
-          {props.products.map((e, i) => (
-            <>
-              <li key={i}>
-                {e.name ? `${i}. ${e.name} ->` : "[PRODUCT_NAME]"}{" "}
-                {e.price ? `$${e.price}` : "[PRODUCT_PRICE]"}
-              </li>
-            </>
+        <ul>
+          {products.map((e, i) => (
+            <li key={i}>
+              {`{e.name} -> ${e.price}`}
+            </li>
           ))}
-        </>
+        </ul>
       );
-    },
+    }
   );
 
-  return <></>;
+  const InputFilterer = React.memo(
+    ({ inputAction }: { inputAction: (val: number) => void }) => {
+      const input_id = useId();
+
+      const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        inputAction(Number(e.currentTarget.value));
+      };
+
+      return (
+        <div style={{ marginBottom: "15px" }}>
+          <label htmlFor={`inpt_${input_id}`}>Max Price: </label>
+          <input
+            type="number"
+            id={`inpt_${input_id}`}
+            style={{ padding: "5px", borderRadius: "5px", width: "100px" }}
+            onChange={handleInput}
+            placeholder="Enter price"
+          />
+        </div>
+      );
+    }
+  );
+
+  // --------------------------
+  // 6️⃣ Render
+  // --------------------------
+  return (
+    <div style={{ padding: "10px", display: "flex", flexDirection: "column" }}>
+      <InputFilterer inputAction={setFilterPrice} />
+      <FilteredProductsDisplay products={FilteredProducts} />
+    </div>
+  );
 }
 
 export default function UseMemoExamples() {
   return (
     <>
-      <UseMemoExample1 />
+      {/* <UseMemoExample1 /> */}
+      <UseMemoExample2 />
     </>
   );
 }
