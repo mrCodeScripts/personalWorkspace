@@ -12,6 +12,9 @@ function UseActionStateExample1 () {
 
   return (
     <>
+      <form>
+        <input type="text" />
+      </form>
     </>
   );
 }
