@@ -11,6 +11,7 @@ import UseEffectExamples from './components/examples/HooksAndExamples/useEffect'
 import UseIdExamples from './components/examples/HooksAndExamples/useId';
 import UseCallbackExamples from './components/examples/HooksAndExamples/useCallback';
 import ReactMemoExamples from './components/examples/HooksAndExamples/reactMemo';
+import UseMemoExamples from './components/examples/HooksAndExamples/useMemo';
 
 
 /**
@@ -88,7 +89,8 @@ export default function Home() {
       {/* <UseEffectExamples /> */}
       {/* <UseIdExamples /> */}
       {/* <UseCallbackExamples /> */}
-      <ReactMemoExamples />
+      {/* <ReactMemoExamples /> */}
+      <UseMemoExamples />
     </div>
   );
 }
