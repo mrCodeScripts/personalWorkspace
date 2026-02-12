@@ -12,6 +12,7 @@ import UseIdExamples from './components/examples/HooksAndExamples/useId';
 import UseCallbackExamples from './components/examples/HooksAndExamples/useCallback';
 import ReactMemoExamples from './components/examples/HooksAndExamples/reactMemo';
 import UseMemoExamples from './components/examples/HooksAndExamples/useMemo';
+import UseActionStateExamples from './components/examples/HooksAndExamples/useActionState';
 
 
 /**
@@ -90,7 +91,8 @@ export default function Home() {
       {/* <UseIdExamples /> */}
       {/* <UseCallbackExamples /> */}
       {/* <ReactMemoExamples /> */}
-      <UseMemoExamples />
+      {/* <UseMemoExamples /> */}
+      <UseActionStateExamples />
     </div>
   );
 }
