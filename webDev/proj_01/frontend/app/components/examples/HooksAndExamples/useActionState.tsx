@@ -11,7 +11,8 @@ function UseActionStateExample1() {
   >(
     async (state: FormStateType, formData: FormData) => {
       await new Promise((res) => setTimeout(res, 3000));
-      const username: string = formData.get("user-name") as string;
+
+      const name: string = formData.get("user-name") as string;
       const password: number = Number(formData.get("user-pwd"));
 
       return { username, password };
