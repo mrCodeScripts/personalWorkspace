@@ -1,7 +1,14 @@
 "use client";
 
 import { request } from "http";
-import { forwardRef, useEffect, useEffectEvent, useRef, useState } from "react";
+import {
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useEffectEvent,
+  useRef,
+  useState,
+} from "react";
 
 const FowardThis = forwardRef<
   HTMLButtonElement,
@@ -62,6 +69,58 @@ function ForwardRefExample2() {
       >
         This element!
       </div>
+    </>
+  );
+}
+
+// accepts any element (HTMLElement)
+const ForwardRefExample = forwardRef<HTMLElement, { text: string }>(
+  ({ text }, ref) => {
+    return <></>;
+  },
+);
+
+type Props = {
+  children?: ReactNode;
+  type?: "submit" | "button";
+  text?: string;
+};
+
+const FancyButton = forwardRef<HTMLButtonElement, Props>(
+  ({ children, type, text }, ref) => {
+    return (
+      <div>
+        <button type={type} ref={ref} onClick={() => {}}>
+          {text}
+          {children}
+        </button>
+      </div>
+    );
+  },
+);
+
+function ForwardRefExample3() {
+  const btn = useRef<HTMLButtonElement>(null);
+  return (
+    <>
+      <button
+        type="button"
+        style={{
+          backgroundColor: "green",
+          padding: "10px",
+          borderRadius: "10px",
+        }}
+        onClick={() => {
+          btn.current!.style.color == "green"
+            ? (btn.current!.style.color = "#f0f0f0")
+            : (btn.current!.style.color = "green");
+        }}
+      >
+        This is a button
+      </button>
+      <FancyButton type="button" text="Click this button!" ref={btn}>
+        <div style={{ color: "#f0f0f0" }}>Inner Shit</div>
+      </FancyButton>
     </>
   );
 }
@@ -620,7 +679,7 @@ function SnakeGame() {
       };
       snakeDirs.push(newPart);
       snakeDirs.shift();
-    };  
+    };
 
     const detectKeyboard = (e: KeyboardEvent) => {
       if (gameOver.current) return;
@@ -681,11 +740,17 @@ function SnakeGame() {
     const detectWallColission = (
       mapMatrix: number[][],
       snakeSegments: dir[],
-      snakeDir: dir
+      snakeDir: dir,
     ): boolean => {
       const head = snakeSegments[snakeSegments.length - 1];
-      const nextPos = {x: head.x + snakeDir.x, y: head.y + snakeDir.y};
-      if (nextPos.x < 0 || nextPos.y < 0 || nextPos.x >= mapMatrix[0].length || nextPos.y >= mapMatrix.length) return true;
+      const nextPos = { x: head.x + snakeDir.x, y: head.y + snakeDir.y };
+      if (
+        nextPos.x < 0 ||
+        nextPos.y < 0 ||
+        nextPos.x >= mapMatrix[0].length ||
+        nextPos.y >= mapMatrix.length
+      )
+        return true;
       if (mapMatrix[nextPos.y][nextPos.x] === 0) return true;
       return false;
     };
@@ -734,7 +799,6 @@ function SnakeGame() {
   );
 }
 
-
 function SnakeGame3() {
   type DIR = { x: number; y: number };
   const mapDiv = useRef<HTMLDivElement>(null);
@@ -778,7 +842,7 @@ function SnakeGame3() {
   // Animation loop
   useEffect(() => {
     const interval = setInterval(() => {
-      setSnake(prev => {
+      setSnake((prev) => {
         const newSnake = [...prev];
         const head = { ...newSnake[0] };
 
@@ -830,7 +894,9 @@ function SnakeGame3() {
       {snake.map((_, i) => (
         <div
           key={i}
-          ref={el => {segmentRefs.current[i] = el!}}
+          ref={(el) => {
+            segmentRefs.current[i] = el!;
+          }}
           style={{
             width: SEG_SIZE,
             height: SEG_SIZE,
@@ -847,12 +913,12 @@ function SnakeGame3() {
   );
 }
 
-function SnakeGame2 () {
+function SnakeGame2() {
   const mapDiv = useRef<HTMLDivElement>(null);
   const MAP_W = 800;
   const MAP_H = 800;
 
-  type DIR = {x: number; y: number};
+  type DIR = { x: number; y: number };
 
   const detectColission = () => {};
   const createBlock = () => {};
@@ -862,23 +928,21 @@ function SnakeGame2 () {
     mapDiv.current!.style.width = `${MAP_W}px`;
     mapDiv.current!.style.height = `${MAP_H}px`;
 
-    
-
     let SnakeSegments: DIR[] = [
-      {x: 10, y: 10}, 
-      {x: 10, y: 10}, 
-      {x: 10, y: 10}, 
+      { x: 10, y: 10 },
+      { x: 10, y: 10 },
+      { x: 10, y: 10 },
     ];
-
-
-
   }, []);
 
   return (
     <>
-      <div ref={mapDiv} style={{border: "1px solid red", borderRadius: "5px"}}></div>
+      <div
+        ref={mapDiv}
+        style={{ border: "1px solid red", borderRadius: "5px" }}
+      ></div>
     </>
-  )
+  );
 }
 
 export default function ForwardRefExamples() {
@@ -887,9 +951,10 @@ export default function ForwardRefExamples() {
     <>
       {/* <ForwardRefExample1 /> */}
       {/* <ForwardRefExample2 /> */}
+      <ForwardRefExample3 />
       {/* <SnakeGame /> */}
       {/* <SnakeGame2 /> */}
-      <SnakeGame3 />
+      {/* <SnakeGame3 /> */}
     </>
   );
 }

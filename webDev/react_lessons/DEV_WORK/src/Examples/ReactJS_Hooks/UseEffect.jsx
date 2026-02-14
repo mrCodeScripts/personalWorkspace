@@ -24,7 +24,6 @@ function UseEffectOnValueChange() {
   );
 }
 
-
 function useMousePoints() {
   const pointRef = useRef({ x: 0, y: 0 });
 

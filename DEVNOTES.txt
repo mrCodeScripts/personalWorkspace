@@ -123,4 +123,3 @@ OBJECTIVES:
 	-> connect and form a server, while learning different ways of sending data.
 	-> learn live server with ExpressJS + NextJS.
 	-> Create a chat app.
-
