@@ -13,6 +13,7 @@ import UseCallbackExamples from './components/examples/HooksAndExamples/useCallb
 import ReactMemoExamples from './components/examples/HooksAndExamples/reactMemo';
 import UseMemoExamples from './components/examples/HooksAndExamples/useMemo';
 import UseActionStateExamples from './components/examples/HooksAndExamples/useActionState';
+import UseInsertionEffectExamples from './components/examples/HooksAndExamples/useInsertionEffect';
 
 
 /**
@@ -92,7 +93,8 @@ export default function Home() {
       {/* <UseCallbackExamples /> */}
       {/* <ReactMemoExamples /> */}
       {/* <UseMemoExamples /> */}
-      <UseActionStateExamples />
+      {/* <UseActionStateExamples /> */}
+      <UseInsertionEffectExamples />
     </div>
   );
 }

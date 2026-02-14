@@ -1,11 +1,11 @@
-import { memo, useInsertionEffect, useState } from "react";
+import React, { memo, useInsertionEffect, useState } from "react";
 
 function TryUseInsertionEffectExample1() {
   const [colorState, newColorState] = useState("green");
 
   console.log(colorState);
 
-  const MemoizedComponent = memo(({ bgColor }) => {
+  const MemoizedComponent = React.memo(({ bgColor }) => {
     useInsertionEffect(() => {
       const styleTag = document.createElement("style");
       styleTag.textContent = `.box {
