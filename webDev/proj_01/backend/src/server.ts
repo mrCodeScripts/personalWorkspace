@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import path from "path";
+import FileSystemLesson from './NodeJSLearning/FileSystems/fsReadFile';
 
 dotenv.config();
 
@@ -17,30 +18,46 @@ app.use(morgan('combined'));
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/data', (_req: Request, res: Response) => {
-//   res.send('Hello from Express backend!');
-  res.json({message: 'Hello from Node API!'});
-});
+// app.get('/api/data', (_req: Request, res: Response) => {
+// //   res.send('Hello from Express backend!');
+//   res.json({message: 'Hello from Node API!'});
+// });
 
-type responseType = {
-  status: 'success' | 'failed';
-  message: string;
-};
+// type responseType = {
+//   status: 'success' | 'failed';
+//   message: string;
+// };
 
-app.post('/api/randomData', (_req: Request, res: Response) => {
-  const data = _req.body;
-  console.log(`Received from Next.js server: ${data.count}`);
-  const response: responseType = {
-    status: 'success', message: 'Successfully received data!'
-  };
-  res.json(response);
-});
+// app.post('/api/randomData', (_req: Request, res: Response) => {
+//   const data = _req.body;
+//   console.log(`Received from Next.js server: ${data.count}`);
+//   const response: responseType = {
+//     status: 'success', message: 'Successfully received data!'
+//   };
+//   res.json(response);
+// });
 
-app.post('');
+// app.post('/api/userSubmit', async (_req: Request, res: Response) => {
+//   const data = _req.body;
 
-app.listen(port, () => {
-  console.log(`Backend server running at http://localhost:${port}`);
-});
+//   console.log(`received from Next.js server: NAME: ${data.name} AGE: ${data.age}`);
+
+//   // simulate loading
+//   await new Promise(res => setTimeout(res, 3000));
+
+//   const response: responseType = { status: 'success', message: 'Successfuly received data!'};
+
+//   res.json(response);
+// });
+
+// app.listen(port, () => {
+//   console.log(`Backend server running at http://localhost:${port}`);
+// });
+
+
+
+
+
 
 // console.log("Shit");
 // setTimeout(() => {console.log("timer");}, 300);
@@ -73,3 +90,6 @@ app.listen(port, () => {
 // };
 
 // readFile(path.join(__dirname, "text/ex.txt"));
+
+
+FileSystemLesson();

@@ -21,6 +21,7 @@ import getData from './components/serverComponentExample/serverComponent1';
 import ClientComponent1 from './components/clientComponentExample/clientComponent1';
 import sendData from './components/serverComponentExample/serverComponent2';
 import ClientComponent2 from './components/clientComponentExample/clientComponent2';
+import MainClientServerComp from './components/examples/clientServerExamples/Example1/main';
 
 
 /**
@@ -137,8 +138,9 @@ export default function Home() {
       {/* <UserDataChangingComponent /> */}
       {/* <DataChangingComponent /> */}
       {/* <DataServerSample /> */}
-      <DataServerSample2 />
-      <DataServerSample3 />
+      {/* <DataServerSample2 />
+      <DataServerSample3 /> */}
+      <MainClientServerComp />
     </div>
   );
 }
