@@ -17,6 +17,10 @@ import UseInsertionEffectExamples from './components/examples/HooksAndExamples/u
 import UseOptimisticExamples from './components/examples/HooksAndExamples/useOptimistic';
 import UserDataChangingComponent from './components/examples/UserDataChanging/userDataChanging';
 import DataChangingComponent from './components/examples/UserDataChanging/dataChanging';
+import getData from './components/serverComponentExample/serverComponent1';
+import ClientComponent1 from './components/clientComponentExample/clientComponent1';
+import sendData from './components/serverComponentExample/serverComponent2';
+import ClientComponent2 from './components/clientComponentExample/clientComponent2';
 
 
 /**
@@ -66,6 +70,37 @@ import DataChangingComponent from './components/examples/UserDataChanging/dataCh
  * - For React Icons wrapper: each library prefix differs (Fa = FontAwesome, Md = Material, Ai = AntDesign, etc.)
  */
 
+async function DataServerSample() {
+  const data = await getData();
+
+  return (
+    <p style={{color: "red"}}>
+      {data.message}
+    </p>
+  );
+};
+
+async function DataServerSample2 () {
+    const data = await getData();
+    const res = await fetch("http://localhost:3000/api/hello");
+    const jsonRes = await res.json();
+    return (
+      <>
+        <ClientComponent1 title={`${data.message} ${jsonRes.message}`} />
+      </>
+    );
+}
+
+async function DataServerSample3 () {
+  const data = await sendData();
+
+  return (
+    <>
+      <ClientComponent2 status={data.status} message={data.message} />
+    </>
+  )
+}
+
 export default function Home() {
   const button: ButtonComponent1 = {
     text: "Click this shit",
@@ -100,7 +135,10 @@ export default function Home() {
       {/* <UseInsertionEffectExamples /> */}
       {/* <UseOptimisticExamples /> */}
       {/* <UserDataChangingComponent /> */}
-      <DataChangingComponent />
+      {/* <DataChangingComponent /> */}
+      {/* <DataServerSample /> */}
+      <DataServerSample2 />
+      <DataServerSample3 />
     </div>
   );
 }
