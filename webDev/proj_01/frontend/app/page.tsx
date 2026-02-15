@@ -14,6 +14,9 @@ import ReactMemoExamples from './components/examples/HooksAndExamples/reactMemo'
 import UseMemoExamples from './components/examples/HooksAndExamples/useMemo';
 import UseActionStateExamples from './components/examples/HooksAndExamples/useActionState';
 import UseInsertionEffectExamples from './components/examples/HooksAndExamples/useInsertionEffect';
+import UseOptimisticExamples from './components/examples/HooksAndExamples/useOptimistic';
+import UserDataChangingComponent from './components/examples/UserDataChanging/userDataChanging';
+import DataChangingComponent from './components/examples/UserDataChanging/dataChanging';
 
 
 /**
@@ -94,7 +97,10 @@ export default function Home() {
       {/* <ReactMemoExamples /> */}
       {/* <UseMemoExamples /> */}
       {/* <UseActionStateExamples /> */}
-      <UseInsertionEffectExamples />
+      {/* <UseInsertionEffectExamples /> */}
+      {/* <UseOptimisticExamples /> */}
+      {/* <UserDataChangingComponent /> */}
+      <DataChangingComponent />
     </div>
   );
 }
