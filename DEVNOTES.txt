@@ -110,6 +110,37 @@ npm run dev   # runs Next.js dev server
 
 
 COLOR THEME FAV [Abyss++]
+SETTINGS:
+{
+    "editor.wordWrap": "on",
+    "zenMode.centerLayout": false,
+    "zenMode.hideStatusBar": true,
+    "editor.suggest.showStatusBar": true,
+    "workbench.tree.renderIndentGuides": "always",
+    // "editor.guides.indentation": false,
+    "workbench.tree.indent": 5,
+    "editor.lineHeight": 1.2,
+    "breadcrumbs.enabled": false,
+    "editor.fontSize": 13,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.fontFamily": "Lilex Nerd Font",
+    // "editor.fontFamily": "JetBrains Mono",
+    "editor.inlineSuggest.enabled": false,
+    "php.validate.executablePath": "C:/xampp/php/php.exe",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "Abyss++",
+    "explorer.confirmDragAndDrop": false,
+    "window.customTitleBarVisibility": "windowed",
+    "C_Cpp.default.compilerPath": "C:/msys64/mingw64/bin/g++.exe",
+    "workbench.activityBar.location": "hidden",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.inlineSuggest.edits.showCollapsed": true,
+    "editor.suggest.selectionMode": "never",
+    "editor.suggestOnTriggerCharacters": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+}
 
 
 
