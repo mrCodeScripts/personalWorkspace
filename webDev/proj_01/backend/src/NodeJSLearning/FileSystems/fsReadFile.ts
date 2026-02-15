@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import fs2, { write } from "fs";
 import path from "path";
 
 declare global {
@@ -211,6 +212,104 @@ function FileSystemLesson7() {
     .catch((err) => console.error(`Stat error ${err}`));
 }
 
+function FileSystemLesson8() {
+  // FILE ACCESS
+  const filepath: string = path.join(__dirname, "test.txt");
+  /**
+   * fs.constants.R_OK -> check read permission
+   * fs.constants.W_OK -> check write permission
+   * fs.constants.X_OK -> check execute permission
+   * You can combine them using |
+   */
+  fs.access(filepath, fs.constants.R_OK)
+    .then(() => console.log("File is readable!"))
+    .catch((err) => console.log(`File is not readable: ${err}`));
+
+  fs.access(filepath, fs.constants.W_OK)
+    .then(() => console.log("File is writeable!"))
+    .catch((err) => console.log(`File is not writeable: ${err}`));
+
+  fs.access(filepath, fs.constants.X_OK)
+    .then(() => console.log("File is executable!"))
+    .catch((err) => console.log(`File is not executable: ${err}`));
+
+  fs.access(filepath, fs.constants.R_OK | fs.constants.X_OK | fs.constants.X_OK)
+    .then(() => console.log("File is readable, writeable, and executable!"))
+    .catch((err) =>
+      console.log(`File is not readable, writeable, and executable: ${err}`),
+    );
+}
+
+function FileSystemLesson9() {
+  // READ DIRECTORY
+  const filepath: string = path.join(__dirname, ".");
+  fs.readdir(filepath)
+    .then((files) => console.log(`Files: ${files.map((e) => ` ${e} `)}`))
+    .catch((err) => console.log(err));
+
+  fs.readdir(filepath, "utf-8") // or "ascii", "base64", etc.
+    .then((files) => console.log(files))
+    .catch((err) => console.log(err));
+
+  fs.readdir(filepath, { withFileTypes: true })
+    .then((entries) => {
+      console.log(`FILES INSIDE ${filepath}`);
+      entries.forEach((entry) => {
+        console.log(`${entry.name} -> 
+        File: ${entry.isFile()}, 
+        Dir: ${entry.isDirectory()}, 
+        Symlink: ${entry.isSymbolicLink()}, 
+        Block: ${entry.isBlockDevice()}, 
+        Char: ${entry.isCharacterDevice()}, 
+        FIFO: ${entry.isFIFO()}, 
+        Socket: ${entry.isSocket()}, 
+      `);
+      });
+    })
+    .catch((err) => console.log(err));
+}
+
+function FileSystemLesson10() {
+  // READ STREAM -> Read
+  // WRITE STREAM -> Write
+  // PIPE -> Copy
+
+  const sourcePath: string = path.join(__dirname, "../../text/copy1.txt");
+  const destinationPath: string = path.join(
+    __dirname,
+    "../../text/innerText.txt",
+  );
+
+  const readStream = fs2.createReadStream(sourcePath, {
+    highWaterMark: 64 * 1024,
+  }); // 64kb chunk
+  const writeStream = fs2.createWriteStream(destinationPath); // 64kb chunk
+
+  readStream.pipe(writeStream);
+
+  readStream.on("open", () => console.log("READ STREAM OPENED!"));
+  writeStream.on("open", () => console.log("WRITE STREAM OPENED!"));
+
+  readStream.on("data", (chunk) =>
+    console.log(`Read chunk of ${chunk.length} bytes.`),
+  );
+
+  readStream.on("end", () => console.log("FILE COPIED SUCCESSFULY"));
+  writeStream.on("finish", () => console.log("FILE COPIED SUCCESSFULY"));
+
+  readStream.on("error", (e) => console.log("READ ERROR: ", e));
+  writeStream.on("error", (e) => console.log("READ ERROR: ", e));
+
+  /**
+   * Event	Trigger / Use
+   * 'open' ->	Fires when the stream file descriptor is opened. Useful to know the stream is ready.
+   * 'data' ->	Fires whenever a chunk is read (for readStream). Lets you inspect each chunk if needed.
+   * 'end' -> Fires when the read stream finishes reading all data.
+   * 'finish' ->	Fires when the write stream has finished writing all data and flushed the buffer.
+   * 'error'	Fires if there’s any problem reading or writing. Always good to catch to prevent crashes.
+   */
+}
+
 export default function FileSystemLesson() {
   // FileSystemLesson1();
   // FileSystemLesson2();
@@ -218,5 +317,8 @@ export default function FileSystemLesson() {
   // FileSystemLesson4();
   // FileSystemLesson5();
   // FileSystemLesson6();
-  FileSystemLesson7();
+  // FileSystemLesson7();
+  // FileSystemLesson8();
+  // FileSystemLesson9();
+  FileSystemLesson10();
 }
