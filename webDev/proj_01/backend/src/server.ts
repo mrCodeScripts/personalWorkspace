@@ -26,8 +26,9 @@ app.post("/fetch_users", RouteExample2);
 app.post("/shit", (req: Request, res: Response) => {
     res.status(200).json({message: "slkjsdlfkjsd"});
 });
-app.post("/login", RouteExample3);
+app.post("/updateUser", RouteExample3);
 app.post("/signup", RouteExample4);
+// app.post("/signup", RouteExample4);
 
 // FileSystemLesson();
 PasswordSecurityLessons();

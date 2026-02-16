@@ -1,5 +1,6 @@
 "use client";
 
+import { Patrick_Hand } from "next/font/google";
 import { useActionState, useCallback, useEffect, useState } from "react";
 
 export default function ClientLayout() {
@@ -36,11 +37,16 @@ export default function ClientLayout() {
   const UserEarlyFetch = async () => {
     newPendingState(true);
     try {
-      const req = await fetch("http://localhost:3001/fetch_users", { method: "POST", headers: { "Content-Type": "application/json" }});
+      const req = await fetch("http://localhost:3001/fetch_users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
       const data = await req.json();
       newUsers((prev) => data.users);
       if (req.ok) {
-        console.log(`FINISHED FETCH SETUP USERS -> MESSAGE FROM SERVER: ${data.message}`);
+        console.log(
+          `FINISHED FETCH SETUP USERS -> MESSAGE FROM SERVER: ${data.message}`,
+        );
       }
     } catch (err) {
       console.log(err);
@@ -49,10 +55,58 @@ export default function ClientLayout() {
     }
   };
 
-  useEffect(() => {UserEarlyFetch()}, []);
+  useEffect(() => {
+    UserEarlyFetch();
+  }, []);
 
-  const [currentUserTarget, setCurrentUserTarget] = useState<number | null>(null);
-  const 
+  const [currentUserTarget, setCurrentUserTarget] = useState<number | null>(
+    null,
+  );
+  const [currentEditedUser, setCurrentEditedUser] = useState<USER>({
+    name: "",
+    age: 0,
+  });
+
+  const handleCancelEdit = () => {
+    setCurrentEditedUser({ name: "", age: 0 });
+    setCurrentUserTarget(null);
+  };
+
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    property: keyof User,
+  ) => {
+    setCurrentEditedUser((prev) => ({ ...prev, [property]: e.target.value }));
+  };
+
+  const [updateUserState, updateUserFormAction, userUpdateIsPending] =
+    useActionState<USER, FormData>(
+      async (prev, formData) => {
+        try {
+          const name: string = String(formData.get("username"));
+          const age: number = Number(formData.get("age"));
+          const userIndex: number = Number(currentUserTarget);
+          const payload: { name: string; age: number; userIndex: number } = {
+            name: name,
+            age: age,
+            userIndex: userIndex,
+          };
+          const req = await fetch("http://localhost:3001/updateUser", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await req.json();
+          newUsers((prev) => data.users);
+          if (req.ok) console.log(`MESSAGE FROM SERVER: ${data.message}`);
+        } catch (err) {
+          console.log(err);
+        }
+        return prev;
+      },
+      { name: "", age: 0 },
+      "/alsdkfjlsakdfjd",
+    );
 
   let UserComponents;
   if (isPending || isPendingState) {
@@ -62,35 +116,86 @@ export default function ClientLayout() {
   } else {
     UserComponents = (
       <ul
-        style={{ border: "none", maxWidth: "700px", display: "flex", flexDirection: "column", gap: "10px", color: "blue" }}
+        style={{
+          border: "none",
+          maxWidth: "700px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          color: "blue",
+        }}
       >
-        {users.map((e, i) => (
+        {users.map((e, i) =>
           currentUserTarget != i ? (
-          <li key={i} style={{display: "flex", flexDirection: "row"}}>
-            <span>
-              Name: {e.name}, 
-            </span>
-            <span>
-              Age: {e.age}
-            </span>
-            <button style={{marginLeft: "auto"}} type="button">
-              Edit
-            </button>
-          </li>) : (
-          <li key={i} style={{display: "flex", flexDirection: "row"}}>
-            <input type="text" name="username" id="" placeholder="Username" value={}/>
-            <span>
-              Name: {e.name}, 
-            </span>
-            <span>
-              Age: {e.age}
-            </span>
-            <button style={{marginLeft: "auto"}} type="button">
-              Edit
-            </button>
-          </li>
-          )
-        ))}
+            <li key={i} style={{ display: "flex", flexDirection: "row" }}>
+              <span>Name: {e.name},</span>
+              <span>Age: {e.age}</span>
+              <button
+                style={{ marginLeft: "auto", backgroundColor: "blue", color: "#FFFFFF", userSelect: "none" }}
+                type="button"
+                onClick={() => {
+                  setCurrentUserTarget(i);
+                  setCurrentEditedUser({ name: e.name, age: e.age });
+                }}
+              >
+                Edit
+              </button>
+            </li>
+          ) : (
+            <form
+              key={i}
+              style={{ display: "flex", flexDirection: "row" }}
+              action={updateUserFormAction}
+            >
+              <input
+                disabled={userUpdateIsPending}
+                type="text"
+                name="username"
+                id=""
+                placeholder="Enter username"
+                value={currentEditedUser!.name}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleOnChange(e, "name")
+                }
+              />
+              <input
+                disabled={userUpdateIsPending}
+                type="number"
+                name="age"
+                id=""
+                placeholder="Enter age"
+                value={currentEditedUser!.age}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleOnChange(e, "age")
+                }
+              />
+              <button
+                style={{
+                  marginLeft: "auto",
+                  background: "green",
+                  color: "#FFFFFF",
+                  userSelect: "none"
+                }}
+                type="submit"
+                disabled={userUpdateIsPending}
+              >
+                Confirm
+              </button>
+              <button
+                type="button"
+                style={{
+                  background: "red",
+                  color: "#FFFFFF",
+                  userSelect: "none"
+                }}
+                disabled={userUpdateIsPending}
+                onClick={() => handleCancelEdit()}
+              >
+                Cancel
+              </button>
+            </form>
+          ),
+        )}
       </ul>
     );
   }
@@ -111,7 +216,15 @@ export default function ClientLayout() {
             name="age"
             placeholder="Enter your age"
           />
-          <button type="submit" disabled={isPending}>
+          <button
+            style={{
+              background: "green",
+              color: "#FFFFFF",
+                  userSelect: "none"
+            }}
+            type="submit"
+            disabled={isPending}
+          >
             Submit Form
           </button>
         </form>
