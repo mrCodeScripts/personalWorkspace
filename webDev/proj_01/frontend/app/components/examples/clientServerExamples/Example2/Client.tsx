@@ -131,7 +131,12 @@ export default function ClientLayout() {
               <span>Name: {e.name},</span>
               <span>Age: {e.age}</span>
               <button
-                style={{ marginLeft: "auto", backgroundColor: "blue", color: "#FFFFFF", userSelect: "none" }}
+                style={{
+                  marginLeft: "auto",
+                  backgroundColor: "blue",
+                  color: "#FFFFFF",
+                  userSelect: "none",
+                }}
                 type="button"
                 onClick={() => {
                   setCurrentUserTarget(i);
@@ -174,7 +179,7 @@ export default function ClientLayout() {
                   marginLeft: "auto",
                   background: "green",
                   color: "#FFFFFF",
-                  userSelect: "none"
+                  userSelect: "none",
                 }}
                 type="submit"
                 disabled={userUpdateIsPending}
@@ -186,7 +191,7 @@ export default function ClientLayout() {
                 style={{
                   background: "red",
                   color: "#FFFFFF",
-                  userSelect: "none"
+                  userSelect: "none",
                 }}
                 disabled={userUpdateIsPending}
                 onClick={() => handleCancelEdit()}
@@ -220,7 +225,7 @@ export default function ClientLayout() {
             style={{
               background: "green",
               color: "#FFFFFF",
-                  userSelect: "none"
+              userSelect: "none",
             }}
             type="submit"
             disabled={isPending}
