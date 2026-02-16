@@ -2933,3 +2933,5 @@ DAY 1 [OBJECTIVES]:
 2. Review file system functions. 
 3. Create a simple web app Next.js + Node.js that manipulates texts.
 4. Create a simple login/signup web app with Next.js + Node.js that stores JSON data on the texts using file systems.
+5. Create a full plan on creating the 'Public Market' app design with Figma.
+6. Finish 50-70% of the 'Public Market' app design with Figma.

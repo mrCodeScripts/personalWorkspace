@@ -346,33 +346,60 @@ function FileSystemLesson10() {
 
   const Example2: () => void = () => {
     // PRACTICAL EXAMPLES WITH WRITE STREAM
-    // flags: 'w'
-    const sf1: string = path.join(__dirname, "test.txt");
+    // flags: 'w' -> write on a file
+    // flags: 'a' -> append on a file
+    const sf: string = path.join(__dirname, "test.txt");
     const flagOpt: string = "a"; // 'w' -> write, 'a' -> append
-    const ws1 = fs2.createWriteStream(sf1, { flags: flagOpt });
-    ws1.on("open", () => console.log(`\n OPENED FILE 1: ${sf1}`));
-    ws1.write(
+    const ws = fs2.createWriteStream(sf, { flags: flagOpt });
+    ws.on("open", () => console.log(`\n OPENED FILE 1: ${sf}`));
+    ws.write(
       "\na;sldkfjla;sjfl;asjfl;asjfl;asjfl;jsal;fjlasjflajsflsajfljsal;fjsaldjfsla;jfslafj",
     );
-    ws1.write(
+    ws.write(
       "\na;sldkfjla;sjfl;asjfl;asjfl;asjfl;jsal;fjlasjflajsflsajfljsal;fjsaldjfsla;jfslafj",
     );
-    ws1.end();
-    ws1.on("finish", () => console.log(`\n DONE FILE 1: ${sf1}`));
+    ws.end();
+    ws.on("finish", () => console.log(`\n DONE FILE 1: ${sf}`));
   };
 
   const Example3: () => void = () => {
-    // flags: 'wx'
-    const sf2: string = path.join(__dirname, "test.txt");
-    const ws2 = fs2.createWriteStream(sf2, { flags: "wx" });
-    ws2.write("SHOULD FAIL!");
-    ws2.end();
-    ws2.on("finish", () => console.log("Finished Operation"));
+    // flags: 'wx' -> it should be error if file exist
+    const sf: string = path.join(__dirname, "test.txt");
+    const ws = fs2.createWriteStream(sf, { flags: "wx" });
+    ws.write("SHOULD FAIL!");
+    ws.end();
+    ws.on("finish", () => console.log("Finished Operation"));
   };
 
   // const readStream2 = fs2.createReadStream(sourcePath, { flags: "r" });
+  const Example4: () => void = () => {
+    // flags: 'r+' + start -> overwrite a part of the file
+    const sf: string  = path.join(__dirname, "test.txt");
+    const ws = fs2.createWriteStream(sf, {flags: 'r+', start: 6});
+    ws.on('open', () => console.log(`OPENING FILE: ${sf}`));
+    ws.on('finish', () => console.log(`FINISHED FILE: ${sf}`));
+    ws.write("Shit");
+    ws.end();
+  };
+
+  const Example5: () => void = () => {
+    // highWaterMark -> chunked writing
+    const sf: string = path.join(__dirname, "test.txt");
+    const sf2: string = path.join(__dirname, "test2.txt");
+    const ws = fs2.createWriteStream(sf2, {flags: 'w'}); // 'a' -> it will append
+    const ws2 = fs2.createReadStream(sf, {highWaterMark: 50});
+    ws2.pipe(ws);
+    ws.on('open', () => console.log(`WRITESTREAM OPENING FILE: ${sf}`));
+    ws2.on('open', () => console.log(`READSTREAM OPENING FILE: ${sf}`));
+    ws.on('finish', () => console.log(`WRITESTREAM FINISHED FILE: ${sf}`));
+    ws2.on('end', () => console.log(`READSTREAM FINISHED FILE: ${sf}`));
+  };
 
   // Example1();
+  // Example2();
+  // Example3();
+  // Example4();
+  // Example5();
 }
 
 export default function FileSystemLesson() {

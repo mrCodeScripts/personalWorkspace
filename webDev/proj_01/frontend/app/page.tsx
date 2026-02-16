@@ -1,39 +1,41 @@
 // app/page.tsx
-import { Heart, PanelsTopLeft } from 'lucide-react';
-import { HeartIcon } from '@heroicons/react/24/solid';
+import { Heart, PanelsTopLeft } from "lucide-react";
+import { HeartIcon } from "@heroicons/react/24/solid";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 // import { IconHeart } from 'tabler-icons-react';
-import { FaHeart } from 'react-icons/fa';
-import DashboardDisplayExample, { ButtonComponent1 } from './components/examples/clientComponentExamples';
-import ForwardRefExamples from './components/examples/HooksAndExamples/forwardRef';
-import UseEffectExamples from './components/examples/HooksAndExamples/useEffect';
-import UseIdExamples from './components/examples/HooksAndExamples/useId';
-import UseCallbackExamples from './components/examples/HooksAndExamples/useCallback';
-import ReactMemoExamples from './components/examples/HooksAndExamples/reactMemo';
-import UseMemoExamples from './components/examples/HooksAndExamples/useMemo';
-import UseActionStateExamples from './components/examples/HooksAndExamples/useActionState';
-import UseInsertionEffectExamples from './components/examples/HooksAndExamples/useInsertionEffect';
-import UseOptimisticExamples from './components/examples/HooksAndExamples/useOptimistic';
-import UserDataChangingComponent from './components/examples/UserDataChanging/userDataChanging';
-import DataChangingComponent from './components/examples/UserDataChanging/dataChanging';
-import getData from './components/serverComponentExample/serverComponent1';
-import ClientComponent1 from './components/clientComponentExample/clientComponent1';
-import sendData from './components/serverComponentExample/serverComponent2';
-import ClientComponent2 from './components/clientComponentExample/clientComponent2';
-import MainClientServerComp from './components/examples/clientServerExamples/Example1/main';
-
+import { FaHeart } from "react-icons/fa";
+import DashboardDisplayExample, {
+  ButtonComponent1,
+} from "./components/examples/clientComponentExamples";
+import ForwardRefExamples from "./components/examples/HooksAndExamples/forwardRef";
+import UseEffectExamples from "./components/examples/HooksAndExamples/useEffect";
+import UseIdExamples from "./components/examples/HooksAndExamples/useId";
+import UseCallbackExamples from "./components/examples/HooksAndExamples/useCallback";
+import ReactMemoExamples from "./components/examples/HooksAndExamples/reactMemo";
+import UseMemoExamples from "./components/examples/HooksAndExamples/useMemo";
+import UseActionStateExamples from "./components/examples/HooksAndExamples/useActionState";
+import UseInsertionEffectExamples from "./components/examples/HooksAndExamples/useInsertionEffect";
+import UseOptimisticExamples from "./components/examples/HooksAndExamples/useOptimistic";
+import UserDataChangingComponent from "./components/examples/UserDataChanging/userDataChanging";
+import DataChangingComponent from "./components/examples/UserDataChanging/dataChanging";
+import getData from "./components/serverComponentExample/serverComponent1";
+import ClientComponent1 from "./components/clientComponentExample/clientComponent1";
+import sendData from "./components/serverComponentExample/serverComponent2";
+import ClientComponent2 from "./components/clientComponentExample/clientComponent2";
+import MainClientServerComp from "./components/examples/clientServerExamples/Example1/main";
+import ServerLayout from "./components/examples/clientServerExamples/Example2/Server";
 
 /**
  * ================= ICON LIBRARIES CHEAT SHEET =================
- * 
+ *
  * 1️⃣ Lucide React
  *    - Official preview & search: https://lucide.dev/
  *    - React Icons version: https://www.react-icons.com/icons/lu
  *    - Package: "lucide-react"
  *    - Example usage:
  *        import { Heart, Home } from "lucide-react";
- * 
+ *
  * 2️⃣ Heroicons
  *    - Official website: https://heroicons.com/
  *    - React package: "@heroicons/react"
@@ -41,7 +43,7 @@ import MainClientServerComp from './components/examples/clientServerExamples/Exa
  *    - Example usage:
  *        import { HeartIcon } from "@heroicons/react/24/solid";
  *        import { HeartIcon } from "@heroicons/react/24/outline";
- * 
+ *
  * 3️⃣ Font Awesome
  *    - Official icons page: https://fontawesome.com/icons
  *    - React package: "@fortawesome/react-fontawesome"
@@ -49,20 +51,20 @@ import MainClientServerComp from './components/examples/clientServerExamples/Exa
  *    - Example usage:
  *        import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  *        import { faHeart } from "@fortawesome/free-solid-svg-icons";
- * 
+ *
  * 4️⃣ Tabler Icons
  *    - Official website: https://tablericons.com/
  *    - React package: "tabler-icons-react"
  *    - Example usage:
  *        import { IconHeart } from "tabler-icons-react";
- * 
+ *
  * 5️⃣ React Icons (multi-library wrapper)
  *    - Official browse & docs: https://react-icons.github.io/react-icons/
  *    - Includes: Font Awesome, Material Design, Ant Design, BoxIcons, Bootstrap Icons, Remix Icons, and more
  *    - Example usage:
  *        import { FaHeart } from "react-icons/fa";
  *        import { MdFavorite } from "react-icons/md";
- * 
+ *
  * ==============================================================
  * Notes:
  * - You can import icons individually to keep bundle size small.
@@ -74,39 +76,35 @@ import MainClientServerComp from './components/examples/clientServerExamples/Exa
 async function DataServerSample() {
   const data = await getData();
 
-  return (
-    <p style={{color: "red"}}>
-      {data.message}
-    </p>
-  );
-};
-
-async function DataServerSample2 () {
-    const data = await getData();
-    const res = await fetch("http://localhost:3000/api/hello");
-    const jsonRes = await res.json();
-    return (
-      <>
-        <ClientComponent1 title={`${data.message} ${jsonRes.message}`} />
-      </>
-    );
+  return <p style={{ color: "red" }}>{data.message}</p>;
 }
 
-async function DataServerSample3 () {
+async function DataServerSample2() {
+  const data = await getData();
+  const res = await fetch("http://localhost:3000/api/hello");
+  const jsonRes = await res.json();
+  return (
+    <>
+      <ClientComponent1 title={`${data.message} ${jsonRes.message}`} />
+    </>
+  );
+}
+
+async function DataServerSample3() {
   const data = await sendData();
 
   return (
     <>
       <ClientComponent2 status={data.status} message={data.message} />
     </>
-  )
+  );
 }
 
 export default function Home() {
   const button: ButtonComponent1 = {
     text: "Click this shit",
     classNames: undefined,
-    onClick: undefined
+    onClick: undefined,
   };
 
   return (
@@ -140,7 +138,8 @@ export default function Home() {
       {/* <DataServerSample /> */}
       {/* <DataServerSample2 />
       <DataServerSample3 /> */}
-      <MainClientServerComp />
+      {/* <MainClientServerComp /> */}
+      <ServerLayout />
     </div>
   );
 }

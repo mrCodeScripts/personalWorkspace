@@ -1,95 +1,27 @@
-import express, { Request, Response } from 'express';
-import fs from 'fs';
-import { promises as promiseFs } from 'fs';
-import cors from 'cors';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import dotenv from 'dotenv';
-import path from "path";
-import FileSystemLesson from './NodeJSLearning/FileSystems/fsReadFile';
+import express, { Request, Response, NextFunction } from "express";
+import helmet from "helmet";
+import cors from "cors";
+import morgan from "morgan";
+import dotenv from "dotenv";
+import FileSystemLesson from "./NodeJSLearning/FileSystems/fsReadFile";
+import { RouteExample1 } from "./routes/routeEx1";
 
-dotenv.config();
+dotenv.config(); // loads .env variables
 
-const app = express();
-const port = process.env.PORT ? Number(process.env.PORT) : 3001;
+const app = express(); // create Express app
+const port = process.env.PORT || 3001; // get port from env or default
 
-app.use(helmet());
-app.use(morgan('combined'));
-app.use(cors());
-app.use(express.json());
-
-// app.get('/api/data', (_req: Request, res: Response) => {
-// //   res.send('Hello from Express backend!');
-//   res.json({message: 'Hello from Node API!'});
-// });
-
-// type responseType = {
-//   status: 'success' | 'failed';
-//   message: string;
-// };
-
-// app.post('/api/randomData', (_req: Request, res: Response) => {
-//   const data = _req.body;
-//   console.log(`Received from Next.js server: ${data.count}`);
-//   const response: responseType = {
-//     status: 'success', message: 'Successfully received data!'
-//   };
-//   res.json(response);
-// });
-
-// app.post('/api/userSubmit', async (_req: Request, res: Response) => {
-//   const data = _req.body;
-
-//   console.log(`received from Next.js server: NAME: ${data.name} AGE: ${data.age}`);
-
-//   // simulate loading
-//   await new Promise(res => setTimeout(res, 3000));
-
-//   const response: responseType = { status: 'success', message: 'Successfuly received data!'};
-
-//   res.json(response);
-// });
-
-// app.listen(port, () => {
-//   console.log(`Backend server running at http://localhost:${port}`);
-// });
+// START MIDDLEWARE SETUP
+app.use(helmet()); // adds security headers
+app.use(cors()); // allow requests from all origins
+app.use(morgan("dev")); // logs requests to console
+app.use(express.json()); // parses JSON bodies for POST requests
+app.use(express.urlencoded({ extended: true })); // parses HTML form bodies
+// END MIDDLEWARE SETUP
 
 
-
-
-
-
-// console.log("Shit");
-// setTimeout(() => {console.log("timer");}, 300);
-// console.log("Shit");
-
-// console.log("File Opened");
-// const pathfile = path.join(__dirname, 'text/ex.txt');
-
-// this one outputed last
-// fs.readFile(pathfile, 'utf-8', (err, data) => {
-//     if(err) throw err;
-//     console.log("Read File Data: ", data);
-// });
-// console.log("File Initiated");
-
-// these ones are first
-// const buf = Buffer.from('Hello Node');
-// console.log(buf.toString('utf-8'));
-// console.log(buf);
-
-// async function readFile (path: string) {
-//     try {
-//         const data = await promiseFs.readFile(path, "utf-8");
-//         console.log("DATA: ", data);
-//     } catch (error: unknown) {
-//         const e = error as NodeJS.ErrnoException;
-//         if (e.code == "ENOENT") console.log("File missing!");
-//         else console.error('UNKNOWN ERR: ', e);
-//     }
-// };
-
-// readFile(path.join(__dirname, "text/ex.txt"));
-
-
-FileSystemLesson();
+app.post("/route_ex_1", RouteExample1);
+app.post("/shit", (res: Response, req: Request) => {
+    res.json({message: "slkjsdlfkjsd"});
+});
+// FileSystemLesson();
