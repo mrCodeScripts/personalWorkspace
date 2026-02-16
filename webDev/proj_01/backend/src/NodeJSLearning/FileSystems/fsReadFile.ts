@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import fs2, { write } from "fs";
 import path from "path";
+import { pathToFileURL } from "url";
 
 declare global {
   var myVar: string;
@@ -280,11 +281,16 @@ function FileSystemLesson10() {
     "../../text/innerText.txt",
   );
 
+  // HOW READ STREAM IS PRACTICALLY USED FOR COPYING FILES
   const readStream = fs2.createReadStream(sourcePath, {
     highWaterMark: 64 * 1024,
   }); // 64kb chunk
   const writeStream = fs2.createWriteStream(destinationPath); // 64kb chunk
 
+  /**
+   * readStream.pipe(writeStream)
+   * -> This is the direct connection between reading and writing. Node handles flow control / backpressure automatically, so the write stream won’t get overwhelmed if it’s slower than the read. No need to manually listen for data chunks just to write them — the pipe handles it.
+   */
   readStream.pipe(writeStream);
 
   readStream.on("open", () => console.log("READ STREAM OPENED!"));
@@ -307,7 +313,41 @@ function FileSystemLesson10() {
    * 'end' -> Fires when the read stream finishes reading all data.
    * 'finish' ->	Fires when the write stream has finished writing all data and flushed the buffer.
    * 'error'	Fires if there’s any problem reading or writing. Always good to catch to prevent crashes.
+   * 
+   * 
+   * pipe() does the heavy lifting of reading → writing. Events give you fine-grained logging / control — see exactly when reading starts, chunks come in, writing finishes, or errors occur.
    */
+
+  /**
+   * READSTREAMS EVENTS 
+   * 'open' ->	when file descriptor is opened; readStream.fd becomes available.
+   * 'data' ->	each time a chunk is read (Buffer or string); can process chunks live.
+   * 'end' ->	when all data has been read; signals read completion.
+   * 'close' ->	when file descriptor is closed; only if autoClose=true.
+   * 'error' ->	on read errors; must handle, otherwise crashes.
+   * 'pause' ->	when the stream is paused; can be triggered by .pause() or backpressure.
+   * 'resume' ->	when the stream resumes; can be triggered by .resume() or backpressure.
+   * 'readable' ->	when stream has data ready to read via .read(); useful for manual .read() 
+   * 
+   * 
+   * WRITESTREAM EVENTS 
+   * 'open' ->	when file descriptor is opened; writeStream.fd becomes available
+   * 'finish' ->	when .end() is called and all data is flushed; signals write completion
+   * 'close' -> when fd is closed; Only if autoClose=true.
+   * 'error' ->	on write errors;	must handle.
+   * 'drain' ->	when internal buffer is empty after write; useful for backpressure.
+   * 'pipe' ->	when another stream pipes into this write stream; useful for chaining.
+   * 'unpipe' ->	when a piped stream is removed; Cleanup / logging.
+   */
+  // ------------------------------------------------------------------------------------
+
+
+  
+
+
+
+  const readStream2 = fs2.createReadStream(sourcePath, { flags: "r" });
+
 }
 
 export default function FileSystemLesson() {
