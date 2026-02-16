@@ -51,6 +51,9 @@ export default function ClientLayout() {
 
   useEffect(() => {UserEarlyFetch()}, []);
 
+  const [currentUserTarget, setCurrentUserTarget] = useState<number | null>(null);
+  const 
+
   let UserComponents;
   if (isPending || isPendingState) {
     UserComponents = <p style={{ color: "green" }}>Loading Users...</p>;
@@ -59,12 +62,34 @@ export default function ClientLayout() {
   } else {
     UserComponents = (
       <ul
-        style={{ display: "flex", flexDirection: "column", gap: "5px", color: "blue" }}
+        style={{ border: "none", maxWidth: "700px", display: "flex", flexDirection: "column", gap: "10px", color: "blue" }}
       >
         {users.map((e, i) => (
-          <li key={i}>
-            Name: {e.name}, Age: {e.age}
+          currentUserTarget != i ? (
+          <li key={i} style={{display: "flex", flexDirection: "row"}}>
+            <span>
+              Name: {e.name}, 
+            </span>
+            <span>
+              Age: {e.age}
+            </span>
+            <button style={{marginLeft: "auto"}} type="button">
+              Edit
+            </button>
+          </li>) : (
+          <li key={i} style={{display: "flex", flexDirection: "row"}}>
+            <input type="text" name="username" id="" placeholder="Username" value={}/>
+            <span>
+              Name: {e.name}, 
+            </span>
+            <span>
+              Age: {e.age}
+            </span>
+            <button style={{marginLeft: "auto"}} type="button">
+              Edit
+            </button>
           </li>
+          )
         ))}
       </ul>
     );
@@ -73,7 +98,6 @@ export default function ClientLayout() {
   return (
     <>
       <div>
-        {UserComponents}
         <form action={formAction}>
           <input
             type="text"
@@ -91,6 +115,7 @@ export default function ClientLayout() {
             Submit Form
           </button>
         </form>
+        {UserComponents}
       </div>
     </>
   );
