@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
+import bcrypt from 'bcryptjs';
 
 type User = { name: string; age: number };
 export async function RouteExample1(req: Request, res: Response) {
@@ -89,3 +90,6 @@ export async function RouteExample2(req: Request, res: Response) {
     });
   }
 }
+
+export async function RouteExample3 (req: Request, res: Response) { };
+export async function RouteExample4 (req: Request, res: Response) { };

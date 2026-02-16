@@ -4,7 +4,8 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import FileSystemLesson from "./NodeJSLearning/FileSystems/fsReadFile";
-import { RouteExample1, RouteExample2 } from "./routes/routeEx1";
+import { RouteExample1, RouteExample2, RouteExample3, RouteExample4 } from "./routes/routeEx1";
+import PasswordSecurityLessons from "./NodeJSLearning/security/passwordSecurity";
 
 dotenv.config(); // loads .env variables
 
@@ -25,6 +26,9 @@ app.post("/fetch_users", RouteExample2);
 app.post("/shit", (req: Request, res: Response) => {
     res.status(200).json({message: "slkjsdlfkjsd"});
 });
+app.post("/login", RouteExample3);
+app.post("/signup", RouteExample4);
 
 // FileSystemLesson();
+PasswordSecurityLessons();
 app.listen(port, () => {console.log(`Server: ${port}`)});

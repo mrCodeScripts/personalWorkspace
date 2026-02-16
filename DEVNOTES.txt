@@ -771,7 +771,6 @@ OAuth (Optional but Powerful):
 - OAuth2 flow
 
 Password Security:
-
 - bcrypt
 - salting
 - hashing rounds
