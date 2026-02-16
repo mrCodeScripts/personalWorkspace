@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import fs2, { write } from "fs";
 import path from "path";
 import { pathToFileURL } from "url";
+import { setFlagsFromString } from "v8";
 
 declare global {
   var myVar: string;
@@ -275,79 +276,103 @@ function FileSystemLesson10() {
   // WRITE STREAM -> Write
   // PIPE -> Copy
 
-  const sourcePath: string = path.join(__dirname, "../../text/copy1.txt");
-  const destinationPath: string = path.join(
-    __dirname,
-    "../../text/innerText.txt",
-  );
+  const Example1: () => void = () => {
+    const sourcePath: string = path.join(__dirname, "../../text/copy1.txt");
+    const destinationPath: string = path.join(
+      __dirname,
+      "../../text/innerText.txt",
+    );
 
-  // HOW READ STREAM IS PRACTICALLY USED FOR COPYING FILES
-  const readStream = fs2.createReadStream(sourcePath, {
-    highWaterMark: 64 * 1024,
-  }); // 64kb chunk
-  const writeStream = fs2.createWriteStream(destinationPath); // 64kb chunk
+    // HOW READ STREAM IS PRACTICALLY USED FOR COPYING FILES
+    const readStream = fs2.createReadStream(sourcePath, {
+      highWaterMark: 64 * 1024,
+    }); // 64kb chunk
+    const writeStream = fs2.createWriteStream(destinationPath); // 64kb chunk
 
-  /**
-   * readStream.pipe(writeStream)
-   * -> This is the direct connection between reading and writing. Node handles flow control / backpressure automatically, so the write stream won’t get overwhelmed if it’s slower than the read. No need to manually listen for data chunks just to write them — the pipe handles it.
-   */
-  readStream.pipe(writeStream);
+    /**
+     * readStream.pipe(writeStream)
+     * -> This is the direct connection between reading and writing. Node handles flow control / backpressure automatically, so the write stream won’t get overwhelmed if it’s slower than the read. No need to manually listen for data chunks just to write them — the pipe handles it.
+     */
+    readStream.pipe(writeStream);
 
-  readStream.on("open", () => console.log("READ STREAM OPENED!"));
-  writeStream.on("open", () => console.log("WRITE STREAM OPENED!"));
+    readStream.on("open", () => console.log("READ STREAM OPENED!"));
+    writeStream.on("open", () => console.log("WRITE STREAM OPENED!"));
 
-  readStream.on("data", (chunk) =>
-    console.log(`Read chunk of ${chunk.length} bytes.`),
-  );
+    readStream.on("data", (chunk) =>
+      console.log(`Read chunk of ${chunk.length} bytes.`),
+    );
 
-  readStream.on("end", () => console.log("FILE COPIED SUCCESSFULY"));
-  writeStream.on("finish", () => console.log("FILE COPIED SUCCESSFULY"));
+    readStream.on("end", () => console.log("FILE COPIED SUCCESSFULY"));
+    writeStream.on("finish", () => console.log("FILE COPIED SUCCESSFULY"));
 
-  readStream.on("error", (e) => console.log("READ ERROR: ", e));
-  writeStream.on("error", (e) => console.log("READ ERROR: ", e));
+    readStream.on("error", (e) => console.log("READ ERROR: ", e));
+    writeStream.on("error", (e) => console.log("READ ERROR: ", e));
 
-  /**
-   * Event	Trigger / Use
-   * 'open' ->	Fires when the stream file descriptor is opened. Useful to know the stream is ready.
-   * 'data' ->	Fires whenever a chunk is read (for readStream). Lets you inspect each chunk if needed.
-   * 'end' -> Fires when the read stream finishes reading all data.
-   * 'finish' ->	Fires when the write stream has finished writing all data and flushed the buffer.
-   * 'error'	Fires if there’s any problem reading or writing. Always good to catch to prevent crashes.
-   * 
-   * 
-   * pipe() does the heavy lifting of reading → writing. Events give you fine-grained logging / control — see exactly when reading starts, chunks come in, writing finishes, or errors occur.
-   */
+    /**
+     * Event	Trigger / Use
+     * 'open' ->	Fires when the stream file descriptor is opened. Useful to know the stream is ready.
+     * 'data' ->	Fires whenever a chunk is read (for readStream). Lets you inspect each chunk if needed.
+     * 'end' -> Fires when the read stream finishes reading all data.
+     * 'finish' ->	Fires when the write stream has finished writing all data and flushed the buffer.
+     * 'error'	Fires if there’s any problem reading or writing. Always good to catch to prevent crashes.
+     *
+     *
+     * pipe() does the heavy lifting of reading → writing. Events give you fine-grained logging / control — see exactly when reading starts, chunks come in, writing finishes, or errors occur.
+     */
 
-  /**
-   * READSTREAMS EVENTS 
-   * 'open' ->	when file descriptor is opened; readStream.fd becomes available.
-   * 'data' ->	each time a chunk is read (Buffer or string); can process chunks live.
-   * 'end' ->	when all data has been read; signals read completion.
-   * 'close' ->	when file descriptor is closed; only if autoClose=true.
-   * 'error' ->	on read errors; must handle, otherwise crashes.
-   * 'pause' ->	when the stream is paused; can be triggered by .pause() or backpressure.
-   * 'resume' ->	when the stream resumes; can be triggered by .resume() or backpressure.
-   * 'readable' ->	when stream has data ready to read via .read(); useful for manual .read() 
-   * 
-   * 
-   * WRITESTREAM EVENTS 
-   * 'open' ->	when file descriptor is opened; writeStream.fd becomes available
-   * 'finish' ->	when .end() is called and all data is flushed; signals write completion
-   * 'close' -> when fd is closed; Only if autoClose=true.
-   * 'error' ->	on write errors;	must handle.
-   * 'drain' ->	when internal buffer is empty after write; useful for backpressure.
-   * 'pipe' ->	when another stream pipes into this write stream; useful for chaining.
-   * 'unpipe' ->	when a piped stream is removed; Cleanup / logging.
-   */
-  // ------------------------------------------------------------------------------------
+    /**
+     * READSTREAMS EVENTS
+     * 'open' ->	when file descriptor is opened; readStream.fd becomes available.
+     * 'data' ->	each time a chunk is read (Buffer or string); can process chunks live.
+     * 'end' ->	when all data has been read; signals read completion.
+     * 'close' ->	when file descriptor is closed; only if autoClose=true.
+     * 'error' ->	on read errors; must handle, otherwise crashes.
+     * 'pause' ->	when the stream is paused; can be triggered by .pause() or backpressure.
+     * 'resume' ->	when the stream resumes; can be triggered by .resume() or backpressure.
+     * 'readable' ->	when stream has data ready to read via .read(); useful for manual .read()
+     *
+     *
+     * WRITESTREAM EVENTS
+     * 'open' ->	when file descriptor is opened; writeStream.fd becomes available
+     * 'finish' ->	when .end() is called and all data is flushed; signals write completion
+     * 'close' -> when fd is closed; Only if autoClose=true.
+     * 'error' ->	on write errors;	must handle.
+     * 'drain' ->	when internal buffer is empty after write; useful for backpressure.
+     * 'pipe' ->	when another stream pipes into this write stream; useful for chaining.
+     * 'unpipe' ->	when a piped stream is removed; Cleanup / logging.
+     */
+    // ------------------------------------------------------------------------------------
+  };
 
+  const Example2: () => void = () => {
+    // PRACTICAL EXAMPLES WITH WRITE STREAM
+    // flags: 'w'
+    const sf1: string = path.join(__dirname, "test.txt");
+    const flagOpt: string = "a"; // 'w' -> write, 'a' -> append
+    const ws1 = fs2.createWriteStream(sf1, { flags: flagOpt });
+    ws1.on("open", () => console.log(`\n OPENED FILE 1: ${sf1}`));
+    ws1.write(
+      "\na;sldkfjla;sjfl;asjfl;asjfl;asjfl;jsal;fjlasjflajsflsajfljsal;fjsaldjfsla;jfslafj",
+    );
+    ws1.write(
+      "\na;sldkfjla;sjfl;asjfl;asjfl;asjfl;jsal;fjlasjflajsflsajfljsal;fjsaldjfsla;jfslafj",
+    );
+    ws1.end();
+    ws1.on("finish", () => console.log(`\n DONE FILE 1: ${sf1}`));
+  };
 
-  
+  const Example3: () => void = () => {
+    // flags: 'wx'
+    const sf2: string = path.join(__dirname, "test.txt");
+    const ws2 = fs2.createWriteStream(sf2, { flags: "wx" });
+    ws2.write("SHOULD FAIL!");
+    ws2.end();
+    ws2.on("finish", () => console.log("Finished Operation"));
+  };
 
+  // const readStream2 = fs2.createReadStream(sourcePath, { flags: "r" });
 
-
-  const readStream2 = fs2.createReadStream(sourcePath, { flags: "r" });
-
+  // Example1();
 }
 
 export default function FileSystemLesson() {
