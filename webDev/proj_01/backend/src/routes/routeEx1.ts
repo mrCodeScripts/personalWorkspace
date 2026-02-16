@@ -2,53 +2,90 @@ import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 
+type User = { name: string; age: number };
 export async function RouteExample1(req: Request, res: Response) {
-  const userDBPath: string = path.join(
+  const data = req.body;
+  let users: User[] = [];
+
+  if (!data?.name || !data?.age) {
+    return res.status(400).json({
+      status: "failed",
+      message: "Name and age required!",
+    });
+  }
+
+  const filePath: string = path.join(
     __dirname,
     "../NodeJSLearning/userTxtDb/users_db.txt",
   );
+
   try {
-    // const { name, age }: { name: string; age: number } = await req.body;
+    const readFile = await fs.promises.readFile(filePath, "utf-8");
 
-    const data = await req.body;
-    const name = data.name;
-    const age = data.age;
-    console.log(name, age);
+    try {
+      if (readFile.trim() != "")
+        users = [...JSON.parse(readFile), { name: data.name, age: data.age }];
 
-    // let users: { name: string; age: number }[] = [];
+      if (!Array.isArray(users)) throw new Error("INVALID DB");
+    } catch (err) {
+      console.log(err);
+      users = [];
+    }
 
-    // try {
-    //   const userDB = await fs.promises.stat(userDBPath);
-    //   if (userDB.size === 0) throw new Error("File is empty!");
-    //   const getUserDB = await fs.promises.readFile(userDBPath, "utf-8");
-    //   const userData = JSON.parse(getUserDB);
-    //   users = userData;
-    //   users = [...users, { name: name, age: age }];
-    // } catch (err) {
-    //   users = [];
-    //   throw new Error("FAILED TO FETCH DATA FROM DB.");
-    // }
+    await fs.promises.writeFile(filePath, JSON.stringify(users));
 
-    // try {
-    //   const stringifyUsers = JSON.stringify(users);
-    //   await fs.promises.writeFile(userDBPath, stringifyUsers);
-    // } catch (err) {
-    //   res
-    //     .status(400)
-    //     .json({
-    //       status: "failed",
-    //       message: "Failed To Register User!",
-    //       dbUsers: JSON.stringify(users),
-    //     });
-    //   throw new Error("FAILED TO INSERT DATA FROM DB");
-    // }
+    // simulate loading
+    await new Promise(res => setTimeout(res, 2000));
 
-    res.json({
+    res.status(200).json({
       status: "success",
-      message: "Successfuly accepted data!",
-      // dbUsers: JSON.stringify(users),
+      message: "Succesfuly Added User!",
+      users: users,
     });
   } catch (err) {
-    console.log(err);
+    users = [];
+    console.log(`ERROR: ${err}`);
+    res.status(500).json({
+      status: "success",
+      message: "Failed To Add User!",
+      users: users,
+    });
+  }
+}
+
+export async function RouteExample2(req: Request, res: Response) {
+  let users: User[] = [];
+  const filePath: string = path.join(
+    __dirname,
+    "../NodeJSLearning/userTxtDb/users_db.txt",
+  );
+
+  try {
+    const readFile = await fs.promises.readFile(filePath, "utf-8");
+    try {
+      if (readFile.trim() != "")
+        users = [...JSON.parse(readFile)];
+      if (!Array.isArray(users)) throw new Error("INVALID DB");
+    } catch (err) {
+      console.log(err);
+      users = [];
+    }
+
+    // simulate loading
+    await new Promise(res => setTimeout(res, 2000));
+
+    res.status(200).json({
+      status: "success",
+      message: "Succesfuly Fetched Users!",
+      users: users,
+    });
+  } catch (err) {
+    users = [];
+    console.log(`ERROR: ${err}`);
+    res.status(500).json({
+      status: "success",
+      message: "Failed Fetch Users!",
+      users: users,
+    });
   }
 }

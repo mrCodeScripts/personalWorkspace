@@ -4,7 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import FileSystemLesson from "./NodeJSLearning/FileSystems/fsReadFile";
-import { RouteExample1 } from "./routes/routeEx1";
+import { RouteExample1, RouteExample2 } from "./routes/routeEx1";
 
 dotenv.config(); // loads .env variables
 
@@ -21,7 +21,10 @@ app.use(express.urlencoded({ extended: true })); // parses HTML form bodies
 
 
 app.post("/route_ex_1", RouteExample1);
-app.post("/shit", (res: Response, req: Request) => {
-    res.json({message: "slkjsdlfkjsd"});
+app.post("/fetch_users", RouteExample2);
+app.post("/shit", (req: Request, res: Response) => {
+    res.status(200).json({message: "slkjsdlfkjsd"});
 });
+
 // FileSystemLesson();
+app.listen(port, () => {console.log(`Server: ${port}`)});
