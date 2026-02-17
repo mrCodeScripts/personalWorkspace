@@ -1,9 +1,6 @@
-import  { type Request, Respond } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-
-
-async function getStudent(req: Request, res: Respond){
-
-
-
+export async function POST(req: NextRequest) {
+	// Minimal handler to satisfy build - returns empty JSON by default.
+	return NextResponse.json({});
 }

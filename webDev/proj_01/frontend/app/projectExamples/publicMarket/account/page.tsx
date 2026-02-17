@@ -17,7 +17,7 @@ export default function AccountPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-base-200 p-4 space-y-4">
+    <div className="min-h-screen bg-base-200 p-3 space-y-4 max-w-screen-sm mx-auto w-full pb-24">
 
       {/* Profile Card */}
       <div className="card bg-base-100 shadow-md p-4 flex items-center gap-4 rounded-lg">
@@ -41,6 +41,7 @@ export default function AccountPage() {
               key={item.name}
               href={item.href}
               className="flex items-center gap-3 p-3 bg-base-100 rounded-lg shadow-sm hover:bg-base-200"
+              aria-label={item.name}
             >
               <Icon size={20} className="text-primary" />
               <span className="font-medium text-sm">{item.name}</span>
@@ -50,7 +51,7 @@ export default function AccountPage() {
       </div>
 
       {/* Logout */}
-      <button className="btn btn-outline btn-error w-full mt-4">
+      <button className="btn btn-outline btn-error w-full mt-4" aria-label="Logout">
         <LogOut size={18} className="mr-2" /> Logout
       </button>
     </div>

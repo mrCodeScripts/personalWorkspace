@@ -43,15 +43,13 @@ export default function CartPage() {
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
 
   return (
-    <div className="space-y-4 pb-24">
+    <div className="space-y-4 pb-36 p-3 max-w-screen-sm mx-auto w-full">
 
       {/* Page Title */}
-      <h1 className="text-lg font-bold">My Cart</h1>
+      <h1 className="text-lg font-bold px-1">My Cart</h1>
 
       {/* Cart Items */}
-      {cart.length === 0 && (
-        <p className="text-center text-gray-400">Your cart is empty.</p>
-      )}
+      {cart.length === 0 && <p className="text-center text-gray-400">Your cart is empty.</p>}
 
       <div className="space-y-3">
         {cart.map((item) => (
@@ -76,6 +74,7 @@ export default function CartPage() {
                 <button
                   onClick={() => decreaseQty(item.id)}
                   className="btn btn-sm btn-outline btn-square"
+                  aria-label={`Decrease quantity of ${item.name}`}
                 >
                   -
                 </button>
@@ -85,6 +84,7 @@ export default function CartPage() {
                 <button
                   onClick={() => increaseQty(item.id)}
                   className="btn btn-sm btn-outline btn-square"
+                  aria-label={`Increase quantity of ${item.name}`}
                 >
                   +
                 </button>
@@ -95,6 +95,7 @@ export default function CartPage() {
             <button
               onClick={() => removeItem(item.id)}
               className="btn btn-ghost btn-sm"
+              aria-label={`Remove ${item.name} from cart`}
             >
               <Trash2 size={18} className="text-red-500" />
             </button>

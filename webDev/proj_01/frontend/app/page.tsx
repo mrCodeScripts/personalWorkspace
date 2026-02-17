@@ -25,6 +25,7 @@ import sendData from "./components/serverComponentExample/serverComponent2";
 import ClientComponent2 from "./components/clientComponentExample/clientComponent2";
 import MainClientServerComp from "./components/examples/clientServerExamples/Example1/main";
 import ServerLayout from "./components/examples/clientServerExamples/Example2/Server";
+import PubMarketLayout from "./projectExamples/publicMarket/pubMarketComp/layout";
 
 /**
  * ================= ICON LIBRARIES CHEAT SHEET =================
@@ -139,7 +140,10 @@ export default function Home() {
       {/* <DataServerSample2 />
       <DataServerSample3 /> */}
       {/* <MainClientServerComp /> */}
-      <ServerLayout />
+      {/* <ServerLayout /> */}
+      <PubMarketLayout>
+        <div></div>
+      </PubMarketLayout>
     </div>
   );
 }
