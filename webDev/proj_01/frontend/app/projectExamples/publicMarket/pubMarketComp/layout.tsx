@@ -15,10 +15,10 @@ export default function PubMarketLayout({ children }: { children: ReactNode }) {
 
           {/* Right Icons */}
           <div className="flex items-center gap-3">
-            <Link href="/pubMarketComp/cart" aria-label="Open cart">
+            <Link href="/projectExamples/publicMarket/cart" aria-label="Open cart">
               <ShoppingCart size={22} />
             </Link>
-            <Link href="/pubMarketComp/account" aria-label="Open account">
+              <Link href="/projectExamples/publicMarket/account" aria-label="Open account">
               <User size={22} />
             </Link>
           </div>
@@ -30,19 +30,19 @@ export default function PubMarketLayout({ children }: { children: ReactNode }) {
 
       {/* Bottom Navigation */}
       <nav role="navigation" aria-label="Bottom navigation" className="fixed bottom-0 left-0 w-full bg-base-100 shadow-md p-2 flex justify-around md:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-        <Link href="/" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Home">
+        <Link href="/projectExamples/publicMarket/home" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Home">
           <Home size={20} />
           <span className="text-xs">Home</span>
         </Link>
-        <Link href="/pubMarketComp/products" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Products">
+        <Link href="/projectExamples/publicMarket/products" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Products">
           <Home size={20} />
           <span className="text-xs">Products</span>
         </Link>
-        <Link href="/pubMarketComp/cart" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Cart">
+        <Link href="/projectExamples/publicMarket/cart" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Cart">
           <ShoppingCart size={20} />
           <span className="text-xs">Cart</span>
         </Link>
-        <Link href="/pubMarketComp/account" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Account">
+        <Link href="/projectExamples/publicMarket/account" className="flex flex-col items-center text-gray-500 hover:text-primary" aria-label="Account">
           <User size={20} />
           <span className="text-xs">Account</span>
         </Link>

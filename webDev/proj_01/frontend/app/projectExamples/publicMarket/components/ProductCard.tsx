@@ -12,7 +12,7 @@ type Product = {
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
-      href={`/pubMarketComp/products/${product.id}`}
+      href={`/projectExamples/publicMarket/products/${product.id}`}
       className="card bg-base-100 shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow"
       aria-label={`Open ${product.name}`}
     >

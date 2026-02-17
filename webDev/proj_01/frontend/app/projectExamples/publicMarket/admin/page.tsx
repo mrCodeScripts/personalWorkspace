@@ -10,11 +10,11 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
         <h2 className="text-lg font-bold mb-3 text-primary">Admin Panel</h2>
 
-        <Link href="/pubMarketComp/admin/products" className="btn btn-ghost w-full justify-start">
+        <Link href="/projectExamples/publicMarket/admin/products" className="btn btn-ghost w-full justify-start">
           Products
         </Link>
 
-        <Link href="/pubMarketComp/admin/users" className="btn btn-ghost w-full justify-start">
+        <Link href="/projectExamples/publicMarket/admin/users" className="btn btn-ghost w-full justify-start">
           Users
         </Link>
       </div>

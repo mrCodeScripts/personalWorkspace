@@ -1,0 +1,257 @@
+/* 
+********************************************************************
+*                       PubMarket Complete Design System           *
+********************************************************************
+
+1️⃣ Primary Brand Colors
+------------------------------------------------
+Primary      - Pinkish Red    - #f43f5e - text-primary, bg-primary, border-primary
+Secondary    - Amber          - #fbbf24 - text-secondary, bg-secondary
+Accent       - Cyan           - #22d3ee - text-accent, bg-accent
+Neutral      - Gray           - #f3f4f6 - bg-neutral (cards, sections)
+Base-100     - White          - #ffffff - bg-base-100 (cards, navbar)
+Text Dark    - Dark Gray      - #1f2937 - text-base-content
+Info         - Blue           - #3b82f6 - text-info
+Success      - Green          - #16a34a - text-success
+Warning      - Yellow         - #facc15 - text-warning
+Error        - Red            - #ef4444 - text-error
+
+2️⃣ Typography
+------------------------------------------------
+Logo/Branding: Bold, Rounded Sans-serif       - font-bold text-xl (mobile-friendly)
+Headings (H1)      : Semi-Bold               - text-lg font-semibold
+Subheadings (H2/H3): Medium                  - text-sm font-medium
+Body Text           : Regular                 - text-sm font-normal text-gray-700
+Small Text/Labels   : Light                   - text-xs text-gray-500
+Buttons             : Bold                    - font-medium
+
+3️⃣ Buttons
+------------------------------------------------
+Primary CTA       : btn btn-primary rounded-full      - Add to cart, checkout
+Secondary         : btn btn-secondary rounded-lg      - Optional actions
+Outline/Ghost     : btn btn-ghost                     - Edit, remove, menu links
+Error/Danger      : btn btn-error                     - Delete actions
+Disabled          : btn btn-disabled                  - Non-clickable
+
+4️⃣ Cards / Containers
+------------------------------------------------
+Product Card      : card bg-base-100 shadow-md rounded-lg p-2
+Account/Profile   : card bg-base-100 shadow-md rounded-lg p-4 flex items-center gap-4
+Seller/Admin Card : card bg-base-100 shadow-sm rounded-md p-2
+Home/Banner Card  : card bg-base-100 rounded-lg overflow-hidden
+
+5️⃣ Icons & Illustrations
+------------------------------------------------
+Cart, User, Home, Edit, Trash     : text-primary
+Info / Alerts                     : text-info
+Success Check                     : text-success
+Warning / Caution                  : text-warning
+Error / Delete                     : text-error
+
+6️⃣ Backgrounds / Sections
+------------------------------------------------
+Main Page       : bg-base-200
+Cards/Components: bg-base-100
+Banner          : bg-primary text-white
+Section Divider : bg-neutral
+Footer/BottomNav: bg-base-100 shadow-t
+
+7️⃣ Text Colors
+------------------------------------------------
+Primary Text    : text-base-content
+Secondary Text  : text-gray-500
+Price Highlight : text-primary font-semibold
+Subtext/Desc    : text-gray-400
+Link/Interactive: text-accent
+Error Message   : text-error
+Success Message : text-success
+
+8️⃣ Borders & Dividers
+------------------------------------------------
+Card Border     : border border-base-200
+Input Fields    : input input-bordered
+Section Divider : border-t border-neutral
+
+9️⃣ Forms / Inputs
+------------------------------------------------
+Text Input      : input input-bordered w-full
+Textarea        : textarea textarea-bordered w-full
+Select Dropdown : select select-bordered w-full
+Checkbox/Radio  : checkbox checkbox-primary
+Error State     : input input-bordered input-error
+
+10️⃣ Layout Spacing
+------------------------------------------------
+Section padding        : p-3
+Component spacing      : gap-3 / gap-4
+Margin bottom (main)   : mb-16 (prevents bottom nav overlap)
+Grid for products      : grid grid-cols-2 gap-3
+
+********************************************************************
+* Notes:
+* - Mobile-first design, Shopee-style clean UI
+* - Tailwind + DaisyUI classes mapped for fast implementation
+* - Reusable components: buttons, cards, inputs, icons
+* - Colors and typography consistent across pages
+* - Use this as your reference cheat sheet while coding
+********************************************************************
+*/
+
+
+/* 
+********************************************************************
+*                       PubMarket Features & Contents             *
+********************************************************************
+
+1️⃣ Public / User Features
+------------------------------------------------
+Home / Landing Page:
+- Banner / carousel (promotions, featured products)
+- Category slider (electronics, fashion, groceries, etc.)
+- Product lists (featured, best-selling, recommended)
+- Search bar (keywords, products, categories)
+- Quick access buttons (Cart, Account, Wishlist)
+
+Products Page:
+- Full list of products
+- Filter by category, price, popularity
+- Search within page
+- Grid layout for mobile cards
+
+Product Detail Page:
+- Product images carousel / zoom
+- Product name, price, description
+- Stock availability
+- Quantity selector
+- Add to cart button
+- Related products / "You might also like"
+
+Cart Page:
+- List of products added
+- Edit quantity / remove items
+- Total price & subtotal
+- Proceed to checkout button
+
+Checkout Page:
+- Shipping information form
+- Payment placeholder / method selection
+- Order summary (products, total, shipping)
+- Confirm purchase button
+
+Authentication / Account:
+- Login page (email, password)
+- Register page (name, email, password)
+- Account page: profile info, orders, addresses, payment info, settings
+- Logout button
+
+2️⃣ Seller Features
+------------------------------------------------
+Seller Dashboard:
+- Total products sold
+- Total orders
+- Pending orders
+
+Seller Products:
+- List of seller’s products
+- Edit / remove product
+- Product stats (views, orders if desired)
+
+Add Product:
+- Form to add a new product
+- Fields: name, price, image URL, optional description
+- Confirmation message after adding
+
+3️⃣ Admin Features (optional / for completeness)
+------------------------------------------------
+Admin Dashboard:
+- Overview of total users, total products, orders
+
+Admin Products:
+- Manage all products (add / edit / remove)
+
+Admin Users:
+- View registered users
+- Edit / deactivate accounts
+
+4️⃣ Global Features / Components
+------------------------------------------------
+- Navbar: logo, cart icon, account icon
+- Bottom Nav (mobile-only): Home, Products, Cart, Account
+- Search Bar: visible on Home and Products pages
+- Category Slider: scrollable list of product categories
+- Product Cards: image, name, price, add-to-cart button
+- Buttons: primary, secondary, ghost, error/danger
+- Cards / Containers: for products, banners, user info
+
+5️⃣ Data / Contents (Sample for Mocking)
+------------------------------------------------
+- Products: id, name, price, image, description, category
+- Users: id, name, email, avatar (optional)
+- Cart: userId, productId, quantity
+- Orders (optional placeholder): orderId, products[], total, shipping info
+
+6️⃣ Extra / Nice-to-Have Features (if time allows)
+------------------------------------------------
+- Wishlist / Favorites
+- Product sorting (price low→high, popularity)
+- Filter by rating / brand
+- Promotional banners / discount labels
+- Order history / tracking (dummy data for demo)
+
+✅ Summary
+- PubMarket is a mobile-first e-commerce platform
+- Public users can browse, search, buy, and manage accounts
+- Sellers can manage their own products
+- Admins can manage users and products
+- All data can be mocked for demo, no backend needed
+- Components: navbar, bottom nav, product cards, category sliders, forms, buttons
+********************************************************************
+*/
+
+app/
+├─ pubMarketComp/
+│  ├─ layout.tsx                     # Main public layout (navbar, bottom nav)
+│  ├─ global.css                      # Tailwind + DaisyUI global styles
+│  ├─ components/                     # Reusable components
+│  │  ├─ Navbar.tsx
+│  │  ├─ BottomNav.tsx
+│  │  ├─ SearchBar.tsx
+│  │  ├─ CategorySlider.tsx
+│  │  ├─ ProductCard.tsx
+│  │  └─ BannerCarousel.tsx
+│  │
+│  ├─ data/
+│  │  └─ products.ts                  # Sample product data
+│  │
+│  ├─ home/
+│  │  └─ page.tsx                     # Home / landing page
+│  │
+│  ├─ products/
+│  │  ├─ page.tsx                     # Products list page
+│  │  └─ [id]/page.tsx                # Single product detail page
+│  │
+│  ├─ cart/
+│  │  └─ page.tsx                     # Cart page
+│  │
+│  ├─ checkout/
+│  │  └─ page.tsx                     # Checkout page
+│  │
+│  ├─ account/
+│  │  └─ page.tsx                     # Account page
+│  │
+│  ├─ auth/
+│  │  ├─ login/page.tsx
+│  │  └─ register/page.tsx
+│  │
+│  ├─ admin/
+│  │  ├─ layout.tsx                   # Admin layout
+│  │  ├─ page.tsx                     # Admin dashboard
+│  │  ├─ products/page.tsx            # Admin products
+│  │  └─ users/page.tsx               # Admin users
+│  │
+│  ├─ seller/
+│  │  ├─ layout.tsx                   # Seller layout
+│  │  ├─ page.tsx                     # Seller dashboard
+│  │  ├─ products/page.tsx            # Seller products
+│  │  └─ add/page.tsx                 # Add product page
+

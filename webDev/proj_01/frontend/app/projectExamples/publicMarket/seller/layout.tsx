@@ -10,15 +10,15 @@ export default function SellerLayout({ children }: { children: ReactNode }) {
 
         <h2 className="text-lg font-bold mb-3 text-primary">Seller Panel</h2>
 
-        <Link href="/pubMarketComp/seller" className="btn btn-ghost w-full justify-start">
+          <Link href="/projectExamples/publicMarket/seller" className="btn btn-ghost w-full justify-start">
           Dashboard
         </Link>
 
-        <Link href="/pubMarketComp/seller/products" className="btn btn-ghost w-full justify-start">
+          <Link href="/projectExamples/publicMarket/seller/products" className="btn btn-ghost w-full justify-start">
           Products
         </Link>
 
-        <Link href="/pubMarketComp/seller/add" className="btn btn-ghost w-full justify-start">
+          <Link href="/projectExamples/publicMarket/seller/add" className="btn btn-ghost w-full justify-start">
           Add Product
         </Link>
       </div>

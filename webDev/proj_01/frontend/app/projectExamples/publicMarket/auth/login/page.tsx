@@ -59,7 +59,7 @@ export default function LoginPage() {
 
           <p className="text-xs text-center text-gray-500">
             Don’t have an account?{" "}
-            <Link href="/pubMarketComp/auth/register" className="text-primary font-semibold">
+            <Link href="/projectExamples/publicMarket/auth/register" className="text-primary font-semibold">
               Register
             </Link>
           </p>

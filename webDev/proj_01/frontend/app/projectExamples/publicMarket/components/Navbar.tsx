@@ -14,7 +14,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex-none">
           <Link
-            href="/pubMarketComp"
+            href="/projectExamples/publicMarket/home"
             className="text-lg font-bold text-primary"
             aria-label="Go to PubMarket home"
           >
@@ -30,11 +30,11 @@ export default function Navbar() {
         {/* Actions */}
         <div className="flex-none gap-1 flex items-center">
 
-          <Link href="/pubMarketComp/cart" className="btn btn-ghost btn-sm" aria-label="Open cart">
+          <Link href="/projectExamples/publicMarket/cart" className="btn btn-ghost btn-sm" aria-label="Open cart">
             <ShoppingCart size={20} />
           </Link>
 
-          <Link href="/pubMarketComp/account" className="btn btn-ghost btn-sm" aria-label="Open account">
+          <Link href="/projectExamples/publicMarket/account" className="btn btn-ghost btn-sm" aria-label="Open account">
             <User size={20} />
           </Link>
 

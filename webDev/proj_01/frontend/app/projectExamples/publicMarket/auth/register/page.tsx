@@ -69,7 +69,7 @@ export default function RegisterPage() {
 
           <p className="text-xs text-center text-gray-500">
             Already have an account?{" "}
-            <Link href="/pubMarketComp/auth/login" className="text-primary font-semibold">
+            <Link href="/projectExamples/publicMarket/auth/login" className="text-primary font-semibold">
               Login
             </Link>
           </p>

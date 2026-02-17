@@ -26,6 +26,8 @@ import ClientComponent2 from "./components/clientComponentExample/clientComponen
 import MainClientServerComp from "./components/examples/clientServerExamples/Example1/main";
 import ServerLayout from "./components/examples/clientServerExamples/Example2/Server";
 import PubMarketLayout from "./projectExamples/publicMarket/pubMarketComp/layout";
+import PublicMarketMainLayout from "./projectExamples/publicMarket2/main_layout";
+import PublicMarket from "./projectExamples/publicMarket3/layout";
 
 /**
  * ================= ICON LIBRARIES CHEAT SHEET =================
@@ -141,9 +143,15 @@ export default function Home() {
       <DataServerSample3 /> */}
       {/* <MainClientServerComp /> */}
       {/* <ServerLayout /> */}
-      <PubMarketLayout>
+      {/* <PubMarketLayout>
         <div></div>
-      </PubMarketLayout>
+      </PubMarketLayout> */}
+      {/* <PublicMarketMainLayout>
+        <div>Welcome to the main page</div>
+      </PublicMarketMainLayout> */}
+      <PublicMarket>
+        <div>Welcome to the main page</div>
+      </PublicMarket>
     </div>
   );
 }
