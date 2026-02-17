@@ -1,0 +1,45 @@
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font and body styles */
+body {
+  @apply bg-base-200 text-base-content font-sans;
+  margin: 0;
+  padding: 0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix bottom nav overlap with main content */
+main {
+  padding-bottom: 4rem; /* Enough space for bottom nav */
+}
+
+/* Custom scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+::-webkit-scrollbar-track {
+  @apply bg-base-200;
+}
+
+/* DaisyUI theme customization */
+:root {
+  --primary: #f43f5e; /* Pinkish red (Shopee style) */
+  --secondary: #fbbf24; /* Amber for highlights */
+  --accent: #22d3ee; /* Cyan accent */
+  --neutral: #f3f4f6; /* Base gray background */
+  --base-100: #ffffff; /* Cards, navbar */
+  --info: #3b82f6;
+  --success: #16a34a;
+  --warning: #facc15;
+  --error: #ef4444;
+}

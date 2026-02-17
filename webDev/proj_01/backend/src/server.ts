@@ -20,7 +20,6 @@ app.use(express.json()); // parses JSON bodies for POST requests
 app.use(express.urlencoded({ extended: true })); // parses HTML form bodies
 // END MIDDLEWARE SETUP
 
-
 app.post("/route_ex_1", RouteExample1);
 app.post("/fetch_users", RouteExample2);
 app.post("/shit", (req: Request, res: Response) => {

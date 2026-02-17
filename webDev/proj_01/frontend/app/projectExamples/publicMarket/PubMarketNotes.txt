@@ -1,0 +1,62 @@
+
+
+
+
+
+
+
+app/
+ └── pubMarketComp/
+     ├── layout.tsx          ✅ Main Layout (Server)
+     ├── globals.css         ✅ Tailwind + DaisyUI
+
+     ├── components/         ✅ Reusable UI
+     │   ├── Navbar.tsx
+     │   ├── BottomNav.tsx
+     │   ├── ProductCard.tsx
+     │   ├── CategorySlider.tsx
+     │   └── SearchBar.tsx
+
+     ├── home/               ✅ /
+     │   └── page.tsx
+
+     ├── products/           ✅ /products
+     │   ├── page.tsx
+     │   └── [id]/
+     │       └── page.tsx
+
+     ├── cart/               ✅ /cart
+     │   └── page.tsx
+
+     ├── checkout/           ✅ /checkout
+     │   └── page.tsx
+
+     ├── account/            ✅ /account
+     │   └── page.tsx
+
+     ├── auth/               ✅ /login /register
+     │   ├── login/
+     │   │   └── page.tsx
+     │   └── register/
+     │       └── page.tsx
+
+     ├── seller/             ✅ Seller Dashboard
+     │   ├── page.tsx
+     │   ├── products/
+     │   │   └── page.tsx
+     │   └── add/
+     │       └── page.tsx
+
+     ├── admin/              ✅ Admin Panel
+     │   ├── page.tsx
+     │   ├── users/
+     │   │   └── page.tsx
+     │   └── products/
+     │       └── page.tsx
+
+     └── data/               ✅ Fake data
+         └── products.ts
+
+
+
+
