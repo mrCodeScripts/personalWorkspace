@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import { argon2id } from "argon2";
 
 async function PasswordSecurityExample1() {
   const SALT_PASSWORD = 12;
@@ -9,7 +10,10 @@ async function PasswordSecurityExample1() {
     return hashedPwd;
   };
 
-  const comparePassword: (password: string, hashPassword: string) => Promise<boolean> = async (password: string, hashPassword: string) => {
+  const comparePassword: (
+    password: string,
+    hashPassword: string,
+  ) => Promise<boolean> = async (password: string, hashPassword: string) => {
     const comparison: boolean = await bcrypt.compare(password, hashPassword);
     return comparison;
   };
@@ -22,10 +26,13 @@ async function PasswordSecurityExample1() {
 
   const pwdComparison = await comparePassword(originalPassword, hashPwd);
   console.log(
-    `BYCRIPTED PASSWORD: ${hashPwd}, ORIGINAL PASSWORD: ${originalPassword}, MATCHED: ${pwdComparison ? 'TRUE' : 'FALSE'}`,
+    `BYCRIPTED PASSWORD: ${hashPwd}, ORIGINAL PASSWORD: ${originalPassword}, MATCHED: ${pwdComparison ? "TRUE" : "FALSE"}`,
   );
 
-
+  const argon2dHash = async (password: string) => {
+    return await argon2id.hash(password);
+  };
+  console.log(`ARGON2D PASSWORD: ${argon2dHash(originalPassword)}`);
 }
 
 export default function PasswordSecurityLessons() {
