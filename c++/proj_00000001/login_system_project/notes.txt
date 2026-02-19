@@ -1,0 +1,62 @@
+BasicUser Features
+- Login & Signup with salted + hashed passwords.
+- Dynamic Profile Display in terminal tables with colors.
+- Change Password securely.
+- Personal Settings: terminal theme, notifications, language preference.
+- Activity Log: track login, logout, and actions.
+- Search Users: quick lookup of other users by username.
+- UUID Display: unique ID for every user.
+- Secure Verification: auto-check password validity and registration status.
+
+AdminAcc Features
+- Manage Users: view, add, edit, or delete any user.
+- View All Activity Logs: teachers/students actions in real-time.
+- Batch Actions: reset passwords, enable/disable accounts, etc.
+- Role Assignment: promote/demote users between basic and admin.
+- Search & Filter Users: by username, last login, or settings.
+- Quick Stats: total users, most active users, latest signups.
+- UUID Display: show UUIDs of all users.
+- Encrypted Logs: tamper-proof activity logs.
+- Custom Terminal Commands: commands like > adduser, > deluser John, > showlogs, > changepass.
+- Terminal UI Styling: colored tables, error messages, and success messages for instant readability.
+
+
+
+HOW TO USE THE UUID_V4
+
+1. Create a UUID generator — use std::mt19937_64 (recommended)
+UUIDv4::UUIDGenerator<std::mt19937_64> uuidGen;
+
+2. Generate a random UUID
+UUIDv4::UUID uuid = uuidGen.getUUID();
+
+3. Get a "pretty string" representation (standard UUID string, 36‑chars)
+std::string uuid_str = uuid.str();
+std::cout << "Generated UUIDv4: " << uuid_str << std::endl;
+
+4. If you want bytes (16 bytes binary representation)
+std::string bytes = uuid.bytes();
+maybe print them in hex, or store somewhere:
+std::cout << "UUID bytes size: " << bytes.size() << std::endl;
+
+5. Load from a UUID string (parse back)
+UUIDv4::UUID uuid2 = UUIDv4::UUID::fromStrFactory(uuid_str);
+if (uuid == uuid2) {
+ std::cout << "Parsed UUID matches!" << std::endl;
+} else {
+ std::cout << "Something wrong with parsing." << std::endl;
+}
+
+------------------------------------------
+
+// COMMAND: g++ src/main.o src/Database.o src/UserEntity.o -Llib -largon2 -o main.exe
+
+/*
+# Compile all C source files into object files
+gcc -O2 -mavx2 -Ivendor/argon2/include -c vendor/argon2/src/argon2.c -o argon2.o
+gcc -O2 -mavx2 -Ivendor/argon2/include -c vendor/argon2/src/core.c -o core.o
+gcc -O2 -mavx2 -Ivendor/argon2/include -c vendor/argon2/src/blake2/blake2b.c -o blake2b.o
+gcc -O2 -mavx2 -Ivendor/argon2/include -c vendor/argon2/src/thread.c -o thread.o
+gcc -O2 -mavx2 -Ivendor/argon2/include -c vendor/argon2/src/encoding.c -o encoding.o
+ */
+

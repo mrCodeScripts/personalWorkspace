@@ -1,0 +1,109 @@
+{
+    "restaurantMenu": [
+        {
+            "foods": [
+                {
+                    "name": "Fries",
+                    "price": 120.0,
+                    "stock": 19
+                },
+                {
+                    "name": "Burger",
+                    "price": 150.0,
+                    "stock": 45
+                },
+                {
+                    "name": "Cheese Burger",
+                    "price": 180.0,
+                    "stock": 45
+                },
+                {
+                    "name": "Bacon Burger",
+                    "price": 200.0,
+                    "stock": 45
+                },
+                {
+                    "name": "Hotdog",
+                    "price": 130.0,
+                    "stock": 46
+                },
+                {
+                    "name": "Pizza Slice",
+                    "price": 220.0,
+                    "stock": 46
+                }
+            ],
+            "name": "🍔 Food Menu"
+        },
+        {
+            "foods": [
+                {
+                    "name": "Cookies",
+                    "price": 100.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Cupcake",
+                    "price": 120.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Donut",
+                    "price": 110.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Ice Cream",
+                    "price": 140.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Cheesecake",
+                    "price": 160.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Apple Pie",
+                    "price": 170.0,
+                    "stock": 50
+                }
+            ],
+            "name": "🍰 Dessert Menu"
+        },
+        {
+            "foods": [
+                {
+                    "name": "Soda",
+                    "price": 100.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Juice",
+                    "price": 120.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Coffee",
+                    "price": 140.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Milk Tea",
+                    "price": 150.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Beer",
+                    "price": 180.0,
+                    "stock": 50
+                },
+                {
+                    "name": "Wine",
+                    "price": 200.0,
+                    "stock": 50
+                }
+            ],
+            "name": "🥤 Drinks Menu"
+        }
+    ]
+}

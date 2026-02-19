@@ -1,0 +1,12 @@
+{
+    "user_database": [
+        {
+            "id": 1,
+            "username": "Juan"
+        },
+        {
+            "id": 2,
+            "username": "Maria"
+        }
+    ]
+}

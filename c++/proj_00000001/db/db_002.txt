@@ -1,0 +1,28 @@
+{
+    "user_database": [
+        {
+            "id": 1,
+            "username": "Juan"
+        },
+        {
+            "id": 2,
+            "username": "Maria"
+        },
+        {
+            "id": 1,
+            "username": "John Doe"
+        },
+        {
+            "id": 2,
+            "username": "Alice Smith"
+        },
+        {
+            "id": 3,
+            "username": "Bob Johnson"
+        },
+        {
+            "id": 4,
+            "username": "Charlie Brown"
+        }
+    ]
+}

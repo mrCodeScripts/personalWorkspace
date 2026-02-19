@@ -1,0 +1,64 @@
+1️⃣ Foundations – must know first
+1. Linear Search
+    - Scan elements one by one.
+    - Learn with arrays and linked lists.
+    - Concept: sequential checking.
+2. Binary Search
+    - Works on sorted arrays.
+    - Concept: divide and conquer — cut search space in half.
+3. Sorting Algorithms (prerequisite for some searches)
+    - Bubble Sort – simplest, understand swapping.
+    - Selection Sort – select min/max iteratively.
+    - Insertion Sort – insert in the right place.
+    - Quick Sort / Merge Sort – divide and conquer; helps understand recursion.
+
+2️⃣ Data structures – know how to store and access data
+1. Arrays / Vectors – basic containers.
+2. Linked Lists – single/double/triple pointers.
+3. Stacks
+    - LIFO: last in, first out.
+    - Implemented with arrays or linked lists.
+4. Queues
+    - FIFO: first in, first out.
+    - Learn std::queue in C++.
+5. Priority Queue / Heap
+    - Special queue that gives you smallest or largest element first.
+    - Needed for Dijkstra / A* algorithms.
+6. Hash Tables / Maps
+    - Fast key → value storage and lookup.
+
+3️⃣ Basic graph concepts – for pathfinding
+1. Graphs
+    - Nodes/Vertices + edges
+    - Directed / Undirected
+    - Weighted / Unweighted
+2. Representations:
+    - Adjacency Matrix
+    - Adjacency List
+3. Graph traversal algorithms
+    - BFS (Breadth-First Search) – use queue; finds shortest path in unweighted graphs.
+    - DFS (Depth-First Search) – use stack / recursion; explore deep paths.
+
+4️⃣ Pathfinding / weighted graph algorithms
+1. Dijkstra’s Algorithm
+    - Finds shortest path on weighted graphs with non-negative edges.
+    - Uses: priority queue + distance array + prev array.
+2. Bellman-Ford
+    - Works with negative edges too.
+    - Slower than Dijkstra.
+3. A Algorithm*
+    - Dijkstra + heuristic (estimation) for faster shortest-path.
+    - Uses: open list (priority queue) + closed list.
+4. Floyd-Warshall
+    - Finds shortest path between all pairs of nodes.
+    - Works for small graphs (O(N³)).
+
+5️⃣ Additional important algorithms
+1. Recursion / Backtracking
+    Solve mazes, generate paths, or do DFS-style exploration.
+2. Greedy Algorithms
+    Take the best choice at each step, e.g., coin change, activity selection.
+3. Dynamic Programming (DP)
+    Break problem into overlapping subproblems, e.g., shortest path on grids, knapsack, Fibonacci.
+4. Union-Find / Disjoint Sets
+    For connected components, Kruskal’s MST algorithm.

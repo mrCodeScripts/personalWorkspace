@@ -1,0 +1,30 @@
+{
+    "USER_ACCOUNTS": [
+        {
+            "address": "Tokyo, Japan",
+            "age": 20,
+            "firstName": "Zyru",
+            "isActive": false,
+            "lastName": "San",
+            "passwordHash": "a661d33c",
+            "passwordSalt": "B#u)Y3;^ee?74wbc",
+            "user_type": "admin",
+            "username": "zyru.san",
+            "uuid": "6f4d7026-5df9-4f5d-9ec5-df65efbe5c47"
+        },
+        {
+            "address": "Anonang, Dumalinao, ZdS",
+            "age": 18,
+            "firstName": "Jayrald",
+            "isActive": false,
+            "lastName": "Deniega",
+            "passwordHash": "c68ae53c",
+            "passwordSalt": ",sXQ^L?[+Wdku|1?",
+            "user_type": "basic_user",
+            "username": "jayralddeniega",
+            "uuid": "855b023d-34bf-4e18-a786-89c305c0220e"
+        }
+    ]
+}
+
+  
