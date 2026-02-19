@@ -112,7 +112,13 @@ const UserListComponent = React.memo(({ users, onUpdate }: UserForm) => {
                   </>
                 ) : (
                   <>
-                    <div style={{display: "flex", flexDirection: "row", gap: "10px"}}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "10px",
+                      }}
+                    >
                       <span> Name: {e.name}</span>
                       <span> Age: {e.age}</span>
                       <span> Location: {e.location}</span>
@@ -145,7 +151,7 @@ export default function DataChangingComponent() {
   ]);
 
   const handleUpdate = useCallback((userIndex: number, updatedUser: User) => {
-    newUserList(prev => {
+    newUserList((prev) => {
       const copy = [...prev];
       copy[userIndex] = updatedUser;
       return copy;

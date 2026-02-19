@@ -1,0 +1,431 @@
+====================================================
+ PASSWORD SECURITY RULES & BEST PRACTICES
+ For Modern Web Applications (Node.js / Web / APIs)
+====================================================
+
+PURPOSE:
+This document defines the standard rules for handling
+user passwords securely in production systems.
+
+Failure to follow these rules can lead to:
+- Data breaches
+- Account takeovers
+- Legal issues
+- Loss of user trust
+
+
+----------------------------------------------------
+1. NEVER STORE PLAIN-TEXT PASSWORDS
+----------------------------------------------------
+❌ WRONG:
+- Saving passwords directly in database
+- Logging passwords in console
+- Sending passwords in emails
+
+✅ CORRECT:
+- Always hash passwords before storing
+- Only store the hashed value
+
+Example:
+User password: "mypassword123"
+Stored value: "$argon2id$v=19$..."
+
+
+----------------------------------------------------
+2. ALWAYS USE STRONG HASHING ALGORITHMS
+----------------------------------------------------
+Use ONLY password-specific hashing algorithms:
+
+✅ Recommended:
+- Argon2 (Preferred)
+- bcrypt
+- scrypt
+
+❌ Never Use:
+- MD5
+- SHA1
+- SHA256 alone
+- Base64
+- Encryption (AES, RSA) for passwords
+
+Reason:
+General hashes are fast → easy to crack.
+Password hashes are slow → hard to crack.
+
+
+----------------------------------------------------
+3. ALWAYS USE SALTING (AUTOMATIC OR MANUAL)
+----------------------------------------------------
+Salt = random data added to password before hashing.
+
+Purpose:
+- Prevent rainbow table attacks
+- Ensure same passwords ≠ same hashes
+
+Rule:
+- Let bcrypt/argon2 manage salt automatically
+- Do NOT reuse salts manually
+
+Example:
+"password123" + random salt → unique hash
+
+
+----------------------------------------------------
+4. USE A STRONG COST / WORK FACTOR
+----------------------------------------------------
+Hashing must be slow by design.
+
+Recommended:
+- bcrypt rounds: 10–14 (12 is standard)
+- Argon2: default or higher memory cost
+
+Purpose:
+- Slow down brute-force attacks
+- Protect against GPU cracking
+
+
+----------------------------------------------------
+5. NEVER DECRYPT PASSWORDS
+----------------------------------------------------
+Passwords must be ONE-WAY only.
+
+Rules:
+- No decryption
+- No reverse functions
+- No "forgot password" recovery
+
+Only allowed:
+- Reset password
+- Verify password
+
+
+----------------------------------------------------
+6. ALWAYS VERIFY USING HASH COMPARISON
+----------------------------------------------------
+❌ WRONG:
+Compare plain text with stored text
+
+✅ CORRECT:
+Re-hash input and compare securely
+
+Use:
+- bcrypt.compare()
+- argon2.verify()
+
+Never write your own comparison logic.
+
+
+----------------------------------------------------
+7. ENFORCE PASSWORD STRENGTH RULES
+----------------------------------------------------
+Minimum Requirements:
+- Length ≥ 8 characters (12+ recommended)
+- At least:
+  - 1 uppercase
+  - 1 lowercase
+  - 1 number
+  - 1 symbol
+
+Reject:
+- "123456"
+- "password"
+- "qwerty"
+- "admin123"
+
+Optional:
+- Use password strength libraries
+
+
+----------------------------------------------------
+8. PROTECT LOGIN SYSTEM FROM ATTACKS
+----------------------------------------------------
+Always implement:
+
+✅ Rate Limiting
+- Limit login attempts
+
+✅ Account Lockout
+- Lock after X failures
+
+✅ CAPTCHA (Optional)
+- Prevent bots
+
+Purpose:
+- Stop brute force
+- Stop credential stuffing
+
+
+----------------------------------------------------
+9. SECURE PASSWORD TRANSMISSION
+----------------------------------------------------
+Passwords must only be sent over HTTPS.
+
+❌ NEVER:
+- Allow HTTP login
+- Log request bodies
+- Store in cookies
+
+✅ ALWAYS:
+- Use TLS/SSL
+- Secure headers
+
+
+----------------------------------------------------
+10. IMPLEMENT SAFE PASSWORD RESET
+----------------------------------------------------
+Never send passwords via email.
+
+Correct Flow:
+1. User requests reset
+2. Generate random token
+3. Store hashed token
+4. Send reset link
+5. Expire after short time
+
+Token lifetime: 10–30 minutes
+
+
+----------------------------------------------------
+11. DO NOT REVEAL AUTHENTICATION DETAILS
+----------------------------------------------------
+Login error messages must be generic.
+
+❌ WRONG:
+"User does not exist"
+"Wrong password"
+
+✅ CORRECT:
+"Invalid credentials"
+
+Reason:
+Prevents user enumeration attacks
+
+
+----------------------------------------------------
+12. STORE HASHES SECURELY
+----------------------------------------------------
+Database Rules:
+- Restrict access
+- Encrypt backups
+- Limit admin permissions
+
+Never expose:
+- Password hashes
+- Auth tables
+- Logs
+
+
+----------------------------------------------------
+13. USE MULTI-FACTOR AUTHENTICATION (OPTIONAL)
+----------------------------------------------------
+For high-security systems:
+
+Implement:
+- SMS OTP
+- Email OTP
+- Authenticator apps
+
+MFA = second layer after password
+
+
+----------------------------------------------------
+14. REGULARLY UPDATE SECURITY SETTINGS
+----------------------------------------------------
+Security is not "set once".
+
+Review:
+- Hashing cost
+- Algorithms
+- Libraries
+- Policies
+
+Upgrade when standards change.
+
+
+----------------------------------------------------
+15. NEVER WRITE CUSTOM CRYPTO
+----------------------------------------------------
+Rule:
+DO NOT invent your own hashing system.
+
+Always use:
+- Trusted libraries
+- Audited packages
+
+Custom crypto = guaranteed failure
+
+
+----------------------------------------------------
+STANDARD AUTHENTICATION FLOW
+----------------------------------------------------
+
+REGISTER:
+User → Password → Hash → Store
+
+LOGIN:
+User → Password → Verify → Token/Session
+
+RESET:
+Request → Token → Verify → New Hash
+
+
+----------------------------------------------------
+RECOMMENDED STACK (NODE.JS)
+----------------------------------------------------
+Hashing:
+- argon2
+- bcryptjs
+
+Auth:
+- jsonwebtoken
+- express-session
+
+Protection:
+- express-rate-limit
+- helmet
+
+
+----------------------------------------------------
+FINAL RULE
+----------------------------------------------------
+If passwords leak, the system failed.
+
+Security > Convenience
+Security > Speed
+Security > Simplicity
+
+No exceptions.
+
+====================================================
+ END OF PASSWORD SECURITY DOCUMENT
+====================================================
+
+
+  CORS (Cross-Origin Resource Sharing) — Full Guide
+ 
+  CORS controls which origins (domains) can access your backend. In Node.js/Express, you use the `cors` package.
+ 
+  -------------------------------
+  1️⃣ Basic Usage
+ 
+  import cors from "cors";
+  app.use(cors());
+ 
+  Default behavior:
+   - All origins allowed ()
+   - Simple methods only
+   - No credentials
+ 
+  -------------------------------
+  2️⃣ CORS Options Object
+ 
+  app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+    exposedHeaders: ["X-Custom-Header"],
+    maxAge: 600,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  }));
+ 
+  Properties:
+ 
+  1. origin
+     - Type: string | boolean | string[] | RegExp | (origin, callback) => void
+     - Default: ""
+     - Allows you to control which origins can access backend
+     - Examples:
+         origin: "http://localhost:3000"
+         origin: ["http://localhost:3000","https://example.com"]
+         origin: true  // allow all
+         origin: false // block all
+         origin: /example\.com$/ // regex
+         origin: (origin, cb) => { cb(null, true) } // dynamic
+ 
+  2. methods
+     - Type: string | string[]
+     - Default: "GET,HEAD,PUT,PATCH,POST,DELETE"
+     - Allowed HTTP methods
+ 
+  3. allowedHeaders
+     - Type: string | string[]
+     - Default: req.headers["access-control-request-headers"]
+     - Which headers client can send
+ 
+  4. exposedHeaders
+     - Type: string | string[]
+     - Default: undefined
+     - Which headers client can read from response
+ 
+  5. credentials
+     - Type: boolean
+     - Default: false
+     - If true, allows cookies or auth headers in cross-origin requests
+     - NOTE: If true, origin cannot be ""
+ 
+  6. preflightContinue
+     - Type: boolean
+     - Default: false
+     - Passes OPTIONS request to next middleware if true
+ 
+  7. optionsSuccessStatus
+     - Type: number
+     - Default: 204
+     - Status code for preflight OPTIONS requests
+ 
+  8. maxAge
+     - Type: number (seconds)
+     - Default: undefined
+     - How long preflight response is cached by browser
+ 
+  -------------------------------
+  3️⃣ Dynamic Origins Example
+ 
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // allow non-browser requests
+      if (["http://localhost:3000","https://example.com"].includes(origin)) {
+        callback(null, true); // allowed
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  }));
+ 
+  -------------------------------
+  4️⃣ Real Production Setup
+ 
+  app.use(cors({
+    origin: ["https://myfrontend.com", "https://admin.myfrontend.com"],
+    methods: ["GET","POST","PUT","DELETE"],
+    allowedHeaders: ["Content-Type","Authorization"],
+    exposedHeaders: ["X-Total-Count","X-RateLimit-Remaining"],
+    credentials: true,
+    maxAge: 600,
+    optionsSuccessStatus: 200,
+  }));
+ 
+  -------------------------------
+  5️⃣ Common Mistakes
+  - credentials: true + origin: "" => ❌ Won’t work
+  - Forgetting Authorization in allowedHeaders => ❌ JWT blocked
+  - Not handling OPTIONS requests => ❌ Preflight fails
+  - Sending headers in frontend but not allowing in backend => ❌ CORS blocked
+ 
+  -------------------------------
+  6️⃣ Frontend Example (Next.js)
+ 
+  await fetch("http://localhost:3001/profile", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    credentials: "include", // if backend sets HttpOnly cookie
+  });
+ 
+  - credentials: "include" sends cookies
+  - Must match credentials: true on backend

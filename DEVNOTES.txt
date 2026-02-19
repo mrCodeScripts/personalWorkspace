@@ -2936,6 +2936,7 @@ OBJECTIVES #1
 6. Create a full plan on creating the 'Public Market' app design with Figma.
 7. Finish 50-70% of the 'Public Market' app design with NextJS.
 8. Presentation for the 'Public Market' app design.
+9. Learn security on NodeJS.
 
 
 
@@ -2958,7 +2959,6 @@ including elements, icons, font, text colors, and etc. I just want all laid down
 what it has, the purposes and etc, i know we can do this together.
 2. Create the 'public market' app using NextJS (React), all pages, including admins, product 
 pages, designs, and etc (dont worry about server shit, i just want the design) (code).
-
 
 
 ... Now lets start with the plan first, i have fucking 30min for it (Objective 1).
