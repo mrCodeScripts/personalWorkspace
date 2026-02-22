@@ -1,3 +1,6 @@
+// ++ c:\Users\klysh\Desktop\programming_extra\personalWorkspace\webDev\proj_01\backend\src\server.ts
+import http from 'http';
+import { Server as IOServer } from 'socket.io';
 import express, { Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import cors from "cors";
@@ -6,6 +9,7 @@ import dotenv from "dotenv";
 import FileSystemLesson from "./NodeJSLearning/FileSystems/fsReadFile";
 import { RouteExample1, RouteExample2, RouteExample3, RouteExample4 } from "./routes/routeEx1";
 import PasswordSecurityLessons from "./NodeJSLearning/security/passwordSecurity";
+import { myOwnLiveServer } from './NodeJSLearning/sampleProjects/sample1/sampleServer';
 
 dotenv.config(); // loads .env variables
 
@@ -32,5 +36,10 @@ app.post("/signup", RouteExample4);
 // FileSystemLesson();
 PasswordSecurityLessons();
 app.listen(port, () => {console.log(`Server: ${port}`)});
+
+myOwnLiveServer(String(port));
+
+
+
 
 

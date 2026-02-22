@@ -2905,18 +2905,6 @@ Every project = learning, earning, leverage.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                                                              
 '########:::::'###::::'####:'##:::::::'##:::'##::::'########::::'###:::::'######::'##:::'##::'######:::::::'####::::::::'#######::'########::::::::'##:'########::'######::'########:'####:'##::::'##:'########::'######::
  ##.... ##:::'## ##:::. ##:: ##:::::::. ##:'##:::::... ##..::::'## ##:::'##... ##: ##::'##::'##... ##:::::'##. ##::::::'##.... ##: ##.... ##::::::: ##: ##.....::'##... ##:... ##..::. ##:: ##:::: ##: ##.....::'##... ##:
@@ -2927,38 +2915,13 @@ Every project = learning, earning, leverage.
  ########:: ##:::: ##:'####: ########:::: ##:::::::::: ##:::: ##:::: ##:. ######:: ##::. ##:. ######:::::. ####. ##::::. #######:: ########::. ######:: ########:. ######::::: ##::::'####:::. ###:::: ########:. ######::
 ........:::..:::::..::....::........:::::..:::::::::::..:::::..:::::..:::......:::..::::..:::......:::::::....::..::::::.......:::........::::......:::........:::......::::::..:::::....:::::...:::::........:::......:::
 
-OBJECTIVES #1
+MISSION #1
 ✅ Finish learning file systems and how to use them. 
-2. Review file system functions. 
-3. Create a simple web app Next.js + Node.js that manipulates texts.
+✅ Review file system functions. 
+3. Create a simple web app Next.js + Node.js that manipulates texts with live server.
 4. Create a simple login/signup web app with Next.js + Node.js that stores JSON data on the texts using file systems.
 5. Create a simple CRUD operation with Node.js + Next.js using text files as database storage.
 6. Create a full plan on creating the 'Public Market' app design with Figma.
 7. Finish 50-70% of the 'Public Market' app design with NextJS.
 8. Presentation for the 'Public Market' app design.
 9. Learn security on NodeJS.
-
-
-
-
-
-
-
-
-
-i need a plan and shit to do for a public market, its just school bullshit project but i only have 6 hours left, 
-but i wanna do it fast, i dont have time for fucking figma, so im going to use my best skill for speed, 
-which is code it out, now i need to code it on next js, so im going to need some help, 
-here are what were going to do, and all you need to do is help:
-
-
-
-OBJECTIVES:
-1. Help me create ideas for the name of the market (in my mind PubMarket), the logo idea, the color pallete (all elements of the app,
-including elements, icons, font, text colors, and etc. I just want all laid down in front of my face), and its contents like in shoppe, 
-what it has, the purposes and etc, i know we can do this together.
-2. Create the 'public market' app using NextJS (React), all pages, including admins, product 
-pages, designs, and etc (dont worry about server shit, i just want the design) (code).
-
-
-... Now lets start with the plan first, i have fucking 30min for it (Objective 1).

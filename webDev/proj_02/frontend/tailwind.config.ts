@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 // @ts-ignore
 import daisyui from "daisyui";
+import animate from "tailwindcss-animate";
 
 const config: Config = {
   content: [
@@ -38,7 +39,7 @@ const config: Config = {
     },
   },
 
-  plugins: [daisyui()],
+  plugins: [daisyui(), animate],
   // @ts-ignore
   // daisyui: {
   //   themes: [

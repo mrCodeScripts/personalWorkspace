@@ -7,8 +7,6 @@
 @custom-variant dark (&:is(.dark *));
 @plugin 'daisyui';
 
-@plugin "tailwindcss-animate";
-
 html {
   scroll-behavior: smooth;
 }
