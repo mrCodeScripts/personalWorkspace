@@ -13,7 +13,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        custom: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui"], // global sans
+        // custom: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui"], // global sans
+        jetBrains: ["var(--font-jetbrains)"],
+        cuprum: ["var(--font-cuprum)"],
       },
       // keyframes: {
       //   formBottomToTop: {

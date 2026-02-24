@@ -23,12 +23,12 @@ export default function Home() {
           {/* Sign In */}
           <Link
             href="/auth/login"
-            className="group relative btn !text-[#f43f5e] !border-[#f43f5e] border-2 rounded-md p-5 text-lg text-[#f3f4f6] flex items-center justify-center overflow-hidden outline-none"
+            className="group relative btn text-[#f43f5e]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg flex items-center justify-center overflow-hidden outline-none"
           >
-            <span className="absolute left-[50%] group-hover:translate-x-[-80%] translate-x-[-70%] transition-all duration-300">
+            <span className="absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300">
               Sign In
             </span>
-            <div className="absolute right-23 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+            <div className="absolute right-23 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 group-focus:opacity-100 group-focus:translate-x-0">
               <ArrowRight />
             </div>
           </Link>
@@ -36,9 +36,9 @@ export default function Home() {
           {/* Sign Up */}
           <Link
             href="/auth/register"
-            className="group relative btn !text-[#f3f4f6] !border-[#f43f5e] border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden"
+            className="group relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden"
           >
-            <span className="absolute left-[50%] group-hover:translate-x-[-80%] translate-x-[-70%] transition-all duration-300">
+            <span className="absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300">
               Sign Up
             </span>
             <div className="absolute right-23 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 group-focus:opacity-100 group-focus:translate-x-0">

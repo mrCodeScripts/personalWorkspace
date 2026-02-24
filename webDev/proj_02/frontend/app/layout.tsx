@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono, Cuprum } from "next/font/google";
 import "./globals.css";
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+});
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const cuprum = Cuprum({
+  subsets:["latin"],
+  variable: "--font-curprum",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="pubmarket">
-      <body className={`${inter.variable} min-h-screen w-full flex flex-col font-sans`}>
+      <body className={`${inter.className} min-h-screen w-full flex flex-col font-sans`}>
         {children}
       </body>
     </html>

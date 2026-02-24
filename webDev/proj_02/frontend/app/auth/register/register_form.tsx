@@ -13,7 +13,10 @@ export default function RegisterForm() {
     { username: string; password: string },
     FormData
   >(
-    (prevState, formData) => {
+    async (prevState, formData) => {
+
+      await new Promise(res => setTimeout(res, 3000));
+
       return prevState;
     },
     { username: "", password: "" },
@@ -35,30 +38,33 @@ export default function RegisterForm() {
             className="flex w-full flex-col px-10 py-5 gap-6"
           >
             <div className="flex flex-col w-full h-full gap-2">
-              <div className="input-lg input-primary outline-[#f43f5e] border-2 !border-gray-300 flex flex-row w-full py-3 px-8 rounded-[15px]">
+              <div className={`${isPending ? 'bg-base-300' : 'bg-base-200'} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}>
                 <input
                   type="text"
+                  disabled={isPending}
                   placeholder="Username"
-                  className="w-full h-auto outline-none border-none bg-none"
+                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? 'text-gray-400' : 'text-gray-700'}`}
                 />
                 <div className="w-auto text-[#f43f5e]">
                   <User strokeWidth={2} />
                 </div>
               </div>
-              <div className="input-lg input-primary outline-[#f43f5e] border-2 !border-gray-300 flex flex-row w-full py-3 px-8 rounded-[15px]">
+              <div className={`${isPending ? 'bg-base-300' : 'bg-base-200'} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}>
                 <input
                   type="text"
                   placeholder="Phone or Email"
-                  className="w-full h-auto outline-none border-none bg-none"
+                  disabled={isPending}
+                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? 'text-gray-400' : 'text-gray-700'}`}
                 />
                 <div className="w-auto text-[#f43f5e]">
                   <MailIcon strokeWidth={2} />
                 </div>
               </div>
-              <div className="input-lg input-primary outline-[#f43f5e] border-2 !border-gray-300 flex flex-row w-full py-3 px-8 rounded-[15px]">
+              <div className={`${isPending ? 'bg-base-300' : 'bg-base-200'} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="w-full h-auto outline-none border-none bg-none"
+                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? 'text-gray-400' : 'text-gray-700'}`}
+                  disabled={isPending}
                   placeholder="Create password"
                 />
                 <div
@@ -68,10 +74,11 @@ export default function RegisterForm() {
                   {showPassword ? <EyeClosed /> : <Eye />}
                 </div>
               </div>
-              <div className="input-lg input-primary outline-[#f43f5e] border-2 !border-gray-300 flex flex-row w-full py-3 px-8 rounded-[15px]">
+              <div className={`${isPending ? 'bg-base-300' : 'bg-base-200'} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}>
                 <input
                   type={showPassword2 ? "text" : "password"}
-                  className="w-full h-auto outline-none border-none bg-none"
+                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? 'text-gray-400' : 'text-gray-700'}`}
+                  disabled={isPending}
                   placeholder="Confirm password"
                 />
                 <div
@@ -82,18 +89,19 @@ export default function RegisterForm() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row text-sm justify-left align-center text-gray-800 gap-3 px-1">
-                <input type="checkbox" name="" id="" className="checkbox checkbox-primary w-6 h-6 border-2 rounded-sm" />
+            <div className={`flex flex-row text-sm justify-left align-center gap-3 px-1 ${isPending ? 'text-gray-400' :'text-gray-600!'} font-semibold`}>
+                <input disabled={isPending} type="checkbox" name="" id="" className="checkbox checkbox-primary w-6 h-6 border-2 rounded-sm text-gray-500!" />
                 <p>
                     Remember me
                 </p>
             </div>
             <button
               type="submit"
-              className="group relative btn !text-[#f3f4f6] !border-[#f43f5e] border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden"
+              disabled={isPending}
+              className={`group ${isPending ? "opacity-80" : "opacity-100"} relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden`}
             >
-              <span className="absolute left-[50%] group-hover:translate-x-[-80%] group-focus:translate-x-[-80%] translate-x-[-70%] transition-all duration-300">
-                Sign Up
+              <span className="absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300">
+                {isPending ? 'Signin Up...' : 'Sign Up'}
               </span>
               <div className="absolute right-23 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 group-focus:opacity-100 group-focus:translate-x-0">
                 <ArrowRight />

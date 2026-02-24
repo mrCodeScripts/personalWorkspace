@@ -12,7 +12,8 @@ export default function LoginForm() {
     { username: string; password: string },
     FormData
   >(
-    (prevState, formData) => {
+    async (prevState, formData) => {
+      await new Promise((res) => setTimeout(res, 3000));
       return prevState;
     },
     { username: "", password: "" },
@@ -34,20 +35,27 @@ export default function LoginForm() {
             className="flex w-full flex-col px-10 py-5 gap-6"
           >
             <div className="flex flex-col w-full h-full gap-2">
-              <div className="input-lg input-primary outline-[#f43f5e] border-2 !border-gray-300 flex flex-row w-full py-3 px-8 rounded-[15px]">
+              <div
+                className={`${isPending ? `bg-base-300` : `bg-base-200`} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}
+              >
                 <input
                   type="text"
                   placeholder="Username"
-                  className="w-full h-auto outline-none border-none bg-none"
+                  disabled={isPending}
+                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? 'text-gray-400' : 'text-gray-700'}`}
                 />
                 <div className="w-auto text-[#f43f5e]">
                   <User strokeWidth={2} />
                 </div>
               </div>
-              <div className="input-lg input-primary outline-[#f43f5e] border-2 !border-gray-300 flex flex-row w-full py-3 px-8 rounded-[15px]">
+              {/* <div className="input-lg input-primary outline-[#f43f5e] border-2 !border-gray-300 flex flex-row w-full py-3 px-8 rounded-[15px]"> */}
+              <div
+                className={`${isPending ? `bg-base-300` : `bg-base-200`} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}
+              >
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="w-full h-auto outline-none border-none bg-none"
+                  disabled={isPending}
+                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? 'text-gray-400' : 'text-gray-700'}`}
                   placeholder="Password"
                 />
                 <div
@@ -59,17 +67,20 @@ export default function LoginForm() {
               </div>
               <Link
                 href="/"
-                className="hover:text-[#f43f5e] focus:text-[#f43f5e] duration-200 text-sm ml-auto px-2 text-gray-800"
+                className="hover:text-[#f43f5e] focus:text-[#f43f5e] duration-200 text-sm ml-auto px-2 text-gray-500 font-semibold"
               >
                 Forgot password?
               </Link>
             </div>
             <button
               type="submit"
-              className="group relative btn !text-[#f3f4f6] !border-[#f43f5e] border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden"
+              disabled={isPending}
+              className={`group ${isPending ? "opacity-80" : "opacity-100"} relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden`}
             >
-              <span className="absolute left-[50%] group-hover:translate-x-[-80%] group-focus:translate-x-[-80%] translate-x-[-70%] transition-all duration-300">
-                Sign In
+              <span
+                className={`absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300`}
+              >
+                {isPending ? "Signing In..." : "Sign In"}
               </span>
               <div className="absolute right-23 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 group-focus:opacity-100 group-focus:translate-x-0">
                 <ArrowRight />
@@ -82,18 +93,18 @@ export default function LoginForm() {
             </div>
           </form>
           <div className="w-full h-fit flex flex-row justify-center gap-3">
-            <div className="group text-[40px] text-[#1f2937] border-none border-[#1f2937] rounded-full p-2 bg-[#f3f4f6]">
-              <FaFacebook className="group-hover:text-[#f43f5e] duration-200" />
-            </div>
-            <div className="group text-[40px] text-[#1f2937] border-none border-[#1f2937] rounded-full p-2 bg-[#f3f4f6]">
+            <button type="button" disabled={isPending} className={`group text-[40px] ${isPending ? 'text-gray-400' : 'text-[#1f2937]'} border-none border-[#1f2937] rounded-full p-2 bg-[#f3f4f6]`}>
+              <FaFacebook className={`group-hover:text-[#f43f5e] duration-200`} />
+            </button>
+            <button type="button" disabled={isPending} className={`group text-[40px] ${isPending ? 'text-gray-400' : 'text-[#1f2937]'} border-none border-[#1f2937] rounded-full p-2 bg-[#f3f4f6]`}>
               <FaGoogle className="group-hover:text-[#f43f5e] duration-200" />
-            </div>
+            </button>
           </div>
           <p className="text-sm text-gray-800">
             Don't have an account?
             <Link
               href="/auth/register"
-              className="!text-[#f43f5e] duration-200 ml-auto px-2 text-gray-800 font-semibold"
+              className="text-[#f43f5e]! duration-200 ml-auto px-2  font-semibold"
             >
               Signup
             </Link>
