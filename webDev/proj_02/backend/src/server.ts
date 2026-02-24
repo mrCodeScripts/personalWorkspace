@@ -3,6 +3,8 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import zxcvbn from "zxcvbn";
+import { RegisterNewAccount } from "./middleware/auth/register";
 
 dotenv.config();
 
@@ -25,12 +27,24 @@ app.get("/api/health", (req: Request, res: Response) => {
   });
 });
 
+
 app.get("/api", (req: Request, res: Response) => {
   res.status(200).json({
     message: "Welcome to the API",
     version: "1.0.0",
   });
 });
+
+
+
+
+
+// PUBMARKET REGISTER AUTHENTICATION
+app.post("/pubMarket/auth/register", RegisterNewAccount);
+
+
+
+
 
 // 404 Handler
 app.use((req: Request, res: Response) => {
@@ -48,6 +62,7 @@ app.use((err: any, req: Request, res: Response) => {
     message: err.message || "Internal server error",
   });
 });
+
 
 // Start Server
 app.listen(PORT, () => {

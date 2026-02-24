@@ -27,14 +27,14 @@ export default function LoginForm() {
             <Image src={LogoNoBG} alt="Logo with no BG." />
         </div> */}
         <div className="flex flex-col w-full min-h-screen bg-base-200 justify-center items-center font-custom gap-5">
-          <h1 className="text-[24px] text-[#f43f5e] font-semibold">
+          <h1 className="text-[24px] text-[#f43f5e] font-semibold select-none">
             Welcome back User!
           </h1>
           <form
             action={actionForm}
             className="flex w-full flex-col px-10 py-5 gap-6"
           >
-            <div className="flex flex-col w-full h-full gap-2">
+            <div className="flex flex-col w-full h-full gap-7">
               <div
                 className={`${isPending ? `bg-base-300` : `bg-base-200`} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}
               >
@@ -67,7 +67,7 @@ export default function LoginForm() {
               </div>
               <Link
                 href="/"
-                className="hover:text-[#f43f5e] focus:text-[#f43f5e] duration-200 text-sm ml-auto px-2 text-gray-500 font-semibold"
+                className="hover:text-[#f43f5e] focus:text-[#f43f5e] duration-200 text-sm ml-auto px-2 text-gray-500 font-semibold select-none"
               >
                 Forgot password?
               </Link>
@@ -86,7 +86,7 @@ export default function LoginForm() {
                 <ArrowRight />
               </div>
             </button>
-            <div className="flex flex-row gap-5 text-[#1f2937] w-full items-center">
+            <div className="flex flex-row gap-5 text-[#1f2937] w-full items-center select-none">
               <div className="w-full h-[1px] bg-base-300"></div>
               <p className="text-gray-400">or</p>
               <div className="w-full h-[1px] bg-base-300"></div>
@@ -100,13 +100,13 @@ export default function LoginForm() {
               <FaGoogle className="group-hover:text-[#f43f5e] duration-200" />
             </button>
           </div>
-          <p className="text-sm text-gray-800">
+          <p className="text-sm text-gray-800 select-none">
             Don't have an account?
             <Link
               href="/auth/register"
               className="text-[#f43f5e]! duration-200 ml-auto px-2  font-semibold"
             >
-              Signup
+              Sign up for free
             </Link>
           </p>
         </div>
