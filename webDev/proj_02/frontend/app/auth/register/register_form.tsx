@@ -17,7 +17,7 @@ import { create } from "domain";
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean | null>(false);
   const [showPassword2, setShowPassword2] = useState<boolean | null>(false);
-  const [currentFormData, setCurrentFormData] = useState<{username: string; emailOrPhone: string; createPassword: string; confirmPassword: string}>({username: "", emailOrPhone: "", createPassword: "", confirmPassword: ""});
+  const [currentFormData, setCurrentFormData] = useState<{username: string; emailOrPhone: string; createPassword: string; confirmPassword: string; rememberMe: boolean}>({username: "", emailOrPhone: "", createPassword: "", confirmPassword: "", rememberMe: false});
   const [formErrors, setFormErrors] = useState<FormValidationResult | null>(
     null,
   );
@@ -437,7 +437,8 @@ export default function RegisterForm() {
                 type="checkbox"
                 name=""
                 id=""
-                className="checkbox checkbox-primary w-6 h-6 border-2 rounded-sm text-gray-500!"
+                onClick={() => setCurrentFormData(prev => ({...prev, ['rememberMe']: !prev.rememberMe}))}
+                className={`checked:bg-[#f43f5e50] checked:text-[#ffffff]  not-focus:bg-none checkbox checkbox-primary w-6 h-6 border-2 rounded-sm text-gray-500!`}
               />
               <p>Remember me</p>
             </div>
