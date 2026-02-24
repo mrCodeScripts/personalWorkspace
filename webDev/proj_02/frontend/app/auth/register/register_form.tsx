@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import axios from 'axios';
+import axios from "axios";
 import LogoNoBG from "../../assets/PubMarket_noBG.png";
 import { useActionState, useState } from "react";
 import { ArrowRight, Eye, EyeClosed, MailIcon, User } from "lucide-react";
@@ -16,11 +16,17 @@ import {
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean | null>(false);
   const [showPassword2, setShowPassword2] = useState<boolean | null>(false);
-  const [formErrorsFirstLayer, setFormErrorsFirstLayer] = useState<FormValidationResult | null>(null);
-
+  const [formErrorsFirstLayer, setFormErrorsFirstLayer] =
+    useState<FormValidationResult | null>(null);
+  const [formErrorsSecondLayer, setFormErrorSecondLayer] = useState<FormValidationResult | null>(null);
 
   const [formState, actionForm, isPending] = useActionState<
-    { username: string; emailOrPhone: string; createPassword: string; confirmPassword: string },
+    {
+      username: string;
+      emailOrPhone: string;
+      createPassword: string;
+      confirmPassword: string;
+    },
     FormData
   >(
     async (prevState, formData) => {
@@ -29,24 +35,114 @@ export default function RegisterForm() {
       const createPassword: string = String(formData.get("created-password"));
       const confirmPassword: string = String(formData.get("confirm-password"));
 
-      const formValidation: FormValidationResult = validateFormFields({username, emailOrPhone, createPassword, confirmPassword});
+      const formValidation: FormValidationResult = validateFormFields({
+        username,
+        emailOrPhone,
+        createPassword,
+        confirmPassword,
+      });
 
       if (formValidation.hasError) setFormErrorsFirstLayer(formValidation);
 
-      if (!formValidation.hasError) return {username, emailOrPhone, createPassword, confirmPassword};
 
-      axios.post("/pubMarket/auth/register", {
-        username: username,
-        emailOrPhone: emailOrPhone,
-        createPassword: createPassword,
-        confirmPassword: confirmPassword
-      }).then(res => {
-        // TODO -> manage responses on register 
-      }).catch(err => {
-        // TODO -> manage responses on error register
-      });
-      
+      if (!formValidation.hasError) {
+        // SIMULATE LOADING
+        await new Promise(res => setTimeout(res, 3000));
+        return { username, emailOrPhone, createPassword, confirmPassword };
+      }
 
+      /**
+       {
+          data: any,          // ✅ This is the response body sent by your server (res.json(...))
+          status: number,     // HTTP status code (200, 201, 400, etc.)
+          statusText: string, // Status text ("OK", "Created", "Bad Request", etc.)
+          headers: object,    // Response headers
+          config: object,     // Axios request config
+          request: object     // The raw request object
+        }
+       */
+      axios
+        .post("/pubMarket/auth/register", {
+          username: username,
+          emailOrPhone: emailOrPhone,
+          createPassword: createPassword,
+          confirmPassword: confirmPassword,
+        })
+        .then((res) => {
+          const status = res.status;
+          const data = res.data;
+          if (status === 201) {
+            console.log(data);
+          }
+
+          // Success responses (2xx)
+          // switch (res.status) {
+          //   case 201:
+          //     console.log("✅ Registration successful!", res.data);
+          //     break;
+          //   case 200:
+          //     console.log("ℹ️ Request OK", res.data);
+          //     break;
+          //   case 204:
+          //     console.log("ℹ️ Registration processed, no content returned");
+          //     break;
+          //   default:
+          //     console.log(`ℹ️ Received status: ${res.status}`, res.data);
+          //     break;
+          // }
+        })
+        .catch((err) => {
+          if (err.response) {
+            const status = err.response.status;
+            const data = err.response.data;
+            if (status === 500) {
+              console.log(data);
+            }
+
+          }
+
+
+
+          //   switch (status) {
+          //     case 400:
+          //       console.warn("⚠️ Bad Request:", data.error);
+          //       break;
+          //     case 401:
+          //       console.warn("⚠️ Unauthorized:", data.error);
+          //       break;
+          //     case 403:
+          //       console.warn("⚠️ Forbidden:", data.error);
+          //       break;
+          //     case 404:
+          //       console.warn("⚠️ Not Found:", data.error);
+          //       break;
+          //     case 409:
+          //       console.warn("⚠️ Conflict:", data.error);
+          //       break;
+          //     case 422:
+          //       console.warn("⚠️ Validation Error:", data.error);
+          //       break;
+          //     case 429:
+          //       console.warn("⚠️ Too Many Requests:", data.error);
+          //       break;
+          //     case 500:
+          //       console.error("❌ Internal Server Error:", data.error);
+          //       break;
+          //     default:
+          //       console.error(
+          //         `❌ Unexpected Error ${status}:`,
+          //         data.error || data,
+          //       );
+          //       break;
+          //   }
+          // } else if (err.request) {
+          //   console.error(
+          //     "⚠️ No response from server. Check network.",
+          //     err.request,
+          //   );
+          // } else {
+          //   console.error("⚠️ Axios Error:", err.message);
+        });
 
       /**
        * USERNAME ERROR MESSAGES
@@ -184,7 +280,7 @@ export default function RegisterForm() {
 
       return prevState;
     },
-    { username: "", emailOrPhone: "", createPassword: "", confirmPassword: ""},
+    { username: "", emailOrPhone: "", createPassword: "", confirmPassword: "" },
     "/auth/login",
   );
 

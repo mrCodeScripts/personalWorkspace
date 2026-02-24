@@ -39,9 +39,10 @@ app.get("/api", (req: Request, res: Response) => {
 
 
 
+// ------------- ACTUAL ROUTES -------------
 // PUBMARKET REGISTER AUTHENTICATION
 app.post("/pubMarket/auth/register", RegisterNewAccount);
-
+// -----------------------------------------
 
 
 
