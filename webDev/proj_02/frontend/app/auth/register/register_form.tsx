@@ -2,7 +2,7 @@
 import Image from "next/image";
 import axios from "axios";
 import LogoNoBG from "../../assets/PubMarket_noBG.png";
-import { useActionState, useState } from "react";
+import { InputEventHandler, useActionState, useState } from "react";
 import { ArrowRight, Eye, EyeClosed, MailIcon, User } from "lucide-react";
 import Link from "next/link";
 import { FaFacebook, FaGoogle, FaMobile } from "react-icons/fa";
@@ -17,6 +17,7 @@ import { create } from "domain";
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean | null>(false);
   const [showPassword2, setShowPassword2] = useState<boolean | null>(false);
+  const [currentFormData, setCurrentFormData] = useState<{username: string; emailOrPhone: string; createPassword: string; confirmPassword: string}>({username: "", emailOrPhone: "", createPassword: "", confirmPassword: ""});
   const [formErrors, setFormErrors] = useState<FormValidationResult | null>(
     null,
   );
@@ -319,6 +320,8 @@ export default function RegisterForm() {
                     type="text"
                     name="username"
                     id="username"
+                    value={currentFormData.username}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['username']: e.target.value}))}
                     disabled={isPending}
                     placeholder="Username"
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-600"}`}
@@ -328,7 +331,7 @@ export default function RegisterForm() {
                   </div>
                 </div>
                 {formErrors?.username.valid === false ? (
-                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                  <span className="flex text-error select-none text-xs font-semibold px-2 duration-300">
                     {formErrors.username.reason}
                   </span>
                 ) : (
@@ -345,6 +348,8 @@ export default function RegisterForm() {
                     type="text"
                     placeholder="Phone or Email"
                     name="phone-email"
+                    value={currentFormData.emailOrPhone}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['emailOrPhone']: e.target.value}))}
                     id="phone-email"
                     disabled={isPending}
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
@@ -354,7 +359,7 @@ export default function RegisterForm() {
                   </div>
                 </div>
                 {formErrors?.phoneOrEmail.valid === false ? (
-                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                  <span className="flex text-error select-none text-xs font-semibold px-2 duration-300">
                     {formErrors.phoneOrEmail.reason}
                   </span>
                 ) : (
@@ -372,6 +377,8 @@ export default function RegisterForm() {
                     name="created-password"
                     id="created-password"
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
+                    value={currentFormData.createPassword}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['createPassword']: e.target.value}))}
                     disabled={isPending}
                     placeholder="Create password"
                   />
@@ -383,7 +390,7 @@ export default function RegisterForm() {
                   </div>
                 </div>
                 {formErrors?.createPassword.valid === false ? (
-                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                  <span className="flex text-error select-none text-xs font-semibold px-2 duration-300">
                     {formErrors.createPassword.reason}
                   </span>
                 ) : (
@@ -400,6 +407,8 @@ export default function RegisterForm() {
                     type={showPassword2 ? "text" : "password"}
                     name="confirm-password"
                     id="confirm-password"
+                    value={currentFormData.confirmPassword}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['confirmPassword']: e.target.value}))}
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
                     disabled={isPending}
                     placeholder="Confirm password"
@@ -412,7 +421,7 @@ export default function RegisterForm() {
                   </div>
                 </div>
                 {formErrors?.confirmPassword.valid === false ? (
-                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                  <span className="flex text-error select-none text-xs font-semibold px-2 duration-300">
                     {formErrors.confirmPassword.reason}
                   </span>
                 ) : (
