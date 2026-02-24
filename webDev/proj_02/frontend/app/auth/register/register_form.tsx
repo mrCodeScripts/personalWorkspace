@@ -12,13 +12,14 @@ import {
   validateFormFields,
   validateUsername,
 } from "../auth_comp/filter_components";
+import { create } from "domain";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean | null>(false);
   const [showPassword2, setShowPassword2] = useState<boolean | null>(false);
-  const [formErrorsFirstLayer, setFormErrorsFirstLayer] =
-    useState<FormValidationResult | null>(null);
-  const [formErrorsSecondLayer, setFormErrorSecondLayer] = useState<FormValidationResult | null>(null);
+  const [formErrors, setFormErrors] = useState<FormValidationResult | null>(
+    null,
+  );
 
   const [formState, actionForm, isPending] = useActionState<
     {
@@ -42,13 +43,21 @@ export default function RegisterForm() {
         confirmPassword,
       });
 
-      if (formValidation.hasError) setFormErrorsFirstLayer(formValidation);
+      if (formValidation.hasError) setFormErrors(formValidation);
 
-
-      if (!formValidation.hasError) {
-        // SIMULATE LOADING
-        await new Promise(res => setTimeout(res, 3000));
-        return { username, emailOrPhone, createPassword, confirmPassword };
+      if (formValidation.hasError) {
+        console.log(
+          JSON.stringify({
+            username,
+            emailOrPhone,
+            createPassword,
+            confirmPassword,
+          }),
+        );
+        console.log(JSON.stringify(formValidation));
+        setFormErrors(formValidation);
+        await new Promise((res) => setTimeout(res, 3000));
+        return prevState;
       }
 
       /**
@@ -61,6 +70,7 @@ export default function RegisterForm() {
           request: object     // The raw request object
         }
        */
+      /*
       axios
         .post("/pubMarket/auth/register", {
           username: username,
@@ -143,6 +153,7 @@ export default function RegisterForm() {
           // } else {
           //   console.error("⚠️ Axios Error:", err.message);
         });
+        */
 
       /**
        * USERNAME ERROR MESSAGES
@@ -276,12 +287,12 @@ export default function RegisterForm() {
        * Confirmation password is invalid.
        */
 
+      console.log("shit");
       await new Promise((res) => setTimeout(res, 3000));
-
       return prevState;
     },
     { username: "", emailOrPhone: "", createPassword: "", confirmPassword: "" },
-    "/auth/login",
+    "pubMarket/auth/register",
   );
 
   return (
@@ -299,63 +310,114 @@ export default function RegisterForm() {
             className="flex w-full flex-col px-10 gap-9"
           >
             <div className="flex flex-col w-full h-full gap-4">
-              <div
-                className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}
-              >
-                <input
-                  type="text"
-                  disabled={isPending}
-                  placeholder="Username"
-                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
-                />
-                <div className="w-auto text-[#f43f5e]">
-                  <User strokeWidth={2} />
-                </div>
-              </div>
-              <div
-                className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}
-              >
-                <input
-                  type="text"
-                  placeholder="Phone or Email"
-                  disabled={isPending}
-                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
-                />
-                <div className="w-auto text-[#f43f5e]">
-                  <MailIcon strokeWidth={2} />
-                </div>
-              </div>
-              <div
-                className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}
-              >
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
-                  disabled={isPending}
-                  placeholder="Create password"
-                />
+              {/* USERNAME */}
+              <div className="flex flex-col w-full h-full">
                 <div
-                  className="w-auto text-[#f43f5e]"
-                  onClick={() => setShowPassword((prev) => !prev)}
+                  className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px] gap-4`}
                 >
-                  {showPassword ? <EyeClosed /> : <Eye />}
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    disabled={isPending}
+                    placeholder="Username"
+                    className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-600"}`}
+                  />
+                  <div className="w-auto text-[#f43f5e]">
+                    <User strokeWidth={2} />
+                  </div>
                 </div>
+                {formErrors?.username.valid === false ? (
+                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                    {formErrors.username.reason}
+                  </span>
+                ) : (
+                  <span className="hidden"></span>
+                )}
               </div>
-              <div
-                className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px]`}
-              >
-                <input
-                  type={showPassword2 ? "text" : "password"}
-                  className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
-                  disabled={isPending}
-                  placeholder="Confirm password"
-                />
+
+              {/* PHONE NUMBER OR EMAIL */}
+              <div className="flex flex-col w-full h-full">
                 <div
-                  className="w-auto text-[#f43f5e]"
-                  onClick={() => setShowPassword2((prev) => !prev)}
+                  className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px] gap-4`}
                 >
-                  {showPassword2 ? <EyeClosed /> : <Eye />}
+                  <input
+                    type="text"
+                    placeholder="Phone or Email"
+                    name="phone-email"
+                    id="phone-email"
+                    disabled={isPending}
+                    className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
+                  />
+                  <div className="w-auto text-[#f43f5e]">
+                    <MailIcon strokeWidth={2} />
+                  </div>
                 </div>
+                {formErrors?.phoneOrEmail.valid === false ? (
+                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                    {formErrors.phoneOrEmail.reason}
+                  </span>
+                ) : (
+                  <span className="hidden"></span>
+                )}
+              </div>
+
+              {/* CREATED PASSWORD */}
+              <div className="flex flex-col w-full h-full">
+                <div
+                  className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px] gap-4`}
+                >
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="created-password"
+                    id="created-password"
+                    className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
+                    disabled={isPending}
+                    placeholder="Create password"
+                  />
+                  <div
+                    className="w-auto text-[#f43f5e]"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? <EyeClosed /> : <Eye />}
+                  </div>
+                </div>
+                {formErrors?.createPassword.valid === false ? (
+                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                    {formErrors.createPassword.reason}
+                  </span>
+                ) : (
+                  <span className="hidden"></span>
+                )}
+              </div>
+
+              {/* CONFIRM PASSWORD */}
+              <div className="flex flex-col w-full h-full">
+                <div
+                  className={`${isPending ? "bg-base-300" : "bg-base-200"} input-lg input-primary outline-[#f43f5e] border-2 border-gray-300! flex flex-row w-full py-3 px-8 rounded-[15px] gap-4`}
+                >
+                  <input
+                    type={showPassword2 ? "text" : "password"}
+                    name="confirm-password"
+                    id="confirm-password"
+                    className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
+                    disabled={isPending}
+                    placeholder="Confirm password"
+                  />
+                  <div
+                    className="w-auto text-[#f43f5e]"
+                    onClick={() => setShowPassword2((prev) => !prev)}
+                  >
+                    {showPassword2 ? <EyeClosed /> : <Eye />}
+                  </div>
+                </div>
+                {formErrors?.confirmPassword.valid === false ? (
+                  <span className="flex text-error text-xs font-semibold px-2 duration-300">
+                    {formErrors.confirmPassword.reason}
+                  </span>
+                ) : (
+                  <span className="hidden"></span>
+                )}
               </div>
             </div>
             <div
@@ -386,7 +448,7 @@ export default function RegisterForm() {
               Don't have an account?
               <Link
                 href="/auth/login"
-                className="!text-[#f43f5e] duration-200 ml-auto px-2 text-gray-800 font-semibold"
+                className="text-[#f43f5e]! duration-200 ml-auto px-2 font-semibold"
               >
                 Sign in
               </Link>
