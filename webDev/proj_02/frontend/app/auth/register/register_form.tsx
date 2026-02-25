@@ -12,12 +12,23 @@ import {
   validateFormFields,
   validateUsername,
 } from "../auth_comp/filter_components";
-import { create } from "domain";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean | null>(false);
   const [showPassword2, setShowPassword2] = useState<boolean | null>(false);
-  const [currentFormData, setCurrentFormData] = useState<{username: string; emailOrPhone: string; createPassword: string; confirmPassword: string; rememberMe: boolean}>({username: "", emailOrPhone: "", createPassword: "", confirmPassword: "", rememberMe: false});
+  const [currentFormData, setCurrentFormData] = useState<{
+    username: string;
+    emailOrPhone: string;
+    createPassword: string;
+    confirmPassword: string;
+    rememberMe: boolean;
+  }>({
+    username: "",
+    emailOrPhone: "",
+    createPassword: "",
+    confirmPassword: "",
+    rememberMe: false,
+  });
   const [formErrors, setFormErrors] = useState<FormValidationResult | null>(
     null,
   );
@@ -28,6 +39,7 @@ export default function RegisterForm() {
       emailOrPhone: string;
       createPassword: string;
       confirmPassword: string;
+      rememberMe: boolean;
     },
     FormData
   >(
@@ -36,6 +48,7 @@ export default function RegisterForm() {
       const emailOrPhone: string = String(formData.get("phone-email"));
       const createPassword: string = String(formData.get("created-password"));
       const confirmPassword: string = String(formData.get("confirm-password"));
+      const rememberMe: boolean = formData.get('remember-me') === 'agree' ? true : false;
 
       const formValidation: FormValidationResult = validateFormFields({
         username,
@@ -53,6 +66,7 @@ export default function RegisterForm() {
             emailOrPhone,
             createPassword,
             confirmPassword,
+            rememberMe,
           }),
         );
         console.log(JSON.stringify(formValidation));
@@ -292,7 +306,13 @@ export default function RegisterForm() {
       await new Promise((res) => setTimeout(res, 3000));
       return prevState;
     },
-    { username: "", emailOrPhone: "", createPassword: "", confirmPassword: "" },
+    {
+      username: "",
+      emailOrPhone: "",
+      createPassword: "",
+      confirmPassword: "",
+      rememberMe: false,
+    },
     "pubMarket/auth/register",
   );
 
@@ -321,7 +341,12 @@ export default function RegisterForm() {
                     name="username"
                     id="username"
                     value={currentFormData.username}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['username']: e.target.value}))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setCurrentFormData((prev) => ({
+                        ...prev,
+                        ["username"]: e.target.value,
+                      }))
+                    }
                     disabled={isPending}
                     placeholder="Username"
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-600"}`}
@@ -349,7 +374,12 @@ export default function RegisterForm() {
                     placeholder="Phone or Email"
                     name="phone-email"
                     value={currentFormData.emailOrPhone}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['emailOrPhone']: e.target.value}))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setCurrentFormData((prev) => ({
+                        ...prev,
+                        ["emailOrPhone"]: e.target.value,
+                      }))
+                    }
                     id="phone-email"
                     disabled={isPending}
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
@@ -378,7 +408,12 @@ export default function RegisterForm() {
                     id="created-password"
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
                     value={currentFormData.createPassword}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['createPassword']: e.target.value}))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setCurrentFormData((prev) => ({
+                        ...prev,
+                        ["createPassword"]: e.target.value,
+                      }))
+                    }
                     disabled={isPending}
                     placeholder="Create password"
                   />
@@ -408,7 +443,12 @@ export default function RegisterForm() {
                     name="confirm-password"
                     id="confirm-password"
                     value={currentFormData.confirmPassword}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentFormData(prev => ({...prev, ['confirmPassword']: e.target.value}))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setCurrentFormData((prev) => ({
+                        ...prev,
+                        ["confirmPassword"]: e.target.value,
+                      }))
+                    }
                     className={`w-full h-auto outline-none border-none bg-none text-sm font-semibold ${isPending ? "text-gray-400" : "text-gray-700"}`}
                     disabled={isPending}
                     placeholder="Confirm password"
@@ -435,10 +475,17 @@ export default function RegisterForm() {
               <input
                 disabled={isPending}
                 type="checkbox"
-                name=""
-                id=""
-                onClick={() => setCurrentFormData(prev => ({...prev, ['rememberMe']: !prev.rememberMe}))}
-                className={`checked:bg-[#f43f5e50] checked:text-[#ffffff]  not-focus:bg-none checkbox checkbox-primary w-6 h-6 border-2 rounded-sm text-gray-500!`}
+                name="remember-me"
+                id="remember-me"
+                value="agree"
+                checked={currentFormData.rememberMe || formState.rememberMe}
+                onChange={(e) =>
+                  setCurrentFormData((prev) => ({
+                    ...prev,
+                    rememberMe: e.target.checked,
+                  }))
+                }
+                className="checked:bg-[#f43f5e] checked:text-[#ffffff] checkbox checkbox-primary w-6 h-6 border-2 rounded-sm !border-gray-200"
               />
               <p>Remember me</p>
             </div>
