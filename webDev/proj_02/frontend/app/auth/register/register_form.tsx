@@ -48,7 +48,8 @@ export default function RegisterForm() {
       const emailOrPhone: string = String(formData.get("phone-email"));
       const createPassword: string = String(formData.get("created-password"));
       const confirmPassword: string = String(formData.get("confirm-password"));
-      const rememberMe: boolean = formData.get('remember-me') === 'agree' ? true : false;
+      const rememberMe: boolean =
+        formData.get("remember-me") === "agree" ? true : false;
 
       const formValidation: FormValidationResult = validateFormFields({
         username,
@@ -313,7 +314,7 @@ export default function RegisterForm() {
       confirmPassword: "",
       rememberMe: false,
     },
-    "pubMarket/auth/register",
+    "/pubMarket/auth/register",
   );
 
   return (
@@ -489,18 +490,23 @@ export default function RegisterForm() {
               />
               <p>Remember me</p>
             </div>
-            <button
-              type="submit"
-              disabled={isPending}
-              className={`group ${isPending ? "opacity-80" : "opacity-100"} relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden`}
-            >
-              <span className="absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300 text-[#ffffff]">
-                {isPending ? "Signin Up..." : "Sign Up"}
-              </span>
-              <div className="absolute right-23 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 group-focus:opacity-100 group-focus:translate-x-0">
-                <ArrowRight />
-              </div>
-            </button>
+            <div className="flex flex-col w-full h-full gap-3">
+              <p className="text-xs text-center text-gray-600 font-semibold">
+                By creating an account, you agree to our <span className="underline text-[#f43f5e]">Terms of Service</span> and <span className="underline text-[#f43f5e]">Privacy Policy</span>
+              </p>
+              <button
+                type="submit"
+                disabled={isPending}
+                className={`group ${isPending ? "opacity-80" : "opacity-100"} relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden w-full`}
+              >
+                <span className="absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300 text-[#ffffff]">
+                  {isPending ? "Signin Up..." : "Sign Up"}
+                </span>
+                <div className="absolute right-23 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 group-focus:opacity-100 group-focus:translate-x-0">
+                  <ArrowRight />
+                </div>
+              </button>
+            </div>
             <p className="text-sm text-center text-gray-800">
               Don't have an account?
               <Link
