@@ -1,3 +1,4 @@
+import Link from "next/link";
 import OTPForm from "../OTP/OTPForm";
 
 export default function PhoneVerificationV1() {
@@ -11,7 +12,14 @@ export default function PhoneVerificationV1() {
             <span className="font-semibold"> +63********01</span>
           </p>
         </div>
-        <OTPForm />
+        <OTPForm>
+          <Link
+            href="/auth/forgotPassword/"
+            className={`w-full group hover:cursor-pointer p-3 font-semibold text-md rounded-md border-2 border-[#f43f5e] text-[#f43f5e] text-center`}
+          >
+            Try another method
+          </Link>
+        </OTPForm>
       </div>
     </>
   );

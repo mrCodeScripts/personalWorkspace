@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { ReactNode, useActionState, useEffect, useRef, useState } from "react";
 
-export default function OTPForm() {
+export default function OTPForm({children}: {children?: ReactNode}) {
   const numberOfDigits: number = 6;
   const OTP_COUNTDOWN: number = 10;
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -101,7 +101,7 @@ export default function OTPForm() {
 
   return (
     <>
-      <div>
+      <div className="flex flex-col w-full gap-2">
         <form action={formAction} className="flex flex-col w-full gap-5">
           <div className="grid grid-cols-6 gap-2 w-full max-w-75">
             {Array.from({ length: numberOfDigits }).map((_, i) => {
@@ -156,6 +156,7 @@ export default function OTPForm() {
             {isPending ? "Verifying..." : "Verify"}
           </button>
         </form>
+        {children}
       </div>
     </>
   );
