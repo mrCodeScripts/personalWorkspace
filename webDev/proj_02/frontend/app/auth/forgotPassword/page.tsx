@@ -10,7 +10,7 @@ export default function ForgotPassword() {
         <div className="flex flex-col gap-3 w-full">
           <Link
             href="/auth/forgotPassword/verify/email"
-            className={`group text-sm relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden w-full`}
+            className={`group text-sm relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 bg-[#f43f5e] flex items-center justify-center overflow-hidden w-full`}
           >
             <span className="absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300 text-[#ffffff]">
               Email Address
@@ -21,7 +21,7 @@ export default function ForgotPassword() {
           </Link>
           <Link
             href="/auth/forgotPassword/verify/phoneNumber"
-            className={`group text-sm relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 text-lg bg-[#f43f5e] flex items-center justify-center overflow-hidden w-full`}
+            className={`group text-sm relative btn text-[#f3f4f6]! border-[#f43f5e]! border-2 rounded-md p-5 bg-[#f43f5e] flex items-center justify-center overflow-hidden w-full`}
           >
             <span className="absolute left-[50%] group-hover:translate-x-[-90%] group-focus:translate-x-[-90%] translate-x-[-50%] transition-all duration-300 text-[#ffffff]">
               Phone Number
