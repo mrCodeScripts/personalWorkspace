@@ -1,9 +1,10 @@
+"use client";
+import EmailVerificationV1 from "app/auth/auth_comp/EmailVerification/emailVerification_v1";
+
 export default function VerifyEmailForChangePassword() {
   return (
     <>
-      <div>
-        <h1>Verify Email</h1>
-      </div>
+      <EmailVerificationV1 />
     </>
   );
 }

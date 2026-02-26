@@ -486,7 +486,7 @@ export default function RegisterForm() {
                     rememberMe: e.target.checked,
                   }))
                 }
-                className="checked:bg-[#f43f5e] checked:text-[#ffffff] checkbox checkbox-primary w-6 h-6 border-2 rounded-sm !border-gray-200"
+                className="checked:bg-[#f43f5e] checked:text-[#ffffff] checkbox checkbox-primary w-6 h-6 border-2 rounded-sm border-gray-200!"
               />
               <p>Remember me</p>
             </div>
