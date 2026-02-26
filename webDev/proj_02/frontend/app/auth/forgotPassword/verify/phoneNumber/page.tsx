@@ -1,9 +1,9 @@
-export default function VerifyPhoneNumberForChangePassword() {
+import PhoneVerificationV1 from "app/auth/auth_comp/PhoneNumberVerification/phoneVerification_v1";
+
+export default function VerifyPhoneForChangePassword() {
   return (
     <>
-      <div>
-        <h1>Verify Password</h1>
-      </div>
+      <PhoneVerificationV1 />
     </>
   );
 }
