@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { ReactNode, useActionState, useEffect, useRef, useState } from "react";
 
-export default function OTPForm({children}: {children?: ReactNode}) {
+export default function OTPForm({ children }: { children?: ReactNode }) {
   const numberOfDigits: number = 6;
   const OTP_COUNTDOWN: number = 10;
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -18,6 +18,9 @@ export default function OTPForm({children}: {children?: ReactNode}) {
   >(
     async (prev, formData) => {
       await new Promise((res) => setTimeout(res, 3000));
+
+      // ADD SOME ERROR AND SHIT
+
       return { otp: "" };
     },
     { otp: "" },
@@ -103,29 +106,34 @@ export default function OTPForm({children}: {children?: ReactNode}) {
     <>
       <div className="flex flex-col w-full gap-2">
         <form action={formAction} className="flex flex-col w-full gap-5">
-          <div className="grid grid-cols-6 gap-2 w-full max-w-75">
-            {Array.from({ length: numberOfDigits }).map((_, i) => {
-              return (
-                <div className="w-full" key={i}>
-                  <input
-                    ref={(el) => {
-                      inputRefs.current[i] = el;
-                    }}
-                    type="password"
-                    disabled={isPending}
-                    value={OTPValues[i]}
-                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                      handleKeyDown(e, i)
-                    }
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleChange(e, i)
-                    }
-                    className={` ${isPending ? "bg-[#F3F4F6] border-gray-300 text-[#9CA3AF]" : "bg-gray-200 border-gray-300 text-gray-600"} focus:border-[#f43f5e] border-2 w-full h-12 text-center bg-gray-200 rounded-md focus:outline-none text-sm font-semibold`}
-                    maxLength={1}
-                  />
-                </div>
-              );
-            })}
+          <div className="w-full flex flex-col gap-2">
+            <div className="grid grid-cols-6 gap-2 w-full max-w-95">
+              {Array.from({ length: numberOfDigits }).map((_, i) => {
+                return (
+                  <div className="w-full" key={i}>
+                    <input
+                      ref={(el) => {
+                        inputRefs.current[i] = el;
+                      }}
+                      type="password"
+                      disabled={isPending}
+                      value={OTPValues[i]}
+                      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                        handleKeyDown(e, i)
+                      }
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleChange(e, i)
+                      }
+                      className={` ${isPending ? "bg-[#F3F4F6] border-gray-300 text-[#9CA3AF]" : "bg-gray-200 border-gray-300 text-gray-600"} focus:border-[#f43f5e] border-2 w-full h-12 text-center bg-gray-200 rounded-md focus:outline-none text-sm font-semibold`}
+                      maxLength={1}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <p className="text-xs text-error font-semibold">
+              Incorrect OTP. Please try again!
+            </p>
           </div>
           {resendOTP ? (
             <p className="text-center text-sm text-gray-600">
