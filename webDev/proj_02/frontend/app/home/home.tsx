@@ -12,8 +12,11 @@ import {
 import Link from "next/link";
 import Product1 from "./../../public/assets/sampleProducts/product_1.png";
 import { useEffect, useState } from "react";
-import ProductCard from "./home_comp/product/product_card_v1";
-import type { StaticImageData } from "next/image";  // for product typing
+import ProductCard from "./home_comp/product/product_card/product_card_v1";
+import type { StaticImageData } from "next/image"; // for product typing
+import ProductCardV1 from "./home_comp/product/product_card/product_card_v1";
+import ProductCardV2 from "./home_comp/product/product_card/product_card_v2";
+import ProductCardV3 from "./home_comp/product/product_card/product_card_v3";
 
 export default function HomePageComponent() {
   const items = [
@@ -28,9 +31,12 @@ export default function HomePageComponent() {
   interface Product {
     id: number;
     name: string;
+    // image: string;
     rating: number;
     price: number;
-    image: string;
+    originalPrice: number;
+    discount: number;
+    images: string[];
   }
 
   const products: Product[] = [
@@ -39,42 +45,60 @@ export default function HomePageComponent() {
       name: "Portable Speaker",
       price: 49.99,
       rating: 4,
-      image: "product_1.png",
+      // image: "product_3.png",
+      originalPrice: 300,
+      discount: 30,
+      images: [ "product_5.png", "product_2.png", "product_3.png", "product_5.png", "product_1.png", "product_3.png", "product_4.png", "product_6.png", "product_3.png", "product_1.png", ],
     },
     {
       id: 2,
       name: "Stylish Sunglasses",
       price: 29.99,
       rating: 4,
-      image: "product_2.png",
+      // image: "product_3.png",
+      images: [ "product_5.png", "product_2.png", "product_3.png", "product_5.png", "product_1.png", "product_3.png", "product_4.png", "product_6.png", "product_3.png", "product_1.png", ],
+      originalPrice: 300,
+      discount: 30,
     },
     {
       id: 3,
+      images: [ "product_5.png", "product_2.png", "product_3.png", "product_5.png", "product_1.png", "product_3.png", "product_4.png", "product_6.png", "product_3.png", "product_1.png", ],
       name: "Wireless Earbuds",
       rating: 4,
       price: 79.99,
-      image: "product_3.png",
+      // image: "product_3.png",
+      originalPrice: 300,
+      discount: 30,
     },
     {
       id: 4,
       name: "Classic Watch",
       rating: 4,
       price: 129.99,
-      image: "product_4.png",
+      images: [ "product_5.png", "product_2.png", "product_3.png", "product_5.png", "product_1.png", "product_3.png", "product_4.png", "product_6.png", "product_3.png", "product_1.png", ],
+      // image: "product_4.png",
+      originalPrice: 300,
+      discount: 30,
     },
     {
       id: 5,
       name: "Leather Wallet",
       price: 39.99,
+      images: [ "product_5.png", "product_2.png", "product_3.png", "product_5.png", "product_1.png", "product_3.png", "product_4.png", "product_6.png", "product_3.png", "product_1.png", ],
       rating: 4,
-      image: "product_5.png",
+      // image: "product_5.png",
+      originalPrice: 300,
+      discount: 30,
     },
     {
       id: 6,
       name: "Running Sneakers",
       rating: 4,
+      images: [ "product_5.png", "product_2.png", "product_3.png", "product_5.png", "product_1.png", "product_3.png", "product_4.png", "product_6.png", "product_3.png", "product_1.png", ],
       price: 89.99,
-      image: "product_6.png",
+      // image: "product_6.png",
+      originalPrice: 300,
+      discount: 30,
     },
   ];
 
@@ -115,7 +139,7 @@ export default function HomePageComponent() {
   return (
     <div className="flex flex-col w-full min-h-screen">
       {/* HEADER */}
-      <div className="flex w-full fixed items-center bg-[#f43f5e] p-5 pb-3! gap-3 z-9">
+      <div className="flex w-full fixed items-center bg-[#f43f5e] p-5 pb-3! gap-3 z-25">
         {/* SEARCH */}
         <form className="relative flex w-full border-2 border-white rounded-sm overflow-hidden bg-white">
           {/* PLACEHOLDER SLIDER */}
@@ -176,7 +200,7 @@ export default function HomePageComponent() {
       </div>
 
       {/* PRODUCTS */}
-      <section className="w-full py-12 bg-base-200">
+      <section className="w-full py-12 bg-base-200 pb-30">
         <div className="max-w-310 mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8 text-gray-800">
             Featured Products
@@ -184,14 +208,14 @@ export default function HomePageComponent() {
 
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCardV3 key={product.id} product={product} />
             ))}
           </div>
         </div>
       </section>
 
       {/* BAR */}
-      <div className="fixed flex bottom-0 translate-y-0 flex-row w-full px-10 py-8 bg-[#f43f5e] justify-center gap-11">
+      <div className="fixed flex bottom-0 translate-y-0 flex-row w-full px-10 py-8 bg-[#f43f5e] justify-center gap-11 z-25">
         <Link
           href="#"
           className="text-[#f3f4f6] flex flex-col gap-2 items-center group"

@@ -1,17 +1,19 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart, Star, Percent } from "lucide-react";
 
 interface Product {
   id: number;
   name: string;
-  price: number;
   image: string;
   rating: number;
-}
+  price: number;
+  originalPrice: number;
+  discount: number;
+};
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCardV1({ product }: { product: Product }) {
   return (
     <div className="bg-base-100 shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 flex flex-col">
       {/* Product Image */}
@@ -46,8 +48,8 @@ export default function ProductCard({ product }: { product: Product }) {
         </p>
 
         {/* Add to Cart */}
-        <button className="mt-3 bg-primary text-white py-2 rounded-xl flex items-center justify-center gap-2 hover:bg-[#f43f5e] transition-colors duration-200 text-sm">
-          <ShoppingCart size={18} />
+        <button className="mt-3 bg-[] border-2 border-[#f43f5e] text-[#f43f5e] py-3 px-5 rounded-xl flex items-center justify-center gap-2 hover:text-[#fbbf24] hover:bg-[#f43f5e] transition-colors duration-200 text-sm font-semibold">
+          <ShoppingCart size={18} strokeWidth={3} />
           Add to Cart
         </button>
       </div>
