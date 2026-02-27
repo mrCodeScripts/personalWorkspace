@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LogoWithNoBG from "./assets/PubMarket_noBG.png";
+import LogoWithNoBG from "../public/assets/PubMarket_noBG.png";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
