@@ -5,7 +5,7 @@ import HeaderBar from "./home_comp/headerBar/headerBar";
 export default function HomePage() {
   return (
     <>
-    <HomePageComponent />
+      <HomePageComponent />
     </>
   );
 }
