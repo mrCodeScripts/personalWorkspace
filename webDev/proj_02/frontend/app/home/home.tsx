@@ -126,7 +126,6 @@ export default function HomePageComponent() {
     },
     {
       id: 5,
-
       name: "Leather Wallet",
       price: 39.99,
       images: [
