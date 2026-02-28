@@ -12,11 +12,11 @@ import {
 import Link from "next/link";
 import Product1 from "./../../public/assets/sampleProducts/product_1.png";
 import { useEffect, useState } from "react";
-import ProductCard from "./home_comp/product/product_card/product_card_v1";
+import ProductCard from "./../components/product/product_card/product_card_v1";
 import type { StaticImageData } from "next/image"; // for product typing
-import ProductCardV1 from "./home_comp/product/product_card/product_card_v1";
-import ProductCardV2 from "./home_comp/product/product_card/product_card_v2";
-import ProductCardV3 from "./home_comp/product/product_card/product_card_v3";
+import ProductCardV1 from "./../components/product/product_card/product_card_v1";
+import ProductCardV2 from "./../components/product/product_card/product_card_v2";
+import ProductCardV3 from "./../components/product/product_card/product_card_v3";
 
 export default function HomePageComponent() {
   const items = [
