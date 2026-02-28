@@ -11,7 +11,7 @@ import {
   validateEmailOrPhone,
   validateFormFields,
   validateUsername,
-} from "../../components/auth_comp/filter_components";
+} from "../../components/auth_components/filter_components";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean | null>(false);

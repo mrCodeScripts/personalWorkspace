@@ -12,11 +12,15 @@ import {
 import Link from "next/link";
 import Product1 from "./../../public/assets/sampleProducts/product_1.png";
 import { useEffect, useState } from "react";
-import ProductCard from "./../components/product/product_card/product_card_v1";
+import ProductCard from "../components/product/product_cards/product_card_v1";
 import type { StaticImageData } from "next/image"; // for product typing
-import ProductCardV1 from "./../components/product/product_card/product_card_v1";
-import ProductCardV2 from "./../components/product/product_card/product_card_v2";
-import ProductCardV3 from "./../components/product/product_card/product_card_v3";
+import ProductCardV1 from "../components/product/product_cards/product_card_v1";
+import ProductCardV2 from "../components/product/product_cards/product_card_v2";
+import ProductCardV3 from "../components/product/product_cards/product_card_v3";
+import ProductPageV1 from "@/components/product/product_pages/product_page_v1";
+import ProductCategoryBarV1 from "@/components/product/product_category_bars/product_vategory_bar_v1";
+import PubMarketLogo from "../../public/assets/PubMarket_noBG.png";
+import Image from "next/image";
 
 export default function HomePageComponent() {
   const items = [
@@ -36,6 +40,7 @@ export default function HomePageComponent() {
     price: number;
     originalPrice: number;
     discount: number;
+    imageFolder?: string;
     images: string[];
   }
 
@@ -48,6 +53,7 @@ export default function HomePageComponent() {
       // image: "product_3.png",
       originalPrice: 300,
       discount: 30,
+      imageFolder: "/assets/sampleProducts/",
       images: [
         "product_5.png",
         "product_2.png",
@@ -163,6 +169,24 @@ export default function HomePageComponent() {
     },
   ];
 
+  const productCategories: { name: string; logo: string }[] = [
+    { name: "Fresh Fish", logo: "fish_logo_nobg.png" },
+    { name: "Seafood", logo: "oyster_logo_nobg.png" },
+    { name: "Meat & Poultry", logo: "meat_logo_nobg.png" },
+    { name: "Vegetables", logo: "vegetable_logo_nobg.png" },
+    { name: "Fruits", logo: "fruits_logo_nobg.png" },
+    { name: "Rice & Grains", logo: "rice_logo_nobg.png" },
+    { name: "Spices & Condiments", logo: "spices_logo_nobg.png" },
+    { name: "Frozen Foods", logo: "hotdogs_logo_nobg.png" },
+    { name: "Street Food", logo: "burger_logo_nobg.png" },
+    { name: "Snacks", logo: "frenchFries_logo_nobg.png" },
+    { name: "Beverages", logo: "beer_logo_nobg.png" },
+    { name: "Bakery", logo: "bread_logo_nobg.png" },
+    { name: "Dairy & Eggs", logo: "milkAndEggs_logo_nobg.png" },
+    { name: "Organic Goods", logo: "organicGoods_logo_nobg.png" },
+    { name: "Kitchen Supplies", logo: "utensil_logo_nobg.png" },
+  ];
+
   // Duplicate list for infinite loop
   const loopItems = [...items, ...items];
 
@@ -200,12 +224,12 @@ export default function HomePageComponent() {
   return (
     <div className="flex flex-col w-full min-h-screen">
       {/* HEADER */}
-      <div className="flex w-full fixed items-center bg-[#f43f5e] p-5 pb-3! gap-3 z-25">
+      <div className="flex w-full fixed items-center bg-[#f43f5e] p-3 pb-3! gap-3 z-25">
         {/* SEARCH */}
-        <form className="relative flex w-full border-2 border-white rounded-sm overflow-hidden bg-white">
+        <form className="relative flex w-full border-2 border-white rounded-sm overflow-hidden bg-white flex-row! pl-2">
           {/* PLACEHOLDER SLIDER */}
           {!focused && !value && (
-            <div className="absolute inset-0 pl-5 pr-12 pointer-events-none overflow-hidden">
+            <div className="absolute inset-0 pl-5 pr-12 pointer-events-none overflow-hidden translate-x-15">
               <div
                 className={`${
                   noAnim ? "" : "transition-transform duration-500 ease-in-out"
@@ -226,10 +250,26 @@ export default function HomePageComponent() {
             </div>
           )}
           {/* INPUT */}
+          {/* <div className="relative w-10 h-10">
+            <Image
+              src={PubMarketLogo}
+              alt="PubMarket Logo"
+              fill
+              className="object-contain scale-200"
+            />
+          </div> */}
+          <div className="relative w-20 h-12 overflow-hidden">
+            <Image
+              src={PubMarketLogo}
+              alt="PubMarket Logo"
+              fill
+              className="object-contain scale-200 object-[50%_60%]"
+            />
+          </div>
           <input
             type="text"
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             className="w-full py-3 pl-5 pr-12 outline-none text-[#f43f5e] font-semibold"
@@ -261,19 +301,18 @@ export default function HomePageComponent() {
       </div>
 
       {/* PRODUCTS */}
-      <section className="w-full py-12 bg-base-200 pb-30">
-        <div className="max-w-310 mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-8 text-gray-800">
-            Featured Products
-          </h2>
-
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {products.map((product) => (
-              <ProductCardV3 key={product.id} product={product} />
-            ))}
-          </div>
+      <div className="flex flex-col w-full h-full pt-20 pb-30 px-2 bg-[#f43f5e] gap-3">
+        <div className="w-full h-auto bg-[#f3f4f6] p-5 rounded-md">
+          <ProductCategoryBarV1
+            productCategories={productCategories}
+            sectionTitle="Categories"
+          />
         </div>
-      </section>
+        <div className="w-full h-auto bg-[#f3f4f6] p-5 rounded-md">
+          <ProductPageV1 products={products} pageTitle="Featured products" />
+        </div>
+        <ProductPageV1 products={products} />
+      </div>
 
       {/* BAR */}
       <div className="fixed flex bottom-0 translate-y-0 flex-row w-full px-10 py-8 bg-[#f43f5e] justify-center gap-11 z-25">

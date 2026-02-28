@@ -1,6 +1,6 @@
 import HomePageComponent from "./home";
-import BottomBar from "./../components/bottomBar/bottomBar";
-import HeaderBar from "./../components/headerBar/headerBar";
+import BottomBar from "../components/bottom_bar/bottomBar";
+import HeaderBar from "../components/header_bar/headerBar";
 
 export default function HomePage() {
   return (

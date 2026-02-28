@@ -161,7 +161,7 @@ export default function ImageSliderV1({ images, discount }: ImageSliderProps) {
           <button
             key={i}
             onClick={() => setIndex(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
+            className={`w-2 h-2 rounded-full transition-all ${
               i === index
                 ? "bg-primary scale-125"
                 : "bg-gray-400"
