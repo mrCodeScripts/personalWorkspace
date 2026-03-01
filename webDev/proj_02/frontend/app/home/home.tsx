@@ -300,6 +300,10 @@ export default function HomePageComponent() {
         </div>
       </div>
 
+
+
+
+
       {/* PRODUCTS */}
       <div className="flex flex-col w-full h-full pt-20 pb-30 px-2 bg-[#f43f5e] gap-3">
         <div className="w-full h-auto bg-[#f3f4f6] p-5 rounded-md">
@@ -313,6 +317,12 @@ export default function HomePageComponent() {
         </div>
         <ProductPageV1 products={products} />
       </div>
+
+
+
+
+
+
 
       {/* BAR */}
       <div className="fixed flex bottom-0 translate-y-0 flex-row w-full px-10 py-8 bg-[#f43f5e] justify-center gap-11 z-25">

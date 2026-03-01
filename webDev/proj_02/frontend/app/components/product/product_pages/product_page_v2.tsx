@@ -1,5 +1,3 @@
-import ProductCardV3 from "../product_cards/product_card_v3";
-
 type Product = {
     id: number;
     name: string;
@@ -10,7 +8,7 @@ type Product = {
     images: string[];
 };
 
-export default function ProductPageV1({products, pageTitle}: {products: Product[], pageTitle?: string}) {
+export default function ProductPageV2({products, pageTitle}: {products: Product[], pageTitle?: string}) {
   return (
     <>
       <section className="w-full bg-none">
