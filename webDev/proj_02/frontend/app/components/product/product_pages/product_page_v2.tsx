@@ -1,3 +1,5 @@
+import ProductCardV4 from "../product_cards/product_card_v4";
+
 type Product = {
     id: number;
     name: string;
@@ -19,7 +21,7 @@ export default function ProductPageV2({products, pageTitle}: {products: Product[
 
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
-              <ProductCardV3 key={product.id} product={product} />
+              <ProductCardV4 key={product.id} product={product} />
             ))}
           </div>
         </div>
