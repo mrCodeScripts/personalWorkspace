@@ -255,3 +255,14 @@ app/
 │  │  ├─ products/page.tsx            # Seller products
 │  │  └─ add/page.tsx                 # Add product page
 
+
+
+
+
+
+
+
+
+
+// WEBSITES FOR ASSETS:
+1. NO BG PNG ITEMS: https://www.hiclipart.com/search?clipart=oysters
