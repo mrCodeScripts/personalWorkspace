@@ -631,11 +631,14 @@ main()
 Run seed:
   npx ts-node prisma/seed.ts
 
-📋 PACKAGE.JSON SCRIPTS REFERENCE
+📋 PACKAGE.JSON SCRIPTS REFERENCE (TESTED & WORKING)
 ================================================================================
+⚠️ CRITICAL: The 'dev' script MUST set DATABASE_URL using cross-env
+
+CORRECT SETUP:
 {
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "cross-env DATABASE_URL=mysql://root:webdevprogrammer@localhost:3306/pubmarket_db ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.ts",
     "prisma:generate": "npx prisma generate",
@@ -646,6 +649,14 @@ Run seed:
     "prisma:migrate": "npx prisma migrate dev --name migration_name"
   }
 }
+
+REQUIRED DEPENDENCY:
+npm install --save-dev cross-env
+
+WHY cross-env?
+  • Sets environment variables cross-platform (Windows, Mac, Linux)
+  • Without it: $env:DATABASE_URL doesn't persist in dev script
+  • ts-node-dev can't find DATABASE_URL without cross-env
 
 💾 PRISMA STUDIO (Visual Database Manager)
 ================================================================================
@@ -710,8 +721,49 @@ await prisma.user.create({
 // Verify password on login
 const isValid = await bcrypt.compare(plainPassword, hashedPassword);
 
+⚠️ WHAT TO AVOID (REAL MISTAKES FROM PROJ_02)
 ================================================================================
-                        Last Updated: March 2, 2026
+❌ DON'T: Use Prisma v7 for standard Node.js projects
+   REASON: Breaking changes require adapter setup, too complex
+   DO: Stick with Prisma v5 for simplicity
+
+❌ DON'T: Create prisma.config.ts in root folder
+   REASON: Prisma CLI tries to load it as config, causes errors
+   DO: Only use if you need custom Prisma config (rare)
+
+❌ DON'T: Remove 'url' from datasource in Prisma v5
+   REASON: v5 REQUIRES it - schema will fail validation
+   DO: Keep: url = env("DATABASE_URL")
+
+❌ DON'T: Run 'npm run dev' without DATABASE_URL set
+   REASON: ts-node-dev won't inherit env vars properly
+   DO: Use cross-env in dev script to set it
+
+❌ DON'T: Try to pass datasourceUrl to PrismaClient constructor
+   REASON: Prisma v5 doesn't accept this parameter
+   DO: Use simple: new PrismaClient() without options
+
+❌ DON'T: Assume .env loading works automatically in dev script
+   REASON: ts-node-dev doesn't always load .env early enough
+   DO: Explicitly set DATABASE_URL in dev script with cross-env
+
+❌ DON'T: Skip 'npx prisma generate' after schema changes
+   REASON: Need to regenerate types for current schema
+   DO: Always run after modifying schema.prisma
+
+✅ CORRECT SETUP SUMMARY (TESTED WORKING)
+================================================================================
+1. npm install @prisma/client@^5 prisma@^5
+2. npm install --save-dev cross-env
+3. Create .env with DATABASE_URL
+4. Create prisma/schema.prisma with 'url = env("DATABASE_URL")'
+5. Set dev script: cross-env DATABASE_URL=... ts-node-dev ...
+6. Run: npm run dev
+7. Test endpoints and verify MySQL connection works
+
+================================================================================
+                    Last Updated: March 2, 2026
+                    Prisma v5 Setup (TESTED & WORKING)
 ================================================================================
 */
 
