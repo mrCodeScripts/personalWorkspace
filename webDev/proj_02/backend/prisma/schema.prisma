@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// --------------------
+// Main User Table
+// --------------------
+model User {
+  id               Int             @id @default(autoincrement())
+  username         String?         @unique
+  email            String?         @unique
+  phone            String?         @unique
+  password         String?         // hashed password, nullable for social login only
+  isEmailVerified  Boolean         @default(false)
+  isPhoneVerified  Boolean         @default(false)
+  avatarUrl        String?         // profile picture
+  role             String          @default("user") // user, admin, etc.
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  lastLogin        DateTime?
+
+  // Relation to social accounts
+  socialAccounts   SocialAccount[]
+
+  @@map("users") // optional, maps table name to 'users'
+}
+
+// --------------------
+// Social Accounts Table
+// --------------------
+model SocialAccount {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  provider    String   // 'google', 'facebook', etc.
+  providerId  String   // unique id from provider
+  avatarUrl   String?
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerId]) // ensures one providerId per provider
+  @@map("social_accounts")
+}

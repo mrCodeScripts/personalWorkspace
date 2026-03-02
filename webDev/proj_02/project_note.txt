@@ -266,3 +266,1166 @@ app/
 
 // WEBSITES FOR ASSETS:
 1. NO BG PNG ITEMS: https://www.hiclipart.com/search?clipart=oysters
+
+
+/*
+================================================================================
+                    🗄️ PRISMA ORM SETUP GUIDE FOR Node.js
+================================================================================
+Complete reference for setting up Prisma in any Node.js/Express backend project
+
+📦 VERSION INFO
+================================================================================
+Prisma Version: 7.4.2
+Node.js: v14+
+Database: MySQL (compatible with PostgreSQL, SQLite, MongoDB, etc.)
+
+🚀 STEP 1: INSTALL DEPENDENCIES
+================================================================================
+npm install @prisma/client
+npm install -D prisma
+npm install -D ts-node typescript
+npm install dotenv
+npm install -D @types/node
+
+📝 STEP 2: INITIALIZE PRISMA
+================================================================================
+npx prisma init
+
+This creates:
+  ✅ .env file (for DATABASE_URL)
+  ✅ prisma/schema.prisma (database schema)
+  ✅ prisma/migrations/ (migration history folder)
+
+⚙️ STEP 3: CONFIGURE .env
+================================================================================
+DATABASE_URL=mysql://username:password@localhost:3306/database_name
+
+Example MySQL Connection String:
+DATABASE_URL=mysql://root:webdevprogrammer@localhost:3306/pubmarket_db
+
+⚠️ IMPORTANT NOTES:
+  • Never commit .env to git - add to .gitignore
+  • Use strong passwords in production
+  • Ensure MySQL server is running on localhost:3306
+  • Database must exist or let Prisma create it
+
+🏗️ STEP 4: DEFINE DATABASE SCHEMA
+================================================================================
+Edit prisma/schema.prisma:
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"    // Change to PostgreSQL, SQLite, etc. as needed
+}
+
+// Model Example:
+model User {
+  id               Int             @id @default(autoincrement())
+  username         String?         @unique
+  email            String?         @unique
+  password         String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  
+  posts            Post[]          // 1-to-many relation
+  
+  @@map("users")      // Map to database table name
+}
+
+model Post {
+  id      Int     @id @default(autoincrement())
+  title   String
+  userId  Int
+  
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+KEY FIELD DIRECTIVES:
+  @id                 - Primary key
+  @unique             - Unique constraint
+  @default(value)     - Default value
+  @default(now())     - Current timestamp
+  @updatedAt          - Auto-update on change
+  @map("name")        - Database column name mapping
+  @@map("table_name") - Database table name mapping
+
+RELATIONSHIPS:
+  One-to-Many:  parent Post[] on child User
+  Many-to-One:  child User @relation(...) on parent
+  Cascade:      onDelete: Cascade (delete children when parent deleted)
+
+📊 STEP 5: PUSH SCHEMA TO DATABASE
+================================================================================
+npx prisma db push
+
+This:
+  ✅ Creates tables in MySQL based on schema.prisma
+  ✅ No migration file created (for development)
+  ✅ Generates Prisma Client automatically
+
+🔧 STEP 6: GENERATE PRISMA CLIENT (For Prisma v7+)
+================================================================================
+Set DATABASE_URL environment variable, then:
+
+npx prisma generate
+
+OR with dotenv (recommended):
+$env:DATABASE_URL="mysql://root:password@localhost:3306/db"; npx prisma generate
+
+🛑 COMMON ERRORS & FIXES
+================================================================================
+ERROR: "PrismaClient needs to be constructed with a non-empty, valid PrismaClientOptions"
+FIX: 
+  1. Ensure DATABASE_URL is set in .env
+  2. Remove prisma.config.ts from root (Prisma v7 incompatibility)
+  3. Run: npx prisma generate
+
+ERROR: "datasource url property is no longer supported"
+FIX: 
+  1. Remove 'url' from datasource in schema.prisma
+  2. Set DATABASE_URL in environment
+  3. Update schema to only have 'provider'
+
+ERROR: "Cannot find module @prisma/client"
+FIX:
+  1. Run: npm install @prisma/client
+  2. Run: npx prisma generate
+  3. Restart server/IDE
+
+📁 STEP 7: CREATE PRISMA CLIENT INSTANCE
+================================================================================
+File: src/lib/prisma.ts
+
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+export default prisma;
+
+⚠️ IMPORTANT: Do NOT create new PrismaClient() multiple times!
+Use singleton pattern (above) to avoid connection pool exhaustion.
+
+🔌 STEP 8: INTEGRATE WITH EXPRESS SERVER
+================================================================================
+File: src/server.ts
+
+import express from "express";
+import prisma from "./lib/prisma";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+
+// CREATE
+app.post("/api/users", async (req, res) => {
+  try {
+    const user = await prisma.user.create({
+      data: {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+      },
+    });
+    res.status(201).json({ status: "success", data: user });
+  } catch (error: any) {
+    res.status(500).json({ status: "error", message: error.message });
+  }
+});
+
+// READ ALL
+app.get("/api/users", async (req, res) => {
+  try {
+    const users = await prisma.user.findMany({
+      include: { posts: true },    // Include relations
+      orderBy: { createdAt: "desc" },
+    });
+    res.json({ status: "success", data: users });
+  } catch (error: any) {
+    res.status(500).json({ status: "error", message: error.message });
+  }
+});
+
+// READ ONE
+app.get("/api/users/:id", async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: parseInt(req.params.id) },
+      include: { posts: true },
+    });
+    if (!user) return res.status(404).json({ status: "error", message: "Not found" });
+    res.json({ status: "success", data: user });
+  } catch (error: any) {
+    res.status(500).json({ status: "error", message: error.message });
+  }
+});
+
+// UPDATE
+app.put("/api/users/:id", async (req, res) => {
+  try {
+    const user = await prisma.user.update({
+      where: { id: parseInt(req.params.id) },
+      data: req.body,
+    });
+    res.json({ status: "success", data: user });
+  } catch (error: any) {
+    res.status(500).json({ status: "error", message: error.message });
+  }
+});
+
+// DELETE
+app.delete("/api/users/:id", async (req, res) => {
+  try {
+    const user = await prisma.user.delete({
+      where: { id: parseInt(req.params.id) },
+    });
+    res.json({ status: "success", message: "User deleted", data: user });
+  } catch (error: any) {
+    res.status(500).json({ status: "error", message: error.message });
+  }
+});
+
+app.listen(5000, () => console.log("✅ Server running on port 5000"));
+
+🔍 COMMON PRISMA QUERIES
+================================================================================
+
+// Create with relations
+prisma.user.create({
+  data: {
+    username: "john",
+    posts: {
+      create: [
+        { title: "Post 1" },
+        { title: "Post 2" },
+      ],
+    },
+  },
+  include: { posts: true },
+});
+
+// Find with filtering & pagination
+prisma.user.findMany({
+  where: {
+    email: { contains: "gmail" },
+    createdAt: { gte: new Date("2024-01-01") },
+  },
+  select: { id: true, username: true },  // Select specific fields
+  orderBy: { createdAt: "desc" },
+  skip: 0,
+  take: 10,  // Pagination: 10 items per page
+});
+
+// Update with relations
+prisma.user.update({
+  where: { id: 1 },
+  data: {
+    username: "jane",
+    posts: {
+      disconnect: { id: 2 },           // Remove relation
+      connect: { id: 3 },              // Add relation
+      create: { title: "New Post" },   // Create new related item
+    },
+  },
+  include: { posts: true },
+});
+
+// Delete with cascade
+prisma.user.delete({
+  where: { id: 1 },
+  // If schema has onDelete: Cascade, related posts auto-delete
+});
+
+// Aggregate queries
+await prisma.post.aggregate({
+  _count: true,
+  _avg: { userId: true },
+});
+
+// Raw queries (use with caution)
+await prisma.$queryRaw`SELECT * FROM users WHERE id = ${userId}`;
+
+🌱 STEP 9: SEED DATABASE (OPTIONAL)
+================================================================================
+File: prisma/seed.ts
+
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+async function main() {
+  // Clear existing data
+  await prisma.post.deleteMany();
+  await prisma.user.deleteMany();
+
+  // Create test users
+  const user1 = await prisma.user.create({
+    data: {
+      username: "alice",
+      email: "alice@example.com",
+      password: "hashedPassword123",
+      posts: {
+        create: [
+          { title: "First Post" },
+          { title: "Second Post" },
+        ],
+      },
+    },
+  });
+
+  console.log("✅ Seeded: ", user1);
+}
+
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+
+Run seed:
+  npx ts-node prisma/seed.ts
+
+📋 PACKAGE.JSON SCRIPTS REFERENCE
+================================================================================
+{
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.ts",
+    "prisma:generate": "npx prisma generate",
+    "prisma:push": "npx prisma db push",
+    "prisma:pull": "npx prisma db pull",
+    "prisma:studio": "npx prisma studio",
+    "prisma:seed": "npx ts-node prisma/seed.ts",
+    "prisma:migrate": "npx prisma migrate dev --name migration_name"
+  }
+}
+
+💾 PRISMA STUDIO (Visual Database Manager)
+================================================================================
+npx prisma studio
+
+Opens http://localhost:5555 in browser
+View, create, edit, delete records visually
+
+🔄 MIGRATIONS (For Production)
+================================================================================
+// Create migration
+npx prisma migrate dev --name init_schema
+
+// Apply migrations in production
+npx prisma migrate deploy
+
+// Reset database (DEV ONLY)
+npx prisma migrate reset
+
+📝 BEST PRACTICES
+================================================================================
+✅ DO:
+  • Use .env and .env.example files
+  • Create singleton PrismaClient instance
+  • Use include/select to prevent N+1 queries
+  • Hash passwords before storing (use bcrypt)
+  • Handle errors in try-catch blocks
+  • Use transactions for multiple related operations
+  • Validate input before passing to Prisma
+
+❌ DON'T:
+  • Create new PrismaClient() on every request
+  • Expose DATABASE_URL in code
+  • Skip password hashing
+  • Use raw queries without escaping
+  • Leave console.logs in production
+  • Forget to disconnect prisma on app shutdown
+
+🧹 CLEANUP ON APP SHUTDOWN
+================================================================================
+// Add to server.ts
+process.on("SIGINT", async () => {
+  console.log("Shutting down gracefully...");
+  await prisma.$disconnect();
+  process.exit(0);
+});
+
+🔐 PASSWORD HASHING EXAMPLE
+================================================================================
+import bcrypt from "bcrypt";
+
+// Hash password before saving
+const hashedPassword = await bcrypt.hash(password, 10);
+await prisma.user.create({
+  data: {
+    username,
+    email,
+    password: hashedPassword,
+  },
+});
+
+// Verify password on login
+const isValid = await bcrypt.compare(plainPassword, hashedPassword);
+
+================================================================================
+                        Last Updated: March 2, 2026
+================================================================================
+*/
+
+
+/*
+================================================================================
+              📱 NEXT.JS COMPLETE SETUP & CONFIGURATION GUIDE
+================================================================================
+Full reference for setting up Next.js 16+ projects with TypeScript, Tailwind,
+DaisyUI, and all necessary dependencies. Complete command reference included.
+
+⚡ NEXT.JS VERSION INFO
+================================================================================
+Next.js:        16.1.6 (Latest App Router)
+React:          19.2.3 (Latest)
+TypeScript:     5.x
+Node.js:        18+ (16+ supported)
+React DOM:      19.2.3
+
+🚀 STEP 1: CREATE NEW NEXT.JS PROJECT
+================================================================================
+// Using create-next-app (Recommended)
+npx create-next-app@latest my-app --typescript --tailwind --eslint
+
+// Using manual setup
+mkdir my-app && cd my-app
+npm init -y
+npm install next react react-dom
+
+📦 STEP 2: INSTALL ALL DEPENDENCIES
+================================================================================
+
+CORE DEPENDENCIES (Required):
+npm install next
+npm install react react-dom
+
+UI & ICONS:
+npm install tailwindcss postcss autoprefixer
+npm install -D daisyui                         # Component library addon
+npm install lucide-react                       # Modern icon library
+npm install react-icons                        # Alternative icon sets
+npm install @heroicons/react                   # Heroicons component icons
+npm install @fortawesome/free-solid-svg-icons
+npm install @fortawesome/free-regular-svg-icons
+npm install @fortawesome/free-brands-svg-icons # FontAwesome icons
+npm install tabler-icons-react                 # Tabler icons
+
+UI UTILITIES & COMPONENTS:
+npm install @radix-ui/react-checkbox
+npm install @radix-ui/react-label
+npm install @radix-ui/react-separator
+npm install @radix-ui/react-slot
+npm install clsx                               # Conditional className utility
+npm install tailwind-merge                     # Merge Tailwind classes smartly
+npm install class-variance-authority           # Component variant system
+
+API & DATA FETCHING:
+npm install axios                              # HTTP client (alternative to fetch)
+npm install swr                                # React hook for data fetching
+
+STYLING:
+npm install tailwindcss-animate                # Tailwind animation utilities
+
+DEVELOPMENT TOOLS:
+npm install -D typescript
+npm install -D @types/react @types/react-dom @types/node
+npm install -D eslint eslint-config-next
+npm install -D @tailwindcss/postcss            # Tailwind CSS v4 support
+
+📦 COMPLETE PACKAGE.JSON REFERENCE
+================================================================================
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",                   # Start dev server (http://localhost:3000)
+    "build": "next build",               # Build for production
+    "start": "next start",               # Start production server
+    "lint": "eslint"                     # Run ESLint checks
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.5.0",
+    "@fortawesome/free-regular-svg-icons": "^6.5.0",
+    "@fortawesome/free-solid-svg-icons": "^6.5.0",
+    "@heroicons/react": "^2.0.20",
+    "@radix-ui/react-checkbox": "^1.3.3",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
+    "axios": "^1.13.5",                  # Promise-based HTTP client
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",                    # Conditional classNames
+    "lucide-react": "^0.563.0",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-icons": "^4.11.0",
+    "swr": "^2.4.0",                     # Data fetching with cache/revalidate
+    "tabler-icons-react": "^1.56.0",
+    "tailwind-merge": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19.2.13",
+    "@types/react-dom": "^19",
+    "daisyui": "^5.5.18",                # DaisyUI component library
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5"
+  }
+}
+
+🏗️ STEP 3: CONFIGURATION FILES
+================================================================================
+
+FILE: tsconfig.json
+Purpose: TypeScript compiler configuration
+Key Settings:
+  - target: "ES2020"       # JavaScript version target
+  - module: "ESNext"       # Module system
+  - jsx: "react-jsx"       # React 18+ JSX transform
+  - strict: true           # Enable strict type checking
+  - paths: {...}           # Path aliases (@/ for imports)
+
+Path Aliases in tsconfig.json:
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["app/components/*"],
+      "@/lib/*": ["app/lib/*"],
+      "@/types/*": ["app/types/*"],
+      "@/utils/*": ["app/utils/*"],
+      "@/hooks/*": ["app/hooks/*"]
+    }
+  }
+}
+
+USAGE:
+Instead of: import Button from "../../../components/Button"
+Use:        import Button from "@/components/Button"
+
+================================================================================
+
+FILE: next.config.ts
+Purpose: Next.js configuration & optimization
+
+Key Sections:
+
+1. REACT STRICT MODE
+  reactStrictMode: true
+  - Enables React development checks
+  - Double-invokes effects to catch bugs
+  - Disable if causes issues: false
+
+2. IMAGE OPTIMIZATION
+  images: {
+    unoptimized: false,      # Use Next.js Image optimization
+    remotePatterns: [...]    # Allow external image sources
+  }
+
+EXAMPLE: Allow images from multiple sources:
+export const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3001",
+        pathname: "/uploads/**"
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com"
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.example.com"
+      }
+    ]
+  }
+};
+
+================================================================================
+
+FILE: tailwind.config.ts
+Purpose: Tailwind CSS configuration & theme customization
+
+Structure:
+{
+  content: [              # Paths to scan for class names
+    "./app/**/*.{js,ts,jsx,tsx,mdx}"
+  ],
+  theme: {
+    extend: {            # Extend/override default theme
+      fontFamily: {
+        jetBrains: ["var(--font-jetbrains)"],
+        cuprum: ["var(--font-cuprum)"]
+      },
+      colors: { ... },
+      spacing: { ... }
+    }
+  },
+  plugins: [              # Tailwind plugins
+    daisyui(),
+    require('tailwindcss-animate')
+  ]
+}
+
+CUSTOM ANIMATIONS EXAMPLE:
+theme: {
+  extend: {
+    keyframes: {
+      fadeIn: {
+        "0%": { opacity: "0" },
+        "100%": { opacity: "1" }
+      }
+    },
+    animation: {
+      fadeIn: "fadeIn 0.5s ease-in"
+    }
+  }
+}
+
+================================================================================
+
+FILE: postcss.config.cjs
+Purpose: PostCSS configuration for CSS processing
+
+module.exports = {
+  plugins: {
+    "@tailwindcss/postcss": {}    # Tailwind v4+ plugin
+  }
+};
+
+⚠️ Note: For Tailwind v4, @tailwindcss/postcss is required instead of just
+         tailwindcss and autoprefixer.
+
+================================================================================
+
+FILE: eslint.config.cjs
+Purpose: ESLint configuration for code linting
+
+module.exports = {
+  "extends": ["next/core-web-vitals"]
+};
+
+Extends Next.js recommended ESLint rules including:
+  - React best practices
+  - Next.js specific rules
+  - Core Web Vitals checks
+
+Custom Rules (if needed):
+module.exports = {
+  extends: ["next/core-web-vitals"],
+  rules: {
+    "react/react-in-jsx-scope": "off",
+    "@next/next/no-img-element": "warn"
+  }
+};
+
+🔧 STEP 4: PROJECT STRUCTURE (App Router)
+================================================================================
+With Next.js 16+, use App Router:
+
+my-app/
+├── app/                              # App Router root
+│   ├── layout.tsx                   # Root layout (body, html tags)
+│   ├── page.tsx                     # Home page (/)
+│   ├── globals.css                  # Global styles
+│   │
+│   ├── components/                  # Reusable components
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   ├── ui/                      # UI component library
+│   │   │   ├── Button.tsx
+│   │   │   ├── Card.tsx
+│   │   │   └── Modal.tsx
+│   │   └── lib/
+│   │       └── utils.ts             # Utility functions (cn() for clsx+tailwind-merge)
+│   │
+│   ├── products/                    # Route groups (dynamic routes)
+│   │   ├── page.tsx                 # /products
+│   │   └── [id]/
+│   │       └── page.tsx             # /products/123
+│   │
+│   ├── admin/                       # Protected route
+│   │   ├── layout.tsx               # Admin-specific layout
+│   │   ├── page.tsx                 # /admin
+│   │   └── users/
+│   │       └── page.tsx             # /admin/users
+│   │
+│   ├── auth/                        # Auth routes
+│   │   ├── login/page.tsx
+│   │   └── register/page.tsx
+│   │
+│   ├── api/                         # API routes
+│   │   ├── users/
+│   │   │   ├── route.ts             # GET /api/users
+│   │   │   └── [id].ts              # GET /api/users/123
+│   │   └── products/route.ts
+│   │
+│   ├── hooks/                       # Custom React hooks
+│   │   ├── useAuth.ts
+│   │   └── useCart.ts
+│   │
+│   ├── lib/                         # Utilities & helpers
+│   │   ├── api.ts                   # API client setup
+│   │   ├── utils.ts
+│   │   └── constants.ts
+│   │
+│   └── types/                       # TypeScript types
+│       ├── user.ts
+│       └── product.ts
+│
+├── public/                          # Static assets
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
+│
+├── .env.local                       # Environment variables (NOT committed)
+├── .env.example                     # Example env file (committed)
+├── tailwind.config.ts               # Tailwind config
+├── postcss.config.cjs               # PostCSS config
+├── tsconfig.json                    # TypeScript config
+├── next.config.ts                   # Next.js config
+├── eslint.config.cjs                # ESLint config
+├── package.json
+├── next-env.d.ts                    # Auto-generated types
+└── .gitignore
+
+⚙️ STEP 5: ENVIRONMENT VARIABLES (.env.local)
+================================================================================
+Create .env.local (NOT committed to git):
+
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_APP_NAME=PubMarket
+
+# Private variables (server-side only)
+SECRET_KEY=your-secret-key
+DATABASE_PASSWORD=password
+
+⚠️ RULES:
+  • Prefix with NEXT_PUBLIC_ to expose to browser
+  • .env.local is NOT committed (add to .gitignore)
+  • Create .env.example with dummy values for reference
+  • Restart dev server after changing .env
+
+.env.example (Commit this):
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_APP_NAME=PubMarket
+SECRET_KEY=your-secret-key
+
+📋 STEP 6: IMPORTANT COMMANDS & NPM SCRIPTS
+================================================================================
+
+DEVELOPMENT:
+npm run dev                          # Start dev server (localhost:3000)
+npm run dev -- -p 3001              # Start on custom port
+
+PRODUCTION:
+npm run build                        # Build optimized production bundle
+npm start                            # Start production server
+
+LINTING & VALIDATION:
+npm run lint                         # Run ESLint
+npm run lint -- --fix               # Auto-fix linting issues
+npm run lint --  --max-warnings 0   # Fail on any warning
+
+BUILDING:
+npm run build -- --debug            # Build with debug info
+
+CLEANING:
+rm -rf .next                         # Delete Next.js cache
+rm -rf node_modules && npm install  # Clean reinstall
+
+BUILD & START (Quick test production):
+npm run build && npm start           # Build then start production
+
+🎨 STEP 7: USING TAILWIND + DAISYUI
+================================================================================
+
+BASIC TAILWIND CLASSES:
+<button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+  Click
+</button>
+
+DAISYUI COMPONENTS:
+<button className="btn btn-primary">Primary Button</button>
+<button className="btn btn-secondary">Secondary</button>
+<button className="btn btn-outline">Outline</button>
+<button className="btn btn-sm">Small</button>
+<button className="btn btn-error">Delete</button>
+
+DAISYUI FORM ELEMENTS:
+<input type="text" placeholder="Type..." className="input input-bordered" />
+<select className="select select-bordered">
+  <option>Option 1</option>
+</select>
+
+DAISYUI CARDS:
+<div className="card bg-base-100 shadow-md">
+  <div className="card-body">
+    <h2 className="card-title">Title</h2>
+    <p>Content here</p>
+  </div>
+</div>
+
+RESPONSIVE CLASSES:
+<div className="text-sm md:text-base lg:text-lg">   /* Mobile first */
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+utilityCLASS MERGING (clsx + tailwind-merge):
+Use the cn() utility from app/components/lib/utils.ts:
+
+import { cn } from "@/lib/utils";
+
+<button className={cn(
+  "btn",
+  isActive && "btn-primary",
+  disabled && "btn-disabled"
+)}>
+  Click
+</button>
+
+🪝 STEP 8: REACT 19 + NEXT.JS 16 PATTERNS
+================================================================================
+
+FUNCTIONAL COMPONENTS (Default):
+export default function HomePage() {
+  return <h1>Home</h1>;
+}
+
+USE CLIENT (Client-side hooks):
+"use client";
+
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+DYNAMIC ROUTES:
+File: app/products/[id]/page.tsx
+
+interface Props {
+  params: Promise<{ id: string }>;
+}
+
+export default async function ProductPage({ params }: Props) {
+  const { id } = await params;
+  return <h1>Product {id}</h1>;
+}
+
+⚠️ IMPORTANT: In Next.js 16, route params are Promises!
+
+API ROUTES:
+File: app/api/products/route.ts
+
+export async function GET(request: Request) {
+  return Response.json({ products: [] });
+}
+
+export async function POST(request: Request) {
+  const data = await request.json();
+  return Response.json({ success: true }, { status: 201 });
+}
+
+SERVER COMPONENTS (Default):
+async function getUserData(id: string) {
+  const res = await fetch(`http://api/users/${id}`, { cache: 'no-store' });
+  return res.json();
+}
+
+export default async function UserPage({ params }: Props) {
+  const user = await getUserData(params.id);
+  return <h1>{user.name}</h1>;
+}
+
+CLIENT-SIDE DATA FETCHING (SWR):
+"use client";
+
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then(r => r.json());
+
+export default function UsersList() {
+  const { data, error, isLoading } = useSWR("/api/users", fetcher);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return data.map(user => <div key={user.id}>{user.name}</div>);
+}
+
+IMAGE OPTIMIZATION:
+import Image from "next/image";
+
+<Image
+  src="/images/logo.png"
+  alt="Logo"
+  width={200}
+  height={100}
+  priority              // Load immediately (critical images)
+  quality={90}          // Compression quality (1-100)
+  loading="lazy"        # Default for below-fold images
+/>
+
+LINKING:
+import Link from "next/link";
+
+<Link href="/products" className="btn">
+  Go to Products
+</Link>
+
+🔐 STEP 9: CONNECTING TO BACKEND API
+================================================================================
+
+FILE: app/lib/api.ts (Axios setup)
+
+import axios from "axios";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+const apiClient = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Add token to all requests
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Handle 401 errors
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("authToken");
+      window.location.href = "/auth/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default apiClient;
+
+USAGE IN COMPONENTS:
+"use client";
+
+import { useState, useEffect } from "react";
+import apiClient from "@/lib/api";
+
+export default function UsersList() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiClient
+      .get("/api/users")
+      .then((res) => setUsers(res.data.data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+
+  return users.map(user => <div key={user.id}>{user.username}</div>);
+}
+
+POST REQUEST:
+const handleRegister = async (email: string, password: string) => {
+  try {
+    const response = await apiClient.post("/api/users", {
+      email,
+      password,
+    });
+    console.log("User created:", response.data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+🚀 STEP 10: BUILDING & DEPLOYING
+================================================================================
+
+LOCAL PRODUCTION TEST:
+npm run build          # Build
+npm start              # Start production server
+# Visit http://localhost:3000
+
+BUILD SIZE CHECK:
+npm run build          # Shows .next folder size
+# Look for large bundles that can be optimized
+
+DEPLOYMENT PLATFORMS:
+
+VERCEL (Recommended for Next.js):
+1. Push code to GitHub
+2. Connect repo on Vercel.com
+3. Vercel auto-deploys on git push
+4. Add env vars in Vercel dashboard: NEXT_PUBLIC_API_URL
+
+HEROKU:
+1. npm install -g heroku-cli
+2. heroku create my-app
+3. heroku config:set NEXT_PUBLIC_API_URL=https://api.example.com
+4. git push heroku main
+
+DOCKER:
+Dockerfile:
+FROM node:20-alpine
+WORKDIR /app
+COPY . .
+RUN npm ci && npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+
+Build & run:
+docker build -t my-app .
+docker run -p 3000:3000 my-app
+
+✅ BEST PRACTICES
+================================================================================
+✅ DO:
+  • Use "use client" sparingly (only when needed for interactivity)
+  • Keep server components as default for better performance
+  • Use Image component (next/image) for optimized images
+  • Store auth tokens in httpOnly cookies (not localStorage for sensitive data)
+  • Pre-fetch critical data with fetch() in server components
+  • Use SWR/React Query for client-side data
+  • Implement error boundaries for error handling
+  • Use middleware for auth protection
+  • Optimize images (compress, use WebP)
+  • Monitor Core Web Vitals in production
+
+❌ DON'T:
+  • Don't make API calls in server component renders (use fetch)
+  • Don't use useState in server components
+  • Don't expose secrets in environment variables (use NEXT_PUBLIC_ carefully)
+  • Don't forget await on async params in dynamic routes (Next.js 16)
+  • Don't use console.log in production (use proper logging)
+  • Don't commit .env.local file
+  • Don't import heavy libraries in layout.tsx
+  • Don't create new API client instances per request
+
+🔐 SECURITY TIPS
+================================================================================
+• Use HTTPS in production
+• Set secure headers (next/headers)
+• Validate all input data
+• Use CSRF tokens for mutations
+• Store auth tokens in httpOnly, Secure cookies
+• Implement rate limiting on API routes
+• Don't expose sensitive data in NEXT_PUBLIC_ vars
+• Use environment variables for secrets
+• Implement proper CORS on backend
+• RegularlyUpdate dependencies: npm audit fix
+
+📊 PERFORMANCE OPTIMIZATION
+================================================================================
+1. Image Optimization:
+   - Use next/image component
+   - Lazy load images below fold
+   - Set width/height to prevent layout shift
+
+2. Code Splitting:
+   - Next.js auto-splits at route level
+   - Use dynamic imports for heavy components:
+     const HeavyComponent = dynamic(() => import("@/components/Heavy"));
+
+3. Caching:
+   - Use fetch() with revalidate option in server components
+   - Use SWR for client-side caching
+   - Set proper cache headers
+
+4. Bundling:
+   - Analyze bundle: npm install bundle-analyzer
+   - Remove unused dependencies
+   - Tree-shake unused exports
+
+5. Database Queries:
+   - Use Prisma for efficient queries
+   - Use select/include to fetch only needed fields
+   - Implement pagination for large datasets
+
+📦 UPDATE & MAINTENANCE
+================================================================================
+Check outdated packages:
+npm outdated
+
+Update minor versions safely:
+npm update
+
+Update major versions (careful - breaking changes):
+npm install next@latest react@latest react-dom@latest
+
+Check security vulnerabilities:
+npm audit
+npm audit fix
+
+Clean install (if having issues):
+rm -rf node_modules package-lock.json
+npm install
+
+🆘 COMMON ISSUES & FIXES
+================================================================================
+
+ISSUE: "Cannot find module '@/components/Button'"
+FIX: Check tsconfig.json paths configuration matches actual file location
+
+ISSUE: "hydration mismatch" – Server and client render different content
+FIX: Use "use client" on components with useState/useEffect
+     Add proper loading states to avoid mismatches
+
+ISSUE: "Port 3000 is already in use"
+FIX: npm run dev -- -p 3001 (use different port)
+     Or kill process: lsof -ti:3000 | xargs kill -9
+
+ISSUE: Build fails with "image optimization error"
+FIX: Check remote image domains in next.config.ts
+     Or use unoptimized: true for development
+
+ISSUE: "Module not found" after npm install
+FIX: npm install --save package-name
+     Check package.json was updated
+     Clear cache: rm -rf .next && npm run build
+
+ISSUE: Env variables not loading
+FIX: Restart dev server after changing .env
+     Use NEXT_PUBLIC_ prefix for browser access
+     Check .env.local is in .gitignore
+
+================================================================================
+                    Complete Next.js Setup Reference
+                    Ready to use for any Next.js project
+                    Last Updated: March 2, 2026
+================================================================================
+*/
