@@ -316,8 +316,8 @@ export default function HomePageComponent() {
         <div className="w-full h-auto bg-[#f3f4f6] p-3 py-10 rounded-none">
           <ProductPageV1 products={products} pageTitle="Featured products" />
         </div>
-        <div className="w-full h-auto bg-[#f3f4f6] p-2 pb-10! rounded-none">
-          <ProductPageV2 products={products} pageTitle="Featured products" />
+        <div className="w-full h-auto bg-[#f3f4f6] p-3 py-10! rounded-none">
+          <ProductPageV2 products={products} pageTitle="For you products" />
         </div>
         <ProductPageV1 products={products} />
       </div>
