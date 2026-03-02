@@ -21,6 +21,7 @@ import ProductPageV1 from "@/components/product/product_pages/product_page_v1";
 import ProductCategoryBarV1 from "@/components/product/product_category_bars/product_vategory_bar_v1";
 import PubMarketLogo from "../../public/assets/PubMarket_noBG.png";
 import Image from "next/image";
+import ProductPageV2 from "@/components/product/product_pages/product_page_v2";
 
 export default function HomePageComponent() {
   const items = [
@@ -224,7 +225,7 @@ export default function HomePageComponent() {
   return (
     <div className="flex flex-col w-full min-h-screen">
       {/* HEADER */}
-      <div className="flex w-full fixed items-center bg-[#f43f5e] p-3 pb-3! gap-3 z-25">
+      <div className="flex w-full fixed items-center bg-[#f43f5e] p-2 pb-3! gap-3 z-25">
         {/* SEARCH */}
         <form className="relative flex w-full border-2 border-white rounded-sm overflow-hidden bg-white flex-row! pl-2">
           {/* PLACEHOLDER SLIDER */}
@@ -305,15 +306,18 @@ export default function HomePageComponent() {
 
 
       {/* PRODUCTS */}
-      <div className="flex flex-col w-full h-full pt-20 pb-30 px-2 bg-[#f43f5e] gap-3">
-        <div className="w-full h-auto bg-[#f3f4f6] p-5 rounded-md">
+      <div className="flex flex-col w-full h-full pt-20 pb-30 bg-[#f43f5e] gap-3">
+        <div className="w-full h-auto bg-[#f3f4f6] p-5 rounded-none">
           <ProductCategoryBarV1
             productCategories={productCategories}
             sectionTitle="Categories"
           />
         </div>
-        <div className="w-full h-auto bg-[#f3f4f6] p-5 rounded-md">
+        <div className="w-full h-auto bg-[#f3f4f6] p-3 py-10 rounded-none">
           <ProductPageV1 products={products} pageTitle="Featured products" />
+        </div>
+        <div className="w-full h-auto bg-[#f3f4f6] p-2 pb-10! rounded-none">
+          <ProductPageV2 products={products} pageTitle="Featured products" />
         </div>
         <ProductPageV1 products={products} />
       </div>

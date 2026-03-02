@@ -30,7 +30,7 @@ type Product = {
 
 export default function ProductCardV3({ product }: { product: Product }) {
   return (
-    <div className="bg-base-100 shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+    <div className="bg-base-100 shadow-lg rounded-none overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col border-[1px] border-gray-200">
       {/* ================= IMAGE SLIDER ================= */}
       <ImageSliderV1 images={product.images} discount={product.discount} />
 

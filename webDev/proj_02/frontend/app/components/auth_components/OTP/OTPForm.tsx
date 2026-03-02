@@ -28,6 +28,11 @@ export default function OTPForm({ children }: { children?: ReactNode }) {
   );
 
   useEffect(() => {
+    inputRefs.current[0]?.focus();
+    return () => console.log("Re-render OTP input.");
+  }, []);
+
+  useEffect(() => {
     if (resendOTPCountdown === 0) {
       setResendOTP(true);
       return;

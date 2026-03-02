@@ -140,6 +140,7 @@ export default function ImageSliderV1({ images, discount }: ImageSliderProps) {
 
       {/* Arrows */}
       <button
+        type="button"
         onClick={prev}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-1.5 rounded-full hover:bg-black/60 transition"
       >
