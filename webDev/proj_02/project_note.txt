@@ -274,9 +274,15 @@ app/
 ================================================================================
 Complete reference for setting up Prisma in any Node.js/Express backend project
 
-📦 VERSION INFO
+📦 VERSION INFO (IMPORTANT - READ CAREFULLY)
 ================================================================================
-Prisma Version: 7.4.2
+⚠️ CRITICAL: Use Prisma v5.x (NOT v7!)
+  • Prisma v7: Has breaking changes, requires complex adapter setup
+  • Prisma v5: Stable, works with standard environment variable setup
+
+RECOMMENDED INSTALLATION:
+npm install @prisma/client@^5 prisma@^5 --save
+
 Node.js: v14+
 Database: MySQL (compatible with PostgreSQL, SQLite, MongoDB, etc.)
 
@@ -367,36 +373,69 @@ This:
   ✅ No migration file created (for development)
   ✅ Generates Prisma Client automatically
 
-🔧 STEP 6: GENERATE PRISMA CLIENT (For Prisma v7+)
+🔧 STEP 6: CONFIGURE SCHEMA FOR PRISMA v5
 ================================================================================
-Set DATABASE_URL environment variable, then:
+⚠️ CRITICAL: Your datasource MUST include the 'url' property:
 
-npx prisma generate
+WRONG (Will fail):
+datasource db {
+  provider = "mysql"
+}
 
-OR with dotenv (recommended):
+CORRECT:
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")  // Must be included for Prisma v5!
+}
+
+🔧 STEP 7: GENERATE PRISMA CLIENT
+================================================================================
+⚠️ IMPORTANT: Set DATABASE_URL before running generate:
+
+Windows PowerShell:
 $env:DATABASE_URL="mysql://root:password@localhost:3306/db"; npx prisma generate
 
-🛑 COMMON ERRORS & FIXES
+Linux/Mac:
+export DATABASE_URL="mysql://root:password@localhost:3306/db" && npx prisma generate
+
+🛑 COMMON ERRORS & FIXES (REAL-WORLD TESTED)
 ================================================================================
-ERROR: "PrismaClient needs to be constructed with a non-empty, valid PrismaClientOptions"
-FIX: 
-  1. Ensure DATABASE_URL is set in .env
-  2. Remove prisma.config.ts from root (Prisma v7 incompatibility)
-  3. Run: npx prisma generate
 
-ERROR: "datasource url property is no longer supported"
-FIX: 
-  1. Remove 'url' from datasource in schema.prisma
-  2. Set DATABASE_URL in environment
-  3. Update schema to only have 'provider'
+ERROR 1: "PrismaClient needs to be constructed with a non-empty, valid PrismaClientOptions"
+✅ ROOT CAUSE: Prisma v7 requires adapter + DATABASE_URL not being passed
+❌ WRONG FIX: Using Prisma v7 with custom adapter config
+✅ CORRECT FIX:
+  1. Downgrade to Prisma v5: npm install @prisma/client@^5 prisma@^5 --save
+  2. Ensure schema has 'url = env("DATABASE_URL")' in datasource
+  3. Set env var: $env:DATABASE_URL="mysql://..."
+  4. Run: npx prisma generate
 
-ERROR: "Cannot find module @prisma/client"
-FIX:
-  1. Run: npm install @prisma/client
-  2. Run: npx prisma generate
-  3. Restart server/IDE
+ERROR 2: "datasource url property is no longer supported"
+✅ ROOT CAUSE: This message is from Prisma v7 CLI
+❌ WRONG FIX: Removing 'url' from datasource
+✅ CORRECT FIX:
+  1. This error only happens with Prisma v7
+  2. Use Prisma v5 instead (much simpler)
+  3. Keep 'url = env("DATABASE_URL")' in schema
 
-📁 STEP 7: CREATE PRISMA CLIENT INSTANCE
+ERROR 3: "Argument url is missing in data source block"
+✅ ROOT CAUSE: Prisma v5 requires url in datasource
+✅ FIX:
+  1. Add: url = env("DATABASE_URL") in datasource db { } block
+  2. Make sure DATABASE_URL env var is set
+
+ERROR 4: "Unknown property datasourceUrl provided to PrismaClient constructor"
+✅ ROOT CAUSE: Trying to use v7 syntax on Prisma v5
+✅ FIX: Remove custom PrismaClient options, use simple: new PrismaClient()
+
+ERROR 5: "Cannot find module @prisma/client" on npm run dev
+✅ FIX:
+  1. Set DATABASE_URL in dev script: cross-env DATABASE_URL=... npm run dev
+  2. Make sure .env file exists with DATABASE_URL
+  3. Run: npm install @prisma/client
+  4. Run: npx prisma generate
+
+📁 STEP 8: CREATE PRISMA CLIENT INSTANCE
 ================================================================================
 File: src/lib/prisma.ts
 
