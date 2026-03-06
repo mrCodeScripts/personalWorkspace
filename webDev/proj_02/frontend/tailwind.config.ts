@@ -10,36 +10,36 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
-    extend: {
-      fontFamily: {
-        // custom: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui"], // global sans
-        jetBrains: ["var(--font-jetbrains)"],
-        cuprum: ["var(--font-cuprum)"],
-      },
-      // keyframes: {
-      //   formBottomToTop: {
-      //     "0%": { transform: "translateY(40px)" },
-      //     "100%": { transform: "translateY(0)" },
-      //   },
-      //   formTopToBottom: {
-      //     "0%": { transform: "translateY(0)" },
-      //     "100%": { transform: "translateY(40px)" },
-      //   },
-      //   hideShow: {
-      //     "0%": { opacity: "0" },
-      //     "100%": { opacity: "1" },
-      //   },
-      // },
-      animation: {
-        formBottomToTop:
-          "formBottomToTop 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
-        hideShow: "hideShow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        formTopToBottom:
-          "formTopToBottom 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
-      },
-    },
-  },
+  // theme: {
+  //   extend: {
+  //     fontFamily: {
+  //       // custom: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui"], // global sans
+  //       jetBrains: ["var(--font-jetbrains)"],
+  //       cuprum: ["var(--font-cuprum)"],
+  //     },
+  //     // keyframes: {
+  //     //   formBottomToTop: {
+  //     //     "0%": { transform: "translateY(40px)" },
+  //     //     "100%": { transform: "translateY(0)" },
+  //     //   },
+  //     //   formTopToBottom: {
+  //     //     "0%": { transform: "translateY(0)" },
+  //     //     "100%": { transform: "translateY(40px)" },
+  //     //   },
+  //     //   hideShow: {
+  //     //     "0%": { opacity: "0" },
+  //     //     "100%": { opacity: "1" },
+  //     //   },
+  //     // },
+  //     animation: {
+  //       formBottomToTop:
+  //         "formBottomToTop 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+  //       hideShow: "hideShow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+  //       formTopToBottom:
+  //         "formTopToBottom 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+  //     },
+  //   },
+  // },
 
   plugins: [daisyui(), animate],
   // @ts-ignore

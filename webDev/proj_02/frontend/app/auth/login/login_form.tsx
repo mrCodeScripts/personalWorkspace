@@ -1,17 +1,29 @@
 "use client";
 import Image from "next/image";
 import LogoNoBG from "../../assets/PubMarket_noBG.png";
-import { useActionState, useState } from "react";
+import {signIn, useSession} from 'next-auth/react';
+import { useActionState, useEffect, useState } from "react";
 import { ArrowRight, Eye, EyeClosed, User } from "lucide-react";
 import Link from "next/link";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
+  const {data: session, status} = useSession();
+  const route = useRouter();
+
   const [showPassword, setShowPassword] = useState<boolean | null>(false);
   const [currentFormData, setCurrentFormData] = useState<{
     username: string;
     password: string;
   }>({ username: "", password: "" });
+
+  useEffect(() => {
+    if (status == "authenticated") {
+      route.replace("/home");
+    }
+  }, [status, route]);
+
   const [formErrors, setFormErrors] = useState<{
     username: { valid: boolean; reason: string };
     password: { valid: boolean; reason: string };
@@ -156,6 +168,7 @@ export default function LoginForm() {
             </button>
             <button
               type="button"
+              onClick={() => signIn("google")}
               disabled={isPending}
               className={`group text-[40px] ${isPending ? "text-gray-400" : "text-[#1f2937]"} border-none border-[#1f2937] rounded-full p-2 bg-[#f3f4f6]`}
             >
