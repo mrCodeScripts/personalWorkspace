@@ -1,16 +1,24 @@
 import ProductCardV4 from "../product_cards/product_card_v4";
 
 type Product = {
-    id: number;
-    name: string;
-    rating: number;
-    price: number;
-    originalPrice: number;
-    discount: number;
-    images: string[];
+  id: number;
+  name: string;
+  rating: number;
+  price: number;
+  originalPrice: number;
+  flashSale: boolean;
+  deal: boolean;
+  discount: number;
+  images: string[];
 };
 
-export default function ProductPageV2({products, pageTitle}: {products: Product[], pageTitle?: string}) {
+export default function ProductPageV2({
+  products,
+  pageTitle,
+}: {
+  products: Product[];
+  pageTitle?: string;
+}) {
   return (
     <>
       <section className="w-full bg-none">

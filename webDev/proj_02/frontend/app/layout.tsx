@@ -35,7 +35,7 @@ export default function RootLayout({
           className={`${inter.className} min-h-screen w-full flex flex-col font-sans`}
           >
           <Providers>
-                {children}
+            {children}
           </Providers>
         </body>
       </html>

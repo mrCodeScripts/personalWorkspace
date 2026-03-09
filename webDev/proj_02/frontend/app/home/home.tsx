@@ -52,6 +52,8 @@ export default function HomePageComponent() {
     price: number;
     originalPrice: number;
     discount: number;
+    flashSale: boolean;
+    deal: boolean;
     imageFolder?: string;
     images: string[];
   }
@@ -65,6 +67,8 @@ export default function HomePageComponent() {
       // image: "product_3.png",
       originalPrice: 300,
       discount: 30,
+      flashSale: false,
+      deal: false,
       imageFolder: "/assets/sampleProducts/",
       images: [
         "product_5.png",
@@ -82,8 +86,10 @@ export default function HomePageComponent() {
     {
       id: 2,
       name: "Stylish Sunglasses",
+      flashSale: false,
       price: 29.99,
       rating: 4,
+      deal: true,
       images: [
         "product_5.png",
         "product_2.png",
@@ -116,12 +122,16 @@ export default function HomePageComponent() {
       name: "Wireless Earbuds",
       rating: 4,
       price: 79.99,
+      flashSale: true,
+      deal: false,
       originalPrice: 300,
       discount: 30,
     },
     {
       id: 4,
       name: "Classic Watch",
+      flashSale: true,
+      deal: false,
       rating: 4,
       price: 129.99,
       images: [
@@ -143,6 +153,8 @@ export default function HomePageComponent() {
       id: 5,
       name: "Leather Wallet",
       price: 39.99,
+      flashSale: true,
+      deal: false,
       images: [
         "product_5.png",
         "product_2.png",
@@ -163,6 +175,8 @@ export default function HomePageComponent() {
       id: 6,
       name: "Running Sneakers",
       rating: 4,
+      flashSale: true,
+      deal: false,
       images: [
         "product_5.png",
         "product_2.png",
