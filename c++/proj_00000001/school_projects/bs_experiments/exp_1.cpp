@@ -108,7 +108,7 @@ int main()
                     if (grade > highest) highest = grade;
                     if (grade < lowest) lowest = grade;
 
-                    std::cout << std::setw(12) << std::fixed << std::setprecision(2) << "\033[32m" << grade << "%\033[0m";
+                    std::cout << std::setw(15) << std::fixed << std::setprecision(2) << "\033[32m" << grade << "%\033[0m";
                 }
 
                 // CLACULATE AVERAGE;
