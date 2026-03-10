@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Cuprum } from "next/font/google";
+// import { SessionProvider } from "next-auth/react";
+import Providers from "./providers";
 import "./globals.css";
 
 const jetbrains = JetBrains_Mono({
@@ -13,7 +15,7 @@ const inter = Inter({
 });
 
 const cuprum = Cuprum({
-  subsets:["latin"],
+  subsets: ["latin"],
   variable: "--font-curprum",
 });
 
@@ -28,10 +30,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="pubmarket">
-      <body className={`${inter.className} min-h-screen w-full flex flex-col font-sans`}>
-        {children}
-      </body>
-    </html>
+      <html lang="en" data-theme="pubmarket">
+        <body
+          className={`${inter.className} min-h-screen w-full flex flex-col font-sans`}
+          >
+          <Providers>
+            {children}
+          </Providers>
+        </body>
+      </html>
   );
 }

@@ -22,8 +22,19 @@ import ProductCategoryBarV1 from "@/components/product/product_category_bars/pro
 import PubMarketLogo from "../../public/assets/PubMarket_noBG.png";
 import Image from "next/image";
 import ProductPageV2 from "@/components/product/product_pages/product_page_v2";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function HomePageComponent() {
+  const {data: session, status} = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status == "unauthenticated") {
+      router.replace("/");
+    }
+  }, [router, status]);
+
   const items = [
     "Search shoes",
     "Find gadgets",
@@ -41,6 +52,8 @@ export default function HomePageComponent() {
     price: number;
     originalPrice: number;
     discount: number;
+    flashSale: boolean;
+    deal: boolean;
     imageFolder?: string;
     images: string[];
   }
@@ -54,6 +67,8 @@ export default function HomePageComponent() {
       // image: "product_3.png",
       originalPrice: 300,
       discount: 30,
+      flashSale: false,
+      deal: false,
       imageFolder: "/assets/sampleProducts/",
       images: [
         "product_5.png",
@@ -71,8 +86,10 @@ export default function HomePageComponent() {
     {
       id: 2,
       name: "Stylish Sunglasses",
+      flashSale: false,
       price: 29.99,
       rating: 4,
+      deal: true,
       images: [
         "product_5.png",
         "product_2.png",
@@ -105,12 +122,16 @@ export default function HomePageComponent() {
       name: "Wireless Earbuds",
       rating: 4,
       price: 79.99,
+      flashSale: true,
+      deal: false,
       originalPrice: 300,
       discount: 30,
     },
     {
       id: 4,
       name: "Classic Watch",
+      flashSale: true,
+      deal: false,
       rating: 4,
       price: 129.99,
       images: [
@@ -132,6 +153,8 @@ export default function HomePageComponent() {
       id: 5,
       name: "Leather Wallet",
       price: 39.99,
+      flashSale: true,
+      deal: false,
       images: [
         "product_5.png",
         "product_2.png",
@@ -152,6 +175,8 @@ export default function HomePageComponent() {
       id: 6,
       name: "Running Sneakers",
       rating: 4,
+      flashSale: true,
+      deal: false,
       images: [
         "product_5.png",
         "product_2.png",
@@ -301,10 +326,6 @@ export default function HomePageComponent() {
         </div>
       </div>
 
-
-
-
-
       {/* PRODUCTS */}
       <div className="flex flex-col w-full h-full pt-20 pb-30 bg-[#f43f5e] gap-3">
         <div className="w-full h-auto bg-[#f3f4f6] p-5 rounded-none">
@@ -322,12 +343,6 @@ export default function HomePageComponent() {
         <ProductPageV1 products={products} />
       </div>
 
-
-
-
-
-
-
       {/* BAR */}
       <div className="fixed flex bottom-0 translate-y-0 flex-row w-full px-10 py-8 bg-[#f43f5e] justify-center gap-11 z-25">
         <Link
@@ -343,7 +358,7 @@ export default function HomePageComponent() {
           </span>
         </Link>
         <Link
-          href="#"
+          href="/account"
           className="text-[#f3f4f6] flex flex-col gap-2 items-center group"
         >
           <UserIcon
