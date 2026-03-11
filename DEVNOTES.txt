@@ -3215,19 +3215,132 @@ END OF MYSQL SETUP GUIDE
  ########:: ##:::: ##:'####: ########:::: ##:::::::::: ##:::: ##:::: ##:. ######:: ##::. ##:. ######:::::. ####. ##::::. #######:: ########::. ######:: ########:. ######::::: ##::::'####:::. ###:::: ########:. ######::
 ........:::..:::::..::....::........:::::..:::::::::::..:::::..:::::..:::......:::..::::..:::......:::::::....::..::::::.......:::........::::......:::........:::......::::::..:::::....:::::...:::::........:::......:::
 
-MISSION #1
-✅ Finish learning file systems and how to use them. 
-✅ Review file system functions. 
-3. Create a simple web app Next.js + Node.js that manipulates texts with live server.
-4. Create a simple login/signup web app with Next.js + Node.js that stores JSON data on the texts using file systems.
-5. Create a simple CRUD operation with Node.js + Next.js using text files as database storage.
-6. Create a full plan on creating the 'Public Market' app design with Figma.
-7. Finish 50-70% of the 'Public Market' app design with NextJS.
-8. Presentation for the 'Public Market' app design.
-9. Learn security on NodeJS.
 
+THE 6 MONTH GRIND:
+GOALS:
+1. Finance: Make my first ₱300K within the 6 months period.
+2. Skills: Multiple income streams 
+   -> Freelancing
+   -> AI automation
+   -> Startups
+   -> Art Comissions
+   -> Content Creation
+   -> Tutorials
+3. Remove all bad habits: 
+   -> Procrastination
+   -> Mentally Weak
+   -> Pornographic Addict
+   -> Wasting Time
+   -> Chasing Validation
+   -> Being a simp
+4. Physique:
+   -> More buffed
+   -> More ripped and jacked
+   -> Brutal strength in calisthenics and arm wrestling.
+5. New equipments:
+   -> Complete clothes for gym, home, events, and outdoor.
+   -> Suzuki Raider 150
+   -> Iphone 13 Pro (pre-owned to save money).
+   -> Complete calisthenics training equipments.
+   -> Complete foods and supliments.
 
-
+RULES:
+1. Increase daily work output; every day must produce something real (drawing progress, coding progress, client outreach, or content).
+2. No zero-progress days unless physically sick.
+3. Stop over-planning; planning time must not exceed 10 minutes before starting work.
+4. Execution is always more important than thinking about execution.
+5. Focus primarily on money-generating activities (portrait commissions, freelance dev, teaching beginners).
+6. Content creation is long-term leverage, not immediate income.
+7. Prioritize finishing work over perfecting work.
+8. Done is better than perfect.
+9. Avoid procrastination triggers such as excessive scrolling, useless debates, and random internet consumption.
+10. Social media must be used as a tool (networking, posting work, client acquisition), not entertainment.
+11. Every day perform at least one action that can potentially generate money.
+12. Improve drawing speed and efficiency through repetition and production volume.
+13. Improve coding skills through building real projects rather than only watching tutorials.
+14. Build small projects frequently to improve skill and create portfolio proof.
+15. Send messages to potential clients or groups consistently instead of waiting for opportunities.
+16. Build connections in art communities and tech communities simultaneously.
+17. Accept that early income attempts may fail; treat them as experiments rather than defeats.
+18. Focus on compounding skill rather than chasing quick validation.
+19. Maintain discipline even when motivation is low.
+20. Consistency matters more than bursts of extreme effort followed by burnout.
+21. Treat your laptop as a powerful tool that must be used daily.
+22. Respect your parents' sacrifices by using opportunities seriously.
+23. Protect your mental focus by avoiding unnecessary drama and negativity.
+24. Do not compare yourself emotionally to classmates or peers.
+25. Measure progress against your previous self instead of others.
+26. Accept that improvement takes time but daily effort accelerates it.
+27. Build financial discipline; do not spend money impulsively once income starts coming in.
+28. Prioritize reinvesting early money into tools, skills, or necessities that increase productivity.
+29. Do not chase attention, validation, or approval from people.
+30. Avoid behaviors that make you dependent on others' opinions.
+31. Be respectful but emotionally independent in social interactions.
+32. Speak less, observe more, and focus on your own mission.
+33. Do not overshare personal plans with people who cannot contribute to your progress.
+34. Maintain calm confidence during conversations with peers.
+35. Avoid pointless arguments that drain mental energy.
+36. Use polite and simple communication instead of trying to impress people.
+37. Do not try to prove your worth through talking; prove it through actions and results.
+38. Treat classmates and peers normally but keep emotional distance if necessary.
+39. Do not isolate yourself socially, but do not prioritize socializing over your goals.
+40. When interacting with girls, remain calm, respectful, and normal.
+41. Do not chase women who are not clearly interested.
+42. Attraction is normal but must not control your decisions.
+43. Accept that feelings may remain for a while but they do not require action.
+44. Treat her respectfully but neutrally, without overthinking interactions.
+45. Do not try to impress her or perform for attention.
+46. Do not act cold or hostile toward her either; behave normally.
+47. Focus on your life development instead of waiting for emotional outcomes.
+48. If attraction remains in the future, approach directly and respectfully without games.
+49. Do not build your identity around romantic success or rejection.
+50. Your value comes from your discipline, competence, and character.
+51. Avoid pornography and habits that weaken mental discipline.
+52. Protect your attention span by minimizing dopamine-draining habits.
+53. Control emotional reactions by focusing on productive actions.
+54. Accept frustration as part of growth instead of resisting it.
+55. Develop mental toughness by continuing work despite discomfort.
+56. Avoid self-pity and victim mentality.
+57. Focus on solutions instead of complaining about circumstances.
+58. Understand that difficult environments can build stronger individuals.
+59. Remember that being young means you have time to build skills and experience.
+60. Avoid rushing life decisions because of temporary emotions.
+61. Build physical discipline through consistent training.
+62. Train calisthenics regularly (pull-ups, chin-ups, handstand work, core exercises).
+63. Train arm wrestling strength carefully to avoid tendon injuries.
+64. Maintain progressive overload when possible to increase strength.
+65. Train with consistency rather than random bursts of intense exercise.
+66. Prioritize recovery to avoid long-term injuries that slow progress.
+67. Maintain basic nutrition using available foods (eggs, fish, meat, vegetables, water).
+68. Reduce sugar and junk food consumption to maintain health and skin condition.
+69. Maintain basic hygiene and grooming to support physical confidence.
+70. Continue skincare discipline to prevent acne from returning.
+71. Use coffee carefully as a tool but avoid dependence on it.
+72. Maintain adequate sleep to sustain long-term productivity.
+73. Accept that not every day will be perfect but continue working regardless.
+74. Focus on progress over perfection.
+75. Accept temporary setbacks without abandoning your long-term goals.
+76. Keep your environment organized to reduce mental clutter.
+77. Avoid wasting time thinking about past mistakes.
+78. Focus on building the version of yourself you want to become.
+79. Make decisions based on long-term benefits rather than short-term comfort.
+80. Stay patient and trust that consistent effort compounds over time.
+81. Always remember your mission: improve finances, skills, physique, and discipline.
+82. Continue learning from every experience rather than expecting immediate success.
+83. Accept that real progress requires effort, patience, and resilience.
+84. Keep moving forward even when progress feels slow.
+85. Your current situation is temporary; your discipline determines your future.
+86. Every productive day increases the probability of success.
+87. Treat each day as an opportunity to move slightly closer to your goals.
+88. Never stop improving your abilities and mindset.
+89. Become the type of person who solves problems rather than avoiding them.
+90. Build a life where your skills, discipline, and independence define you.
+ 
+OBJECTIVES #1:
+1. Finish the 'PubMarket' project backend to frontend within 2 days.
+2. Create 5 realistic portraits of people within 2 days.
+3. Complete daily training sessions.
+4. Continue daily handstands spamming for 5 straight days.
 
 
 
