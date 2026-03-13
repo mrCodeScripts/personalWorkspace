@@ -168,7 +168,7 @@ export default function LoginForm() {
             </button>
             <button
               type="button"
-              onClick={() => signIn("google")}
+              onClick={() => signIn("google", { callbackUrl: "/home" })}
               disabled={isPending}
               className={`group text-[40px] ${isPending ? "text-gray-400" : "text-[#1f2937]"} border-none border-[#1f2937] rounded-full p-2 bg-[#f3f4f6]`}
             >
@@ -178,7 +178,7 @@ export default function LoginForm() {
           <p className="text-sm text-gray-800 select-none">
             Don't have an account?
             <Link
-              href="/auth/register"
+              href="/auth /register"
               className="text-[#f43f5e]! duration-200 ml-auto px-2  font-semibold"
             >
               Sign up for free

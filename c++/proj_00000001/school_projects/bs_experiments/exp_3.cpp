@@ -27,6 +27,12 @@ int main()
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
+
+        if (std::cin.fail()) {
+            std::cout << "l;ksjdflkjdsf";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
         grades.push_back(grade);
     }
 

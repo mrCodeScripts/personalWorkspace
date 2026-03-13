@@ -1,7 +1,9 @@
 import NextAuth, { DefaultSession, NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { DefaultJWT } from "next-auth/jwt";
+import https from "https";
 
+// --- TypeScript augmentation ---
 declare module "next-auth" {
   interface Session {
     user: {
@@ -26,6 +28,7 @@ declare module "next-auth/jwt" {
   }
 }
 
+// --- NextAuth options ---
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
@@ -37,6 +40,10 @@ export const authOptions: NextAuthOptions = {
             "openid email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
           prompt: "select_account",
         },
+      },
+      httpOptions: {
+        // Force IPv4 to prevent ETIMEDOUT from IPv6 fallback
+        agent: new https.Agent({ family: 4 }),
       },
     }),
   ],
@@ -51,7 +58,6 @@ export const authOptions: NextAuthOptions = {
         token.verified = (profile as any).email_verified;
         token.hd = (profile as any).hd;
       }
-
       return token;
     },
 
@@ -64,7 +70,6 @@ export const authOptions: NextAuthOptions = {
         session.user.verified = token.verified;
         session.user.hd = token.hd;
       }
-
       return session;
     },
   },
@@ -73,5 +78,4 @@ export const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };

@@ -3181,6 +3181,252 @@ END OF MYSQL SETUP GUIDE
 ===========================================================
 */
 
+/*
+
+====================================================
+POSTGRESQL TERMINAL CHEAT SHEET (UBUNTU / LINUX)
+====================================================
+
+SECTION 1 — START / CONTROL POSTGRESQL SERVICE
+----------------------------------------------
+
+Check if PostgreSQL is running
+sudo systemctl status postgresql
+
+Start PostgreSQL
+sudo systemctl start postgresql
+
+Restart PostgreSQL
+sudo systemctl restart postgresql
+
+Enable PostgreSQL on system boot
+sudo systemctl enable postgresql
+
+
+
+SECTION 2 — ACCESS POSTGRESQL
+------------------------------
+
+Switch to postgres system user
+sudo -i -u postgres
+
+Open PostgreSQL terminal
+psql
+
+Exit PostgreSQL terminal
+\q
+
+Exit postgres system user
+exit
+
+
+
+SECTION 3 — DATABASE COMMANDS
+------------------------------
+
+List all databases
+\l
+
+Create a database
+CREATE DATABASE mydatabase;
+
+Delete a database
+DROP DATABASE mydatabase;
+
+Connect to a database
+\c mydatabase
+
+Show current database
+SELECT current_database();
+
+
+
+SECTION 4 — USER / ROLE MANAGEMENT
+----------------------------------
+
+Create database user
+CREATE USER myuser WITH PASSWORD 'mypassword';
+
+List all users
+\du
+
+Delete user
+DROP USER myuser;
+
+Grant database privileges
+GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;
+
+Remove privileges
+REVOKE ALL PRIVILEGES ON DATABASE mydatabase FROM myuser;
+
+Show current user
+SELECT current_user;
+
+
+
+SECTION 5 — CONNECT USING USER
+------------------------------
+
+Run from LINUX TERMINAL (not inside psql)
+
+psql -U myuser -d mydatabase -W
+
+Example
+
+psql -U zyru -d mydatabase -W
+
+
+
+SECTION 6 — TABLE MANAGEMENT
+----------------------------
+
+Show all tables in current database
+\dt
+
+Describe table structure
+\d table_name
+
+Create table
+
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    age INT
+);
+
+Delete table
+DROP TABLE students;
+
+
+
+SECTION 7 — DATA OPERATIONS
+---------------------------
+
+Insert data
+
+INSERT INTO students (name, age)
+VALUES ('John', 18);
+
+View data
+
+SELECT * FROM students;
+
+Update data
+
+UPDATE students
+SET age = 19
+WHERE name = 'John';
+
+Delete data
+
+DELETE FROM students
+WHERE name = 'John';
+
+
+
+SECTION 8 — DATABASE STRUCTURE COMMANDS
+---------------------------------------
+
+List schemas
+\dn
+
+List all relations (tables, views, sequences)
+\d
+
+Show PostgreSQL version
+SELECT version();
+
+
+
+SECTION 9 — CONFIGURATION FILES
+--------------------------------
+
+PostgreSQL main configuration
+
+/etc/postgresql/<version>/main/postgresql.conf
+
+Authentication configuration
+
+/etc/postgresql/<version>/main/pg_hba.conf
+
+
+
+SECTION 10 — COMMON FIX (AUTHENTICATION ERROR)
+----------------------------------------------
+
+If you get:
+
+Peer authentication failed
+
+Edit file
+
+sudo nano /etc/postgresql/16/main/pg_hba.conf
+
+Change:
+
+local   all   all   peer
+
+to
+
+local   all   all   md5
+
+Save file and restart PostgreSQL
+
+sudo systemctl restart postgresql
+
+
+
+SECTION 11 — CONNECTION STRING (FOR APPS)
+-----------------------------------------
+
+Format:
+
+postgresql://username:password@localhost:5432/database
+
+Example:
+
+postgresql://myuser:mypassword@localhost:5432/mydatabase
+
+
+
+SECTION 12 — TYPICAL DEVELOPER WORKFLOW
+---------------------------------------
+
+1. Start PostgreSQL
+2. Enter postgres user
+3. Open psql
+4. Create database
+5. Create user
+6. Grant privileges
+7. Connect application (Prisma / backend)
+
+Example workflow:
+
+CREATE DATABASE appdb;
+
+CREATE USER appuser WITH PASSWORD 'securepassword';
+
+GRANT ALL PRIVILEGES ON DATABASE appdb TO appuser;
+
+
+
+SECTION 13 — MOST USED COMMANDS (DAILY)
+---------------------------------------
+
+\l      list databases
+\c db   connect to database
+\dt     list tables
+\d tbl  describe table
+\du     list users
+\q      quit psql
+
+
+====================================================
+END OF POSTGRESQL CHEAT SHEET
+====================================================
+
+*/
+
 
 
 
@@ -3335,12 +3581,94 @@ RULES:
 88. Never stop improving your abilities and mindset.
 89. Become the type of person who solves problems rather than avoiding them.
 90. Build a life where your skills, discipline, and independence define you.
+91. Keep a simple daily task list with only the 3–5 most important tasks that must be completed that day.
+92. Separate tasks into categories: Money Work, Skill Building, School Work, Physical Training, and Maintenance.
+93. Always complete Money Work tasks before entertainment or optional activities.
+94. Keep school work organized in one dedicated folder or notebook so nothing is forgotten.
+95. Finish small school assignments immediately instead of delaying them.
+96. Do not allow school tasks to accumulate into large stressful piles.
+97. If a school task is unavoidable, complete it efficiently and return to your main goals quickly.
+98. Keep your digital workspace organized (folders for art, coding, school, and business).
+99. Name files clearly so they are easy to find later.
+100. Back up important files regularly to avoid losing work.
+101. Keep a list of current projects so you always know what you are working on.
+102. Do not start too many projects at once; finish current ones before adding new ones.
+103. Track portrait commissions, client messages, and payments carefully.
+104. Respond to clients professionally and within a reasonable time.
+105. Maintain a simple record of income and expenses.
+106. Set aside time each day for learning new technical or artistic skills.
+107. Review progress weekly to identify what is working and what needs adjustment.
+108. Remove unnecessary items from your workspace to reduce distraction.
+109. Keep your desk or drawing area clean before starting work.
+110. Prepare tools (pencils, sketchbooks, laptop, charger) before starting work sessions.
+111. Begin difficult tasks early in the day when energy is highest.
+112. Break large tasks into smaller steps so progress feels manageable.
+113. Avoid jumping between tasks constantly; complete one before switching.
+114. Use short breaks to recover focus instead of long unproductive pauses.
+115. Protect deep work time by avoiding phone use during focused work sessions.
+116. Limit checking notifications to specific times instead of constantly reacting to them.
+117. When motivation drops, start with the smallest possible action to regain momentum.
+118. Keep a notebook or digital list for ideas so they do not distract you during work.
+119. Avoid overloading your schedule with unrealistic expectations.
+120. Accept that productivity varies, but maintain minimum daily effort.
+121. Learn to say no to activities that interfere with your mission.
+122. Use school time efficiently if possible (reading, planning, or thinking about projects).
+123. Observe successful people and learn from their habits.
+124. Avoid spending time with people who constantly discourage ambition.
+125. Maintain respectful relationships with teachers and classmates.
+126. Do not create unnecessary enemies through arrogance or disrespect.
+127. Help others when possible but do not sacrifice your priorities.
+128. Avoid gossip and unnecessary drama among peers.
+129. Keep emotional control even when others behave poorly.
+130. Avoid reacting impulsively to insults or criticism.
+131. Treat criticism as information rather than a personal attack.
+132. Focus energy on improvement instead of defending your ego.
+133. Practice calm breathing or short pauses when emotions rise.
+134. Do not allow temporary anger to influence important decisions.
+135. Maintain a balanced identity that includes skills, discipline, and character.
+136. Avoid obsessing over a single person or situation.
+137. Accept uncertainty as part of life and continue progressing anyway.
+138. Remind yourself regularly of the long-term goals you are building toward.
+139. Use setbacks as feedback rather than proof of failure.
+140. Maintain humility even when progress begins to appear.
+141. Avoid bragging excessively about achievements.
+142. Let results speak for themselves.
+143. Build trust through reliability and consistent behavior.
+144. Be someone people can depend on for quality work.
+145. Protect your reputation by delivering what you promise.
+146. Learn basic communication skills for professional interactions.
+147. Maintain clear and polite language when speaking with clients or collaborators.
+148. Avoid emotional or aggressive messages in professional communication.
+149. Separate personal emotions from business decisions.
+150. Continue refining your organization system whenever something feels inefficient.
+
  
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================
 OBJECTIVES #1:
-1. Finish the 'PubMarket' project backend to frontend within 2 days.
-2. Create 5 realistic portraits of people within 2 days.
-3. Complete daily training sessions.
-4. Continue daily handstands spamming for 5 straight days.
+-> Finish all these within 3 days:
+1. Learn more about NextJS within:
+   -> authentications (classic signin/signup, google, facebook, github) using better-auth or Supabase.
+   -> routing & navigations, server & client, cookies & sessions.
+   -> Learn how to implement NextJS server.
+   -> Learn how to use Prisma + MySQL with NextJS.
+3. Finish the PubMarket frontend + backend, authentication, and other pages.
+4. Create 5 hyper realistic portraits of people within 4 days.
+5. Complete daily training sessions.
+
+TASKS TODAY (Day 1):
+1. Learn everything about Better-auth + Drizzle + PosgreSQL/MySQL for NextJS authentication.
+2. Learn how to setup PostgreSQL server.
+3. Learn Prisma and how to connect it to PostgreSQL and MySQL.
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================
+==========================================================================================================
+
+
+
 
 
 
