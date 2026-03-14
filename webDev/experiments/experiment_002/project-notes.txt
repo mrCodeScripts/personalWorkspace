@@ -1,0 +1,44 @@
+HOW TO SETUP BETTER-AUTH IN NEXTJS
+
+1. Create NextJS App
+    Run Command: npx create-next-app@latest app-name --typescript --tailwindcss --eslint
+2. Add Better-Auth
+    Run Command: pnpm add better-auth
+3. Create '/lib/auth.ts' and '/lib/auth-client.ts'.
+4. Create '.env' file, and add configuration:
+    BETTER_AUTH_SECRET=better_auth_secret_from_better_auth_docs
+    BETTER_AUTH_URL=http://localhost:3000 #base URL of your app
+5. Add Drizzle ORM (You can check Drizzle Documentation):
+    Run Command: pnpm add drizzle-orm
+6. Add Drizzle kit:
+    Run Command: pnpm add drizzle-kit
+7. Add Neon Database for serverless apps (optional, you can have your own postgresql database for sto:wrage):
+    Run Command: pnpm add @neondatabase/serverless
+8. Add DOTENV for accessing '.env' data:
+    Run Command: pnpm add dotenv
+9. Create Neon Project:
+    #1 Go to neon website.
+    #2 Login or Signup.
+    #3 Create new project.
+    #4 Get the database URL.
+    #5 Paste the database URL you copied to DATABASE_URL '.env'.
+10. Create '/db/drizzle.ts' and copy the code from the Drizzle Docs.
+11. Create '/db/schema.ts'.
+12. Create 'drizzle.config.ts' and copy the code from the Drizzle Docs.
+13. Copy and paste the drizzle code for better-auth at the better-auth docs in the '/lib/auth.ts' file.
+14. Generate the tables using this command:
+    Run Command #1: pnpm add @neondatabase/serverless (if you are using neon postgresql database for serverless apps)
+    Run Command #2: npx @better-auth/cli generate
+    #1 This will genrate 'auth-schema.ts', copy and paste its tables and paste it in the '/lib/schema.ts' file.
+    #2 Remove the '/auth-schema.ts'.
+15. Use the Drizzle kit, and this will create the tables on you Neon Serverless DB project:
+    Run Command: npx drizzle-kit push
+16. Configure the 'lib/auth.ts', enable the 'emailAndPassword', put your 'plugins: [nextCookkies()]'.
+17. Create the router '/app/api/auth/[...all]/route.ts' and copy the code for that route at better-auth docs.
+18. Copy the code for '/lib/auth-client.ts' from the better-auth docs.
+19. Create '/middleware.ts' for checking if users are logged in, copy the code from the better-auth docs, and set its 'matcher: ["/dashboard"]' which means dashboard will be forbidden or any pages that you want to hide if users are not logged in.
+20. Create imaginary dashboard (optional).
+21. Create '/server/user.ts' for login and signup.
+22. Create login and signup forms.
+21. Export all schema.
+22. Add the export schema variable that contains the exported schema tables for authentication to '/lib/auth.ts' at the drizzle adapter.
