@@ -3697,28 +3697,29 @@ OBJECTIVES #1:
 3. Finish the PubMarket frontend, authentication, and other pages.
 5. Complete daily training sessions.
 
+--
+
 TASKS TODAY (Day 1):
 1. Learn the basics of Better-auth + Drizzle + PosgreSQL/MySQL + Neon (for serverless websites) for NextJS authentication (DONE).
 2. Learn how to setup PostgreSQL server (DONE).
 3. Do strength (full body) training (DONE).
 
-TASKS TODAY (Day 2):
-1. Finish learning Better-Auth + Drizzle + PostgreSQL/MySQL + Neon.
-2. Learn how to use Drizzle for NextJS Authentication and how to use Better-Auth for custom database.
-3. Learn Prisma and how to connect it to PostgreSQL and MySQL.
-4. Do strength (full body) + skill training.
-
-TASKS TODAY (Day 3):
-1. Finish the design of the PubMarket web app with Google/Facebook signin/signup using Better-Auth + Drizzle + Neon (serverless).
-
 --
 
-OBJECTIVES #2:
-1. Create 5 hyper realistic portraits of people within 4 days.
+TASKS #1 (7 hours):
+1. Learn how to setup and use tailwindcss + daisyUI + shadcn, zod, and other component/ui dependencies (must be with docs).
+2. Finish 'PubMarket' pages and UI/UX designs.
+
+TASKS #2 (10 hours):
+1. Create 2 hyper realistic artworks.
+
+TASKS #3 (24 hours):
+1. Finish learning Better-Auth + Drizzle + PostgreSQL/MySQL + Neon/personal database server.
+2. Learn more with Better-Auth on this YouTube tutorial: Better-Auth - Full Guide (OAuth, Emails, Roles, Hooks, Authorization, Prisma, Next.js 15, Resend).
+3. Finish the design of the PubMarket web app with Google/Facebook signin/signup using Better-Auth + Drizzle + Neon (serverless).
+4. Learn Prisma and Drizzle, and how to connect it to PostgreSQL and MySQL.
 
 --
-
-
 
 ==========================================================================================================
 ==========================================================================================================

@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -15,12 +13,8 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { signIn, signUp } from "@/server/user";
-import { useRouter } from "next/navigation";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-  const router = useRouter();
-
   return (
     <Card {...props}>
       <CardHeader>
@@ -65,12 +59,12 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             </Field>
             <FieldGroup>
               <Field>
-                <Button type="button" onClick={signUp}>Create Account</Button>
+                <Button type="submit">Create Account</Button>
                 <Button variant="outline" type="button">
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">
-                  Already have an account? <a href="#" onClick={() => router.push("/authentication-page/login")}>Sign in</a>
+                  Already have an account? <a href="#">Sign in</a>
                 </FieldDescription>
               </Field>
             </FieldGroup>

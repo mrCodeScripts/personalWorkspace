@@ -1,0 +1,74 @@
+Project Name -> SEO-Agent
+
+
+FEATURES:
+1. The "Smart" Onboarding Form (Lead Input)
+  -> This is where the user gives the AI the "context."
+  -> Feature: A multi-step form to collect Business Name, Industry/Niche, 
+  Target Audience, and Brand "Tone" (e.g., Professional, Playful, or Aggressive).
+  -> Why: It proves you can handle complex state management in Next.js.
+2. The AI Generation Engine (The "Magic")
+  -> Feature: A "Generate" button sends the form data to an API Route. 
+  The AI returns a structured JSON. The JSON contains:
+  -> Hero Section: High-converting Headline and Sub-headline.
+  -> Features/Benefits: 3–4 selling points with descriptions.
+  -> Social Proof: Placeholder testimonials based on the niche.
+  -> SEO Metadata: A generated Meta Title and Meta Description (max 160 chars).
+  -> Why: It proves prompting skills and the ability to handle Asynchronous API calls.
+3. Live "No-Code" Previewer
+  -> Feature: A split-screen view. The left side shows the JSON data; 
+  the right side shows a real-time preview of the landing page using a clean Tailwind template.
+  -> Why: This mimics high-end tools. It shows an understanding of Dynamic UI rendering.
+4. "One-Click" Content Editing
+  -> Feature: Inline editing. The user can click any text in the preview and change it. This update triggers a Database Update in real-time.
+  -> Why: It proves the ability to handle CRUD operations and Optimistic UI updates.
+5. Project Dashboard (The "SaaS" Feel)
+  -> Feature: A private area where users see a grid of all the "Sites" they’ve generated. Users can delete, edit, or "Publish" them.
+  -> Why: This proves an ability to handle Relational Data and User Authentication.
+6. Export to HTML/React Code
+  -> Feature: A button generates a clean string of HTML/Tailwind code that the user can copy and paste into their own project.
+  -> Why: It shows consideration of the End User's journey.
+7. Deployment/Published URL (The "Final Boss")
+  -> Feature: Each project has a unique slug (e.g., ://seo-agent.com).
+  -> Why: This shows an understanding of Dynamic Routing and Server-Side Rendering (SSR) for SEO.
+
+How to "Lock In" this week:
+  -> Set up the Next.js project, Tailwind, and Supabase (Tables: projects, content).
+  -> Connect the Gemini API. Make it return JSON, not just text.
+  -> Build the Previewer and Dashboard.
+  -> Add Clerk Auth and deploy to Vercel.
+
+
+
+
+/*************************************************************/
+                        DATABASE DESIGN
+/*************************************************************/
+Users {
+  id      (UUID) (Primary Key)    - Unique ID (from Auth provider)
+  email   (String)                - User's email
+  name    (String)                - User's full name
+  created_at  (Timestamp)         - When they joined
+}
+
+Projects {
+  id      (UUID) (Primary Key)    - Unique Project ID
+  user_id   (UUID) (Foreign Key)  - References User's ID
+  business_name   (String)        - Name of the business (input for AI)
+  niche   (String)                - Industry (e.g., "Dental Clinic", "Coffee Shop")
+  target_audience   (Text)        - Who they are selling to?
+  status  (String)                - "Draft", "Generated", or "Published"
+}
+
+Page_Content {
+  id      (UUID) (Primary Key)    - ID
+  project_id    (UUID)            - References Project's ID
+  hero_title    (Text)            - The "Hook" (AI Generated)
+  hero_subtext  (Text)            - The "Bridge" (AI Generated)
+  features      (JSONB)           - Array of features (e.g., [{title: "", desc: ""}])
+  seo_title     (String)          - For Google search
+  seo_description   (Text)        - For Google search
+  cta_text      (String)          - e.g., "Book Now" or "Get Started"
+}
+/*************************************************************/
+

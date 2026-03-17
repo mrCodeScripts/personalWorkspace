@@ -1,0 +1,4 @@
+SHADCN UI/UX COMPONENT INSTALLATION COMMANDS
+
+ACCORDION: pnpm dlx shadcn@latest add accordion
+
