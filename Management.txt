@@ -1,20 +1,20 @@
 20 DAY PLAN:
 -> Get my shit up and fix my problems.
 
-Goals:
+GOALS:
 1. Make my first $500 via freelancing (full stack web development).
-2. Acquire all the necessary full-stack skill for full stack web development (front-end & back-end).
+2. Acquire all the necessary full-stack skill for full stack web development (front-end & back-end) within a short period of time.
 
-The Tech Stack:
-   -> NextJS (ReactJS)
-   -> NodeJS (ExpressJS)
-   -> MySQL/PostgreSQL (Neon/Supabase)
-   -> Shadcn (UI/UX) & TailwindCSS
-   -> Vercel (frontend deploymen)
-   -> Google, Facebook, SMS, and Email APIs
-   -> Payment APIs (PayPal, GCash, Stripe)
+THE TECH STACK:
+-> NextJS (ReactJS)
+-> NodeJS (ExpressJS)
+-> MySQL/PostgreSQL (Neon/Supabase)
+-> Shadcn (UI/UX) & TailwindCSS
+-> Vercel (frontend deploymen)
+-> Google, Facebook, SMS, and Email APIs
+-> Payment APIs (PayPal, GCash, Stripe)
 
-Daily Objectives:
+DAILY OBJECTIVES:
 1. Day 1-5:
   -> Make 2-3 working MVPs using the same stack.
   -> Learn how to use APIs + Auth + Reusable UI/UX Components + AI Integration + Deployment.
@@ -30,6 +30,55 @@ Daily Objectives:
 4. Day 15-20:
   -> Put the money in the bank to recover the loss.
   -> Make another 3 working MVP using the same stack.
-  -> Expand nework.
+  -> Expand nework and proceed working for another client.
+
+DAILY BASIC SCHEDULES:
+-> Max work hrs: 16hrs/day.
+-> Max sleep hrs: 3-5hrs/day.
+-> Remove all types of noise (people, phone, etc.).
+-> Work Mode: Multi-tasking.
+-> Basic morning - evening routine:
+  5:00AM - 6:20AM: Morning Stretching & Coffee.
+  (No Breakfast to remain focused)
+  6:20AM - 12:00NN: Working hours:
+    -> Developing Skills & Building.
+    -> Finding clients (Networking).
+  12:00NN - 1:00PM: Heavy Lunch & Coffee.
+  1:00PM - 6:00PM: Working hours:
+    -> Developing Skills & Building.
+    -> Content Creation (Fitness/Freelancing).
+    -> Finding Clients (Networking).
+  6:00PM - 7:00PM: Heavy Dinner & Coffee.
+  7:00PM - 2:00AM: Working Hours:
+    -> Developing Skills & Building.
+    -> Finding Clients (Networking).
+
+TIPS ON HOW TO STAY AWAKE AND ENERGIZED DAY TO LATE NIGHT:
+-> Black Coffee Spamming (No Sugar).
+-> Fast, eat less to stay focused (less carb, more protein/fats).
+-> Salt + Water.
+-> Cold air and water exposure.
+-> No to dark mode themes (light mode only).
+
+
+
+
+
+/**************************/
+TASKS TO COMPLETE:
+/**************************/
+
+DAY 1:
+  -> Finish the first version of the PubMarket design and pages using Shadcn and TailwindCSS (within 8 hours).
+  -> Implement user authentication (Google & Facebook).
+  -> Host the project via vercel.
+  -> Start making the first MVP projec: AI-SEO Landing Page Generator
+    -> Start with the designs first.
+  -> Finish learning Shadcn + Zod.
+
+
+/**************************/
+
+
 
 
