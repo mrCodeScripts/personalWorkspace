@@ -1,6 +1,3 @@
-20 DAY PLAN:
--> Get my shit up and fix my problems.
-
 GOALS:
 1. Make my first $500 via freelancing (full stack web development).
 2. Acquire all the necessary full-stack skill for full stack web development (front-end & back-end) within a short period of time.
@@ -32,53 +29,128 @@ DAILY OBJECTIVES:
   -> Make another 3 working MVP using the same stack.
   -> Expand nework and proceed working for another client.
 
-DAILY BASIC SCHEDULES:
--> Max work hrs: 16hrs/day.
--> Max sleep hrs: 3-5hrs/day.
--> Remove all types of noise (people, phone, etc.).
--> Work Mode: Multi-tasking.
--> Basic morning - evening routine:
-  5:00AM - 6:20AM: Morning Stretching & Coffee.
-  (No Breakfast to remain focused)
-  6:20AM - 12:00NN: Working hours:
-    -> Developing Skills & Building.
-    -> Finding clients (Networking).
-  12:00NN - 1:00PM: Heavy Lunch & Coffee.
-  1:00PM - 6:00PM: Working hours:
-    -> Developing Skills & Building.
-    -> Content Creation (Fitness/Freelancing).
-    -> Finding Clients (Networking).
-  6:00PM - 7:00PM: Heavy Dinner & Coffee.
-  7:00PM - 2:00AM: Working Hours:
-    -> Developing Skills & Building.
-    -> Finding Clients (Networking).
+ORGANIZING DAILY PRIORITIES AND SCHEDULES
+Ranked Priorities:
+1. Finance & Skills
+2. Physical Training
+3. Content Creation
+4. Acads and others.
 
-TIPS ON HOW TO STAY AWAKE AND ENERGIZED DAY TO LATE NIGHT:
--> Black Coffee Spamming (No Sugar).
--> Fast, eat less to stay focused (less carb, more protein/fats).
--> Salt + Water.
--> Cold air and water exposure.
--> No to dark mode themes (light mode only).
+Non-negotiables: 
+• Save money as tight as possible.
+• One task at a time, no multi-tasking.
+• Just start — no overthinking, no procrastinating.
+• Drink water regularly throughout the day.
+• No phone until work hours start.
+• Social media: create → post → leave
+• Work with speed, finish fast
+• Skincare — morning and night, no skipping
 
+Daily Schedules & Routines (16 hours a day)
+4:00AM (~30 MIN) MORNING ROUTINE:
+  -> Make your bed immediately.
+  -> Drink a glass of water.
+  -> Cold shower — no negotiating.
+  -> Black coffee.
+4:30AM (~45 MIN) STRENGTH TRAINING (training):
+  -> Pull-ups/Chin-ups + L-sit (to target Back/Arm/Core quickly)
+  -> Handstand push-ups
+  -> Finish with a stretch — 5 mins minimum
+5:15AM (~45 MIN) DEEP WORK BLOCK 1 (finance & skills):
+  -> Coding / freelancing / MVP work.
+  -> No phone, no distractions - pure focus.
+  -> Pick ONE task and finish it before moving on.
+6:00AM (~1 HR) GET READY + COMMUTE (school prep):
+  -> Eat — meat, fruits, rice — fuel the body.
+  -> Skincare routine.
+  -> Prepare for school, commute.
+7:00AM (~5 HRS) CLASSES BLOCK
+  -> Stay present — absorb what you can.
+  -> Use idle time for assignments, not scrolling.
+  -> Finish small tasks between classes.
+  -> IF no class: Continue WORK BLOCK 1.
+12:00PM (~1 HR) EAT AND RECHARGE (lunch + reset):
+  -> Proper meal — prioritize protein and rice.
+  -> Short rest if needed — 15-20 mins max.
+  -> Drink water.
+1:00PM (~3 HRS) DEEP WORK BLOCK 2 (finance & skills)
+  -> Main grind session — coding, freelancing, projects.
+  -> This is your.
+  -> highest priority block of the day.
+  -> Speed over perfection — ship and iterate.
+  -> Water break every hour.
+4:00PM (~1 HR) CONTENT BLOCK (content creation)
+  -> Film, edit, or plan content.
+  -> Post at 7PM — 9PM window for max reach.
+  -> Create → post → leave. No scrolling after.
+  -> @followers only if post is already gaining traction.
+5:00PM (~1 HR) SCHOOL ASSIGNMENTS (acads)
+  -> Finish pending assignments or school work.
+  -> Lowest priority — only after deep work is done.
+  -> Skip if nothing due, use time for work instead.
+6:00PM (~1 HR) EAT & DECOMPRESS (dinner & reset)
+  -> Full meal — meat, rice, vegetables.
+  -> Skincare — evening routine.
+  -> Drink water.
+  -> Light walk if possible — clears the head.
+7:00PM (~3 HRS) DEEP WORK BLOCK 3 (finance & skills)
+  -> Evening grind — coding, freelancing, MVP finishing.
+  -> Post content during this window if ready.
+  -> Handle urgent tasks and wrap up the day's work.
+  -> Black coffee only if absolutely needed — watch the stomach.
+10:00PM (~1 HR) WIND DOWN WORK (finance & skills)
+  -> Finish any remaining tasks.
+  -> Review what you accomplished today.
+  -> Plan tomorrow's ONE most important task.
+11:00PM (~1 HR) SHUT DOWN (night routine)
+  -> Skincare — non-negotiable.
+  -> No phone after this point.
+  -> Sleep target: 12AM latest.
+  -> Earlier sleep = better muscle recovery = better gains.
 
+⚡ When Deadlines Hit — Override Mode:
+  -> If money is urgent, compress or skip content block and acads block. 
+  -> Double down on Deep Work blocks 2 and 3. 
+  -> Training stays — it keeps your head right. 
+  -> Sleep only when you absolutely must. This is temporary, not a lifestyle.
 
+CALISTHENICS & WEIGHTED EXCERCISES ROUTINE
+PULLING:
+  -> Chin-ups (weighted)  -   10reps x 3sets
+  -> Pull-ups (weighted)  -   10reps x 3sets
+PUSHING:
+  -> Handstand push-ups   -   5reps x 7
+  -> Regular push-ups     -   12reps x 3sets
+  -> Close grip push-ups  -   12reps x 3sets
+  -> Wide grip push-ups   -   12reps x 3sets
+CORE:
+  -> Hollow hold          -   (till failure) x 3sets
+  -> Leg raises           -   7reps x 5sets
+  -> T2B                  -   5reps x 7sets
+  -> Knee raises          -   10reps x 3sets
+  -> Leg raise hold       -   (till failure) x 3sets
+LEGS:
+  -> Pistol squats        -   7reps x 3sets
+  -> Squats (weighted)    -   15reps x 3sets
+  -> Calf raises (weighted)   -   15reps x 3sets
+PLANCHE TRAINING
+  -> Forward lean hold    -   (till failure) x 3sets
+  -> Tuck planche hold    -   (till failure) x 3sets
+  -> Tuck planche pushups -   5reps x 3sets
+  -> Scapula pushups      -   10reps x 5sets
+  -> Planche pushups      -   7reps x 3sets
 
 
 /**************************/
 TASKS TO COMPLETE:
 /**************************/
 
-DAY 1:
-  -> Finish the first version of the PubMarket design and pages using Shadcn and TailwindCSS (within 8 hours).
-  -> Implement user authentication (Google & Facebook).
-  -> Host the project via vercel.
-  -> Start making the first MVP projec: AI-SEO Landing Page Generator
-    -> Start with the designs first.
-  -> Finish learning Shadcn + Zod.
-
-
+TASK 1: 
+  1. Finish the PubMarket MPV project (urgent):
+    -> Finish all the front-end designs, components, layouts, and routes of the PubMarket (use claude.ai for speed).
+    -> Improve the designs, clean some codes, understand the codes and its patterns, and fix some errors/bugs of the web app.
+    -> Map out all the features and pages (with descriptions) of the PubMarket to be used for developing the back-end, database, and implementing specific features.
+    -> Learn how to use Zod for Shadcn form hooks and apply on forms.
+    -> Learn how to fully use Better-Auth for authentication (Google, Facebook, Github, etc.) and implement on the apps login/signup.
 /**************************/
-
-
-
 
