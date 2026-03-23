@@ -148,9 +148,8 @@ TASKS TO COMPLETE:
 TASK 1: 
   1. Finish the PubMarket MPV project (urgent):
     -> Finish all the front-end designs, components, layouts, and routes of the PubMarket (use claude.ai for speed).
-    -> Improve the designs, clean some codes, understand the codes and its patterns, and fix some errors/bugs of the web app.
+    -> Improve the designs, clean some codes, routings, understand the codes and its patterns, and fix some errors/bugs of the web app.
     -> Map out all the features and pages (with descriptions) of the PubMarket to be used for developing the back-end, database, and implementing specific features.
-    -> Learn how to use Zod for Shadcn form hooks and apply on forms.
-    -> Learn how to fully use Better-Auth for authentication (Google, Facebook, Github, etc.) and implement on the apps login/signup.
+    -> Learn how to fully use Better-Auth for authentication (Google, Facebook, Github, etc.) and implement on the PubMarket's login/signup system.
 /**************************/
 
