@@ -39,6 +39,7 @@ HOW TO SETUP BETTER-AUTH IN NEXTJS
 19. Create '/middleware.ts' for checking if users are logged in, copy the code from the better-auth docs, and set its 'matcher: ["/dashboard"]' which means dashboard will be forbidden or any pages that you want to hide if users are not logged in.
 20. Create imaginary dashboard (optional).
 21. Create '/server/user.ts' for login and signup.
-22. Create login and signup forms.
+22. Create login and signup forms.1498YTHUNd "lqod-wf]
+, q
 21. Export all schema.
 22. Add the export schema variable that contains the exported schema tables for authentication to '/lib/auth.ts' at the drizzle adapter.

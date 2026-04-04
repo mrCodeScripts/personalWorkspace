@@ -1,0 +1,179 @@
+1. SET UP NEXTJS
+  - Run Command: npx create-next-app@latest app-name --typescript --tailwind --eslint
+
+2. NEXTJS TOP LEVEL FILES
+  - next.config.js        -> Configuration file for Next.js
+  - package.json          -> Project dependencies and scripts
+  - instrumentation.ts    -> OpenTelemetry and Instrumentation file
+  - proxy.ts	            -> Next.js request proxy
+  - .env                  -> Environment variables (should not be tracked by version control)
+  - .env.local	          -> Local environment variables (should not be tracked by version control)
+  - .env.production	      -> Production environment variables (should not be tracked by version control)
+  - .env.development	    -> Development environment variables (should not be tracked by version control)
+  - eslint.config.mjs	    -> Configuration file for ESLint
+  - .gitignore	          -> Git files and folders to ignore
+  - next-env.d.ts	        -> TypeScript declaration file for Next.js (should not be tracked by version control)
+  - tsconfig.json	        -> Configuration file for TypeScript
+  - jsconfig.json	        -> Configuration file for JavaScript
+
+3. PATH ALLIASES
+  - Instead of: import { Button } from '../../../components/ui/button';
+  - Use this: import { Button } from '@/components/ui/button';
+
+4. ENVIRONMENT VARIABLES
+  -> Create a file called '.env.local' in your root folder. Put secrets in it:
+    -> Example: DATABASE_URL=your-neon-db-url-here
+  -> Two rules you must remember:
+    -> Without 'NEXT_PUBLIC_' -> only your server can see it. Use this for API keys and DB URLs. Safe.
+      -> Example: DATABASE_URL=your-neon-db-url-here
+    -> With 'NEXT_PUBLIC_'    -> exposed to the browser. Anyone can see it. Only use it for non-sensitive stuff like your public site URL.
+      -> Example: NEXT_PUBLIC_SITE_URL=your-site-url-here
+  
+5. NEXT CONFIG 
+import type { NextConfig } from 'next'
+const nextConfig: NextConfig = {
+  // ============================================
+  // 1. IMAGES (you already know this)
+  // ============================================
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+      { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
+      { protocol: 'https', hostname: '*.supabase.co' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+      { protocol: 'https', hostname: 'utfs.io' },
+      { protocol: 'https', hostname: '*.amazonaws.com' },
+      { protocol: 'https', hostname: 'i.imgur.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'platform-lookaside.fbsbx.com' },
+      { protocol: 'https', hostname: 'cdn.discordapp.com' },
+      { protocol: 'https', hostname: '*.public.blob.vercel-storage.com' },
+    ],
+  },
+
+  // ============================================
+  // 2. REDIRECTS
+  // Send users from one URL to another.
+  // Useful when you rename a page but don't
+  // want old links to break.
+  // ============================================
+  async redirects() {
+    return [
+      {
+        source: '/old-page',       // the URL they visit
+        destination: '/new-page',  // where you send them
+        permanent: true,           // true = 308, false = 307
+      },
+    ]
+  },
+
+  // ============================================
+  // 3. REWRITES
+  // Like redirects BUT the URL in the browser
+  // doesn't change. Good for hiding API URLs
+  // or proxying requests.
+  // ============================================
+  async rewrites() {
+    return [
+      {
+        source: '/api/ai/:path*',
+        destination: 'https://api.openai.com/:path*',
+      },
+    ]
+  },
+
+  // ============================================
+  // 4. HEADERS
+  // Add security headers to your app.
+  // Clients and companies care about this.
+  // Makes your app more professional and secure.
+  // ============================================
+  async headers() {
+    return [
+      {
+        source: '/(.*)',  // applies to all pages
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',  // prevents your site being embedded in iframes
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+    ]
+  },
+
+  // ============================================
+  // 5. ENVIRONMENT VARIABLES
+  // Expose specific env variables to the app
+  // without using NEXT_PUBLIC_ prefix.
+  // ============================================
+  env: {
+    APP_VERSION: '1.0.0',
+    APP_NAME: 'My App',
+  },
+
+  // ============================================
+  // 6. TYPESCRIPT & ESLINT
+  // During builds, if there are TS errors or
+  // ESLint errors, the build FAILS by default.
+  // You can ignore them temporarily while
+  // building fast (don't leave this on forever).
+  // ============================================
+  typescript: {
+    ignoreBuildErrors: false, // set true only if you're in a rush
+  },
+  eslint: {
+    ignoreDuringBuilds: false, // same here
+  },
+
+  // ============================================
+  // 7. EXPERIMENTAL FEATURES
+  // Next.js 15+ bleeding edge features.
+  // Only turn on what you actually need.
+  // ============================================
+  experimental: {
+    // Partial Pre-Rendering — faster page loads
+    // Mix static and dynamic content on one page
+    ppr: true,
+
+    // Server Actions are stable in Next.js 15
+    // but some projects still need this
+    serverActions: {
+      bodySizeLimit: '2mb', // max size for server action requests
+    },
+  },
+
+  // ============================================
+  // 8. TRAILING SLASH
+  // /about  vs  /about/
+  // Pick one and be consistent.
+  // ============================================
+  trailingSlash: false, // default, most people leave this off
+
+  // ============================================
+  // 9. POWERED BY HEADER
+  // By default Next.js tells everyone your site
+  // runs on Next.js. Turn this off for client
+  // projects — looks more professional.
+  // ============================================
+  poweredByHeader: false,
+
+  // ============================================
+  // 10. COMPRESSION
+  // Gzip compression. Always keep this true.
+  // Makes your site faster for users.
+  // ============================================
+  compress: true,
+
+}
+
+export default nextConfig

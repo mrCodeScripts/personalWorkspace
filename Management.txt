@@ -1,155 +1,251 @@
-GOALS:
-1. Make my first $500 via freelancing (full stack web development).
-2. Acquire all the necessary full-stack skill for full stack web development (front-end & back-end) within a short period of time.
 
-THE TECH STACK:
--> NextJS (ReactJS)
--> NodeJS (ExpressJS)
--> MySQL/PostgreSQL (Neon/Supabase)
--> Shadcn (UI/UX) & TailwindCSS
--> Vercel (frontend deploymen)
--> Google, Facebook, SMS, and Email APIs
--> Payment APIs (PayPal, GCash, Stripe)
+============================================
+GOAL (MARCH 27 - APRIL 10):
+1. Make my first $500 via web development freelancing using NextJS + Serverless Databases + Frameworks in less than 14 days.
+============================================
 
-DAILY OBJECTIVES:
-1. Day 1-5:
-  -> Make 2-3 working MVPs using the same stack.
-  -> Learn how to use APIs + Auth + Reusable UI/UX Components + AI Integration + Deployment.
-2. Day 6-8:
-  -> Set-up online profile to start freelancing.
-  -> Network as hard as possible, post projects, cold calling, and knock doors for oppurtunities.
-  -> Start working on another 1-2 working MVPs using the same stack.
-3. Day 10-15:
-  -> If theres possible client, use sales talk and communication about the service.
-  -> If theres still no client, continue finding one, search for businesses and offer a solution.
-  -> Offer a solution for free, and if they like it, they can buy it or hire me.
-  -> Make another 1-3 working MVPs using the same stack.
-4. Day 15-20:
-  -> Put the money in the bank to recover the loss.
-  -> Make another 3 working MVP using the same stack.
-  -> Expand nework and proceed working for another client.
-
-ORGANIZING DAILY PRIORITIES AND SCHEDULES
-Ranked Priorities:
-1. Finance & Skills
-2. Physical Training
-3. Content Creation
-4. Acads and others.
-
-Non-negotiables: 
-• Save money as tight as possible.
-• One task at a time, no multi-tasking.
-• Just start — no overthinking, no procrastinating.
-• Drink water regularly throughout the day.
-• No phone until work hours start.
-• Social media: create → post → leave
-• Work with speed, finish fast
-• Skincare — morning and night, no skipping
-
-Daily Schedules & Routines (16 hours a day)
-4:00AM (~30 MIN) MORNING ROUTINE:
-  -> Make your bed immediately.
-  -> Drink a glass of water.
-  -> Cold shower — no negotiating.
-  -> Black coffee.
-4:30AM (~45 MIN) STRENGTH TRAINING (training):
-  -> Pull-ups/Chin-ups + L-sit (to target Back/Arm/Core quickly)
-  -> Handstand push-ups
-  -> Finish with a stretch — 5 mins minimum
-5:15AM (~45 MIN) DEEP WORK BLOCK 1 (finance & skills):
-  -> Coding / freelancing / MVP work.
-  -> No phone, no distractions - pure focus.
-  -> Pick ONE task and finish it before moving on.
-6:00AM (~1 HR) GET READY + COMMUTE (school prep):
-  -> Eat — meat, fruits, rice — fuel the body.
-  -> Skincare routine.
-  -> Prepare for school, commute.
-7:00AM (~5 HRS) CLASSES BLOCK
-  -> Stay present — absorb what you can.
-  -> Use idle time for assignments, not scrolling.
-  -> Finish small tasks between classes.
-  -> IF no class: Continue WORK BLOCK 1.
-12:00PM (~1 HR) EAT AND RECHARGE (lunch + reset):
-  -> Proper meal — prioritize protein and rice.
-  -> Short rest if needed — 15-20 mins max.
-  -> Drink water.
-1:00PM (~3 HRS) DEEP WORK BLOCK 2 (finance & skills)
-  -> Main grind session — coding, freelancing, projects.
-  -> This is your.
-  -> highest priority block of the day.
-  -> Speed over perfection — ship and iterate.
-  -> Water break every hour.
-4:00PM (~1 HR) CONTENT BLOCK (content creation)
-  -> Film, edit, or plan content.
-  -> Post at 7PM — 9PM window for max reach.
-  -> Create → post → leave. No scrolling after.
-  -> @followers only if post is already gaining traction.
-5:00PM (~1 HR) SCHOOL ASSIGNMENTS (acads)
-  -> Finish pending assignments or school work.
-  -> Lowest priority — only after deep work is done.
-  -> Skip if nothing due, use time for work instead.
-6:00PM (~1 HR) EAT & DECOMPRESS (dinner & reset)
-  -> Full meal — meat, rice, vegetables.
-  -> Skincare — evening routine.
-  -> Drink water.
-  -> Light walk if possible — clears the head.
-7:00PM (~3 HRS) DEEP WORK BLOCK 3 (finance & skills)
-  -> Evening grind — coding, freelancing, MVP finishing.
-  -> Post content during this window if ready.
-  -> Handle urgent tasks and wrap up the day's work.
-  -> Black coffee only if absolutely needed — watch the stomach.
-10:00PM (~1 HR) WIND DOWN WORK (finance & skills)
-  -> Finish any remaining tasks.
-  -> Review what you accomplished today.
-  -> Plan tomorrow's ONE most important task.
-11:00PM (~1 HR) SHUT DOWN (night routine)
-  -> Skincare — non-negotiable.
-  -> No phone after this point.
-  -> Sleep target: 12AM latest.
-  -> Earlier sleep = better muscle recovery = better gains.
-
-⚡ When Deadlines Hit — Override Mode:
-  -> If money is urgent, compress or skip content block and acads block. 
-  -> Double down on Deep Work blocks 2 and 3. 
-  -> Training stays — it keeps your head right. 
-  -> Sleep only when you absolutely must. This is temporary, not a lifestyle.
-
-CALISTHENICS & WEIGHTED EXCERCISES ROUTINE
-PULLING:
-  -> Chin-ups (weighted)  -   10reps x 3sets
-  -> Pull-ups (weighted)  -   10reps x 3sets
-PUSHING:
-  -> Handstand push-ups   -   5reps x 7
-  -> Regular push-ups     -   12reps x 3sets
-  -> Close grip push-ups  -   12reps x 3sets
-  -> Wide grip push-ups   -   12reps x 3sets
-CORE:
-  -> Hollow hold          -   (till failure) x 3sets
-  -> Leg raises           -   7reps x 5sets
-  -> T2B                  -   5reps x 7sets
-  -> Knee raises          -   10reps x 3sets
-  -> Leg raise hold       -   (till failure) x 3sets
-LEGS:
-  -> Pistol squats        -   7reps x 3sets
-  -> Squats (weighted)    -   15reps x 3sets
-  -> Calf raises (weighted)   -   15reps x 3sets
-PLANCHE TRAINING
-  -> Forward lean hold    -   (till failure) x 3sets
-  -> Tuck planche hold    -   (till failure) x 3sets
-  -> Tuck planche pushups -   5reps x 3sets
-  -> Scapula pushups      -   10reps x 5sets
-  -> Planche pushups      -   7reps x 3sets
+===========================================
+|             MAIN OBJECTIVES:            |
+===========================================
+1. Fully master all necessary technical skills (within a very short period of time ~5-7 days):
+  -> TypeScript: Generics, Zod Inference, Utility Types (Pick/Omit/Partial), and Strict Type Safety for Database Schemas.
+  -> React 19: Hooks (useActionState, useOptimistic, useFormStatus), Rendering Lifecycle, Suspense/Error Boundaries, and the new React Compiler mechanics.
+  -> Styling & UI Components: TailwindCSS (Arbitrary values/Config), Shadcn/UI, Radix UI (Primitives), Framer Motion (Layout transitions), and Lucide React (Icons).
+  -> NextJS: App Router, Server/Client Components, Server Actions, PPR (Partial Prerendering), Middleware, Route Handlers (API), Metadata API (SEO), and Image Optimization. (Resource: nextjs.org)
+  -> PostgreSQL Database: Relational Data Modeling, One-to-Many/Many-to-Many Relationships, Indexing for Performance, and JSONB for semi-structured data.
+  -> Serverless Databases (Core Technology): Compute/Storage separation, Scaling to Zero, and Connection Pooling in Serverless environments.
+  -> Database & ORM: Drizzle ORM (Type-safe SQL), Prisma (Schema management), Neon (Postgres Branching), and Supabase (Postgres + Auth/Storage).
+  -> Form Validations: Zod (Schema validation/Type inference) & React Hook Form (Client-side handling/Validation).
+  -> Authentication & Authorization: Better Auth / NextAuth, OAuth (Google/GitHub), Magic Links, Session Management, and RBAC (Role-Based Access Control).
+  -> Advanced Middleware & Security: Rate Limiting (Upstash Ratelimit), Bot Protection, and Secure Headers (CSP/HSTS) for client compliance.
+  -> State Management: Zustand (Client state/Persistence) & TanStack Query (Server state/Caching/Optimistic Updates).
+  -> Stripe API Fundamentals: Creating Checkout Sessions, Managing Stripe Customers, and Handling One-time vs. Recurring (Subscription) Payments.
+  -> Stripe + Webhooks: Stripe Checkout (Pre-built vs. Elements), Product/Price Object Modeling, Stripe Dashboard (Test vs. Live mode), and Customer Portal.
+  -> Webhook Architecture: Secure Route Handlers, Stripe Signature Verification, Event Listeners (checkout.session.completed, invoice.paid), and Idempotency keys.
+  -> Database Syncing: Mapping Stripe customer_id to your PostgreSQL user_id, updating Subscription Status (Active/Past Due/Canceled), and Entitlement logic.
+  -> Payment Security: PCI Compliance (Why not to store Card info), SCA (Strong Customer Authentication) handling, and Environment Variable security (STRIPE_SECRET_KEY).
+  -> Error Handling & Retries: Managing failed payments, Webhook retry logic, and providing User Feedback via Toasts/Emails when transactions fail.
+  -> Local Testing Tools: Stripe CLI (Forwarding events to localhost), Webhook signing secrets, and mocking event payloads for development.
+  -> File Storage (Uploadthing / Supabase / S3): Presigned URLs, Upload Callbacks (Syncing file metadata to DB), Content-Type restricted uploads (Images only), and Server-side deletion logic.
+  -> Image Processing & CDN: Edge caching, automatic image resizing/compression (Next/Image), and handling private vs. public bucket access.
+  -> Emails & Notifications: Resend (Email API), React Email (Coding templates), and Webhooks for automated transactional emails.
+  -> AI Integration (OpenAI / Anthropic): LLM Streaming (Vercel AI SDK), System Prompts vs. User Prompts, Function Calling (connecting AI to your code/DB), and Token usage/Cost management.
+  -> Vector Databases & RAG: Storing embeddings with pgvector (Neon/Supabase), Semantic Search (Cosine similarity), Context Injection, and Chunking strategies for large documents.
+  -> Analytics & Tracking: PostHog or Umami (Privacy-focused analytics), Event tracking (button clicks, page views), Heatmaps, and Conversion Funnels.
+  -> User Retention & CRM: Loops.so or MailerLite for automated onboarding drip campaigns, User tagging/segmentation, and event-based notification triggers.
+  -> Customer Support & Feedback Tools: Crisis/Feedback Widgets (Crisp/Intercom/HelpKit), In-app feedback forms, and public Product Roadmaps (Canny/LogChimp).
+  -> Performance & SEO: Core Web Vitals, Structured Data (JSON-LD), Robots.txt, and Sitemap Generation.
+  -> Testing & Quality Assurance: Playwright for E2E (End-to-End) testing, Vitest for Unit testing Server Actions, and Preview Deployments for client approval.
+  -> Deployment & DevOps: Vercel (Deployment/Env Variables), Domain Management, Cron Jobs (Scheduled tasks), and Log Monitoring (Sentry/Logtail).
+2. Build a "Golden Stack" Boilerplate & 2 Rapid MVPs (~2-3 days):
+  -> Phase A: The Master Boilerplate: Instead of starting from zero, build one "Master Template" containing BetterAuth, Drizzle, Stripe, and Shadcn. This is your engine.
+  -> Phase B: MVP 1 - The "SaaS Starter": A "Waitlist" or "Member-Only" portal. Features: Auth, Stripe Subscription, Protected Dashboard, and a Resend email welcome trigger.
+  -> Phase C: MVP 2 - The "AI Wrapper": A simple tool (e.g., "AI Resume Polisher"). Features: File upload (Uploadthing), OpenAI API integration, and a "Credits" system in the database.
+  -> Skip Figma: Use v0.dev and Shadcn/UI blocks to design directly in code. Do not spend time in design tools for a $500 gig.
+  -> Database Strategy: Use Neon (Postgres) for its branching—perfect for fast iteration without breaking your live demo.
+3. The "High-Velocity" Client Hunt (~3-4 days):
+  -> Cold Outreach: Use a "Problem-Solver" script. Don't sell "coding"; sell "business automation" (e.g., "I can automate your client onboarding with a secure portal in 48 hours").
+  -> Platform Blitz: Hit X (Twitter), Reddit (r/SaaS), and Upwork/Fiverr with a "Fixed Price, Fixed Time" offer ($500 for a 3-day build).
+  -> The "Live Demo" Close: Send potential clients a link to your Master Boilerplate. Let them see the login, the "Pro" dashboard, and the Stripe integration. This builds instant trust.
+4. Post-Launch & Optimization (Ongoing):
+  -> Feedback Loop: Use PostHog to see how users interact with your MVPs and fix bottlenecks.
+  -> Client Retention: Offer a monthly "Maintenance & Hosting" fee ($50/month) to your $500 clients to create recurring income.
+============================================
 
 
-/**************************/
-TASKS TO COMPLETE:
-/**************************/
 
-TASK 1: 
-  1. Finish the PubMarket MPV project (urgent):
-    -> Finish all the front-end designs, components, layouts, and routes of the PubMarket (use claude.ai for speed).
-    -> Improve the designs, clean some codes, routings, understand the codes and its patterns, and fix some errors/bugs of the web app.
-    -> Map out all the features and pages (with descriptions) of the PubMarket to be used for developing the back-end, database, and implementing specific features.
-    -> Learn how to fully use Better-Auth for authentication (Google, Facebook, Github, etc.) and implement on the PubMarket's login/signup system.
-/**************************/
+
+=============================================
+|     FOLDER STRUCTURE "GOLDEN TEMPLATE"    |
+=============================================
+├── app/                      # Next.js App Router (Routing & Pages)
+│   ├── (auth)/               # Auth Group (Login, Register, Reset)
+│   ├── (dashboard)/          # Protected Routes (Client Portal)
+│   ├── api/                  # Route Handlers (Webhooks, External APIs)
+│   │   ├── auth/[...all]/    # BetterAuth Backend
+│   │   └── stripe/webhook/   # Stripe Event Listener
+│   ├── layout.tsx            # Root Layout (Providers, Fonts)
+│   └── page.tsx              # Public Landing Page
+├── components/               # UI & Shared Logic
+│   ├── ui/                   # Shadcn/UI Components (The "Axe")
+│   ├── forms/                # Zod + React Hook Form logic
+│   ├── dashboard/            # Specific views for the User Portal
+│   └── shared/               # Navbar, Footer, Loading States
+├── lib/                      # The "Plumbing" (The Logic)
+│   ├── auth/                 # BetterAuth Configuration
+│   ├── db/                   # Neon/Drizzle Config & Schemas
+│   │   └── schema.ts         # Your Single Source of Truth for Data
+│   ├── stripe/               # Stripe Client & Subscription Helpers
+│   └── utils.ts              # Tailwind Merge & Helper Functions
+├── hooks/                    # Custom React Hooks & TanStack Queries
+├── store/                    # Zustand Store (Client State)
+├── types/                    # Global TypeScript Interfaces
+├── .env.local                # Secret Keys (Neon, Stripe, Auth)
+├── drizzle.config.ts         # DB Migration Settings
+└── middleware.ts             # Auth Protection & Redirects
+
+
+=============================================================
+|   THE SAAS APP (SOFTWARE AS A SERVICE) FOLDER STRUCTURE   |
+=============================================================
+├── app/
+│   ├── (marketing)/       # Landing page, Pricing, FAQ
+│   ├── (auth)/            # Login, Signup (BetterAuth)
+│   └── (dashboard)/       # The Core App
+│       ├── layout.tsx     # The Sidebar + Navigation
+│       ├── projects/      # ://your-app.com
+│       └── settings/      # ://your-app.com
+├── lib/
+│   ├── db/schema.ts       # Tables: users, teams, projects, subscriptions
+│   └── auth.ts            # BetterAuth Org/Team plugin config
+├── components/
+│   ├── dashboard/         # ProjectCards, StatWidgets
+│   └── shared/            # UserAvatar, UpgradeButton
+
+THE E-COMMERCE APP FOLDER STRUCTURE
+├── app/
+│   ├── (marketing)/       # Landing page, Pricing, FAQ
+│   ├── (auth)/            # Login, Signup (BetterAuth)
+│   └── (dashboard)/       # The Core App
+│       ├── layout.tsx     # The Sidebar + Navigation
+│       ├── projects/      # ://your-app.com
+│       └── settings/      # ://your-app.com
+├── lib/
+│   ├── db/schema.ts       # Tables: users, teams, projects, subscriptions
+│   └── auth.ts            # BetterAuth Org/Team plugin config
+├── components/
+│   ├── dashboard/         # ProjectCards, StatWidgets
+│   └── shared/            # UserAvatar, UpgradeButton
+
+
+=======================================
+|   THE "AI WRAPPER" / CONTENT APP    |
+=======================================
+├── app/
+│   ├── (marketing)/       # Home & Demo
+│   └── (app)/             # The Generator/Chat interface
+│       ├── chat/          # /chat/[conversationId]
+│       └── gallery/       # /gallery (User's past AI results)
+├── lib/
+│   ├── ai/                # OpenAI/Anthropic client & System Prompts
+│   └── db/schema.ts       # Tables: messages, credits, image_results
+├── hooks/
+│   └── use-ai-chat.ts     # TanStack Query + Vercel AI SDK logic
+├── components/
+│   ├── ai/                # ChatBubble, PromptInput, LoadingPulse
+│   └── usage/             # CreditBalanceCounter
+
+=========================================================
+|   THE "FULL-STACK" PROFESSIONAL RULES FOR FOLDERS:    |
+=========================================================
+1. Group by "Domain" (Parentheses): Use (dashboard), (auth), and (marketing) to separate the "Vibe" of the app. Each group can have its own layout.tsx.
+2. Dynamic Routes ([id]): If you are building for a client who has many "Items" (Products, Projects, Documents), you use [id]/page.tsx.
+  -> Professional Tip: Inside [id]/page.tsx, you use TanStack Query or a Server Action to fetch only that specific ID from Neon.
+3. The "Shared" Folder: If a component is used in more than two places (like a Logo or a SubmitButton), it moves to components/shared/.
+4. The "Feature" Folder: If you are building a specific complex feature (like a "Video Player"), give it its own folder: components/video-player/.
+
+=========================================================
+GOLDEN RULES OF NAMING FOLDERS
+=========================================================
+1. The "Big Three" Route Groups
+  -> Stick to these three folders inside app/ and you’ll never be confused again:
+    -> (marketing): Anything a person sees before they log in (Home, Pricing, About).
+    -> (auth): Only the Login, Signup, and Forgot Password pages.
+    -> (dashboard): Everything the user sees after they log in.
+      Don't make a (user) folder. Just put /dashboard/profile or /dashboard/settings inside the dashboard group. It keeps your Sidebar logic much simpler.
+2. The "Feature" Component Rule
+  -> If you are building a SaaS for a client, don't just dump 50 files into components/. Group them by what they do:
+    -> components/billing/: Stripe buttons, pricing cards, invoice tables.
+    -> components/projects/: Project list, "Create Project" modal, Kanban board.
+    -> components/layout/: Sidebar, Navbar, Mobile Menu.
+3. Use "Next.js Conventions" to Name Files
+  -> Stop trying to come up with creative names for files. Stick to the standard:
+    -> page.tsx: The actual page content.
+    -> layout.tsx: The wrapper (Sidebar/Nav) for that folder.
+    -> loading.tsx: The skeleton screen while data is fetching (Next.js shows this automatically!).
+    -> error.tsx: The fallback if the database crashes.
+4. Pro Strategy: The "Address Book" Test
+  -> If you can't find a file in 3 seconds, your structure is too complex.
+  -> Too Complex: app/(dashboard)/(user)/settings/account/security/page.tsx
+  -> Professional: app/(dashboard)/settings/page.tsx (Then just use "Tabs" inside that one page to show Account vs Security).
+=============================================
+
+
+=================================
+|   NESTED FILES CONVENTIONS    |
+=================================
+1. The Layout "Russian Doll" (Nesting)
+  -> Root Layout (app/layout.tsx): This is global. It holds your <html>, <body>, and global providers (TanStack, Theme). It stays on the screen forever.
+  -> Folder Layout (app/(dashboard)/layout.tsx): This only shows up when the user is in the dashboard. This is where you put your Sidebar and User Navbar.
+  -> Sub-Folder Layout (app/(dashboard)/settings/layout.tsx): This only shows up on the settings pages. You could put a small "Settings Menu" (Account, Billing, Security) on the left side here.
+  -> Why use this? When a user clicks from Dashboard -> Settings, the Sidebar doesn't re-render. It stays perfectly still, making the app feel like a desktop application.
+2. The "Magic" Files (Loading & Error)
+  -> This is how you beat the $500 competition.
+  -> loading.tsx: If you drop this file into a folder, Next.js will automatically show it (usually a Skeleton screen) while your Neon Database is fetching data. You don't have to write if (isLoading) return <Spinner /> anymore.
+  -> error.tsx: If the database crashes or the internet cuts out, Next.js catches the crash and shows this file instead of a "White Screen of Death." It usually has a "Try Again" button.
+3. Stop using page-client.tsx
+  -> Naming a file page-client.tsx is not an official Next.js convention; it’s a manual pattern some people use to stay organized.
+  -> The Professional Way: Keep your page.tsx as a Server Component (no 'use client' at the top).
+  -> If you need a "Button" or a "Form" that needs interactivity, you create a component in components/forms/MyForm.tsx (which is a Client Component) and import it into your page.tsx.
+4. Example of a professional settings folder:
+    app/
+    └── (dashboard)/
+        └── settings/
+            ├── layout.tsx    # Horizontal sub-menu (Account, Billing)
+            ├── loading.tsx   # Shimmer/Skeleton of the settings form
+            ├── error.tsx     # "Oops, couldn't load settings"
+            └── page.tsx      # The actual Account Form (Server Component)
+
+
+1. TypeScript Lessons:
+  -> Primitive & Literal Types: Mastering string, number, boolean, and Template Literal Types for strictly typed CSS or API routes.
+  -> Interfaces vs. Types: When to use interface for merging and type for complex unions/intersections.
+  -> Generics: Building reusable, type-safe components like DataTable<TData> or Form<TSchema>.
+  -> Utility Types: Mastery of Pick, Omit, Partial, and ReturnType to transform data models for the frontend.
+  -> Type Narrowing & Guards: Using typeof, instanceof, and User-Defined Type Guards to safely handle unknown API responses.
+  -> Zod Inference: Using z.infer<typeof Schema> to automatically generate TypeScript types from validation schemas. 
+
+===========================
+|       DAILY TASKS       |
+===========================
+
+
+DAY 1:
+  ✅ Morning Tasks.
+  ✅ ATTEND A 3HRS SCHOOL ACTIVITY
+  ✅ 1 HOUR TRAINING BLOCK:
+    -> Handstand statics / push-ups skill training
+
+DAY 2:
+  1. 2 HOURS WORK BLOCK:
+    -> Re-learn TypeScript and expand current knowledge.
+  3. 3 HOURS WORK BLOCK:
+    -> 
+
+
+
+
+
+
+
+
+15 HOURS WORK TASKS:
+First 5hrs:
+  1. Finish learning TypeScript: Generics, Zod Inference, Utility Types (Pick/Omit/Partial), and Strict Type Safety for Database Schemas.
+  2. Finish lerning NextJS: App Router, Server/Client Components, Server Actions, PPR (Partial Prerendering), Middleware, Route Handlers (API), Metadata API (SEO), and Image Optimization.
+Second 5hrs:
+Third 5hrs:
+
+
+
+
+
+
+
+
+
+
+
+
+
 

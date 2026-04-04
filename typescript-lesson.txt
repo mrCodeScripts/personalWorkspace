@@ -1,0 +1,898 @@
+================================================================
+         TYPESCRIPT MASTERY CURRICULUM — PROFITABLE & UNDENIABLE
+         From Zero Confusion to Market-Ready Consultant/Creator
+================================================================
+Learn these IN ORDER. Each lesson builds on the previous one.
+Every lesson includes: What it is, Why it matters, Real example.
+================================================================
+
+
+----------------------------------------------------------------
+PHASE 1 — FOUNDATIONS (Learn these first, no skipping)
+----------------------------------------------------------------
+These are the building blocks. Everything else is built on top.
+If you skip these, the advanced stuff won't make sense.
+
+
+════════════════════════════════════════════════════════════════
+LESSON 1: WHY TYPESCRIPT EXISTS
+════════════════════════════════════════════════════════════════
+What it is:
+  TypeScript is JavaScript with a "safety net." It catches
+  mistakes BEFORE your code runs — at the editor level.
+  Plain JavaScript only tells you about errors when the app
+  crashes in production. TypeScript tells you immediately.
+
+Why it matters for money:
+  Clients and companies pay more for TypeScript developers
+  because TypeScript code is easier to maintain, has fewer
+  bugs, and scales better. It signals you're a professional,
+  not a hobbyist.
+
+The mindset shift:
+  Stop thinking of types as "extra work."
+  Think of them as documentation that the computer enforces.
+  You are writing code for future-you and for your clients.
+
+
+════════════════════════════════════════════════════════════════
+LESSON 2: PRIMITIVE & LITERAL TYPES
+════════════════════════════════════════════════════════════════
+What it is:
+  The most basic types in TypeScript. Every variable has one.
+
+The primitives:
+  string    — text
+  number    — any number (integer or decimal)
+  boolean   — true or false
+  null      — intentionally empty
+  undefined — not yet assigned
+  any       — escape hatch (avoid this, it defeats the purpose)
+  unknown   — safer version of any (use this instead)
+  never     — a value that should never exist
+  void      — functions that return nothing
+
+Basic usage:
+  ─────────────────────────────────────────────────────────────
+  const name: string = 'Juan'
+  const age: number = 22
+  const isLoggedIn: boolean = false
+  ─────────────────────────────────────────────────────────────
+
+Literal Types (more specific than primitives):
+  Instead of just saying "it's a string," you say
+  "it's THIS specific string and nothing else."
+
+  ─────────────────────────────────────────────────────────────
+  type Direction = 'left' | 'right' | 'up' | 'down'
+  type StatusCode = 200 | 400 | 404 | 500
+
+  let move: Direction = 'left'   // ✅
+  let move: Direction = 'diagonal' // ❌ TypeScript error
+  ─────────────────────────────────────────────────────────────
+
+Template Literal Types (real-world use):
+  Useful for strictly typing API routes, CSS classes, or
+  event names so you never mistype a string.
+
+  ─────────────────────────────────────────────────────────────
+  type ApiRoute = `/api/${string}`
+  // Only accepts strings that start with /api/
+
+  type CssSize = `${number}px` | `${number}rem` | `${number}%`
+  // Only accepts strings like '16px', '2rem', '100%'
+
+  type EventName = `on${Capitalize<string>}`
+  // Only accepts 'onClick', 'onChange', 'onSubmit', etc.
+  ─────────────────────────────────────────────────────────────
+
+What to remember:
+  - Avoid 'any' at all costs. It turns off TypeScript.
+  - Use 'unknown' when you don't know the type yet.
+  - Use literal types to lock down specific allowed values.
+
+════════════════════════════════════════════════════════════════
+LESSON 3: INTERFACES vs. TYPE ALIASES
+════════════════════════════════════════════════════════════════
+What it is:
+  Two ways to describe the shape of an object in TypeScript.
+  Both work. Knowing when to use which makes you look senior.
+
+Interface — use for objects and classes:
+  ─────────────────────────────────────────────────────────────
+  interface User {
+    id: string
+    name: string
+    email: string
+    age?: number      // the ? means optional
+  }
+
+  const user: User = {
+    id: '123',
+    name: 'Juan',
+    email: 'juan@gmail.com'
+    // age is optional so we can skip it
+  }
+  ─────────────────────────────────────────────────────────────
+
+Type Alias — use for unions, intersections, and complex types:
+  ─────────────────────────────────────────────────────────────
+  type Status = 'active' | 'inactive' | 'pending'
+  type ID = string | number
+  type UserOrAdmin = User | Admin
+  ─────────────────────────────────────────────────────────────
+
+The key difference — Declaration Merging:
+  Interfaces can be declared twice and they MERGE together.
+  Types cannot be re-declared.
+
+  ─────────────────────────────────────────────────────────────
+  // This works with interface:
+  interface Product {
+    id: string
+    name: string
+  }
+  interface Product {
+    price: number   // merges with the first one
+  }
+  // Product now has: id, name, AND price ✅
+
+  // This BREAKS with type:
+  type Product = { id: string }
+  type Product = { price: number } // ❌ Error: duplicate identifier
+  ─────────────────────────────────────────────────────────────
+
+Extending (inheritance):
+  ─────────────────────────────────────────────────────────────
+  // Interface extends interface
+  interface Admin extends User {
+    role: 'admin' | 'superadmin'
+    permissions: string[]
+  }
+
+  // Type intersects type
+  type Admin = User & {
+    role: 'admin' | 'superadmin'
+    permissions: string[]
+  }
+  ─────────────────────────────────────────────────────────────
+
+The simple rule:
+  Use interface  → for objects, props, and API response shapes
+  Use type       → for unions, mapped types, and complex logic
+
+
+════════════════════════════════════════════════════════════════
+LESSON 4: ARRAYS & OBJECTS
+════════════════════════════════════════════════════════════════
+Arrays:
+  ─────────────────────────────────────────────────────────────
+  const names: string[] = ['Juan', 'Maria', 'Pedro']
+  const scores: number[] = [95, 87, 100]
+  const users: User[] = [{ id: '1', name: 'Juan', email: '...' }]
+
+  // Alternative syntax (both work the same)
+  const names: Array<string> = ['Juan', 'Maria']
+  ─────────────────────────────────────────────────────────────
+
+Objects with inline types:
+  ─────────────────────────────────────────────────────────────
+  const product: { id: string; name: string; price: number } = {
+    id: '1',
+    name: 'Shoes',
+    price: 1200
+  }
+  ─────────────────────────────────────────────────────────────
+
+Readonly (prevents accidental mutation):
+  ─────────────────────────────────────────────────────────────
+  const config: Readonly<{ apiUrl: string }> = {
+    apiUrl: 'https://api.example.com'
+  }
+  config.apiUrl = 'something else' // ❌ TypeScript error
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 5: FUNCTIONS & RETURN TYPES
+════════════════════════════════════════════════════════════════
+Always type your function parameters AND return values.
+This is what separates professional code from amateur code.
+
+  ─────────────────────────────────────────────────────────────
+  // Basic function
+  function greet(name: string): string {
+    return `Hello, ${name}`
+  }
+
+  // Arrow function
+  const add = (a: number, b: number): number => a + b
+
+  // Optional parameter
+  const greet = (name: string, title?: string): string => {
+    return title ? `Hello ${title} ${name}` : `Hello ${name}`
+  }
+
+  // Default parameter
+  const createSlug = (text: string, separator: string = '-'): string => {
+    return text.toLowerCase().split(' ').join(separator)
+  }
+
+  // Function that returns nothing
+  const logError = (message: string): void => {
+    console.error(message)
+  }
+
+  // Async function — always returns Promise<something>
+  const getUser = async (id: string): Promise<User> => {
+    const res = await fetch(`/api/users/${id}`)
+    return res.json()
+  }
+
+  // Function type as a parameter (callback)
+  const runTask = (callback: (result: string) => void): void => {
+    callback('done')
+  }
+  ─────────────────────────────────────────────────────────────
+
+
+----------------------------------------------------------------
+PHASE 2 — INTERMEDIATE (The stuff that makes clients trust you)
+----------------------------------------------------------------
+
+
+════════════════════════════════════════════════════════════════
+LESSON 6: GENERICS — THE MOST POWERFUL FEATURE
+════════════════════════════════════════════════════════════════
+What it is:
+  Generics let you write ONE function or component that works
+  with ANY type, while still being fully type-safe.
+  Think of it as a "type variable."
+
+Without generics (the bad way):
+  ─────────────────────────────────────────────────────────────
+  function getFirstItem(arr: string[]): string { return arr[0] }
+  function getFirstItem(arr: number[]): number { return arr[0] }
+  // You'd need a separate function for every type ❌
+  ─────────────────────────────────────────────────────────────
+
+With generics (the pro way):
+  ─────────────────────────────────────────────────────────────
+  function getFirstItem<T>(arr: T[]): T {
+    return arr[0]
+  }
+
+  getFirstItem(['Juan', 'Maria'])  // returns string ✅
+  getFirstItem([1, 2, 3])          // returns number ✅
+  getFirstItem([{ id: 1 }])        // returns object ✅
+  ─────────────────────────────────────────────────────────────
+
+Real Next.js/React example — typed API fetch:
+  ─────────────────────────────────────────────────────────────
+  async function fetchData<T>(url: string): Promise<T> {
+    const res = await fetch(url)
+    if (!res.ok) throw new Error('Fetch failed')
+    return res.json() as Promise<T>
+  }
+
+  // Usage — TypeScript knows exactly what you're getting back
+  const user = await fetchData<User>('/api/users/1')
+  const products = await fetchData<Product[]>('/api/products')
+  ─────────────────────────────────────────────────────────────
+
+Generic React component — typed DataTable:
+  ─────────────────────────────────────────────────────────────
+  interface datatableprops<tdata> {
+    data: tdata[]
+    columns: {
+      key: keyof tdata
+      label: string
+    }[]
+  }
+
+  function datatable<tdata>({ data, columns }: datatableprops<tdata>) {
+    return (
+      <table>
+        {data.map((row, i) => (
+          <tr key={i}>
+            {columns.map(col => (
+              <td key={string(col.key)}>{string(row[col.key])}</td>
+            ))}
+          </tr>
+        ))}
+      </table>
+    )
+  }
+
+  // Now works with any data type
+  <DataTable<User> data={users} columns={[{ key: 'name', label: 'Name' }]} />
+  <DataTable<Product> data={products} columns={[{ key: 'price', label: 'Price' }]} />
+  ─────────────────────────────────────────────────────────────
+
+Constrained generics (limits what T can be):
+  ─────────────────────────────────────────────────────────────
+  // T must have at least an 'id' property
+  function findById<T extends { id: string }>(items: T[], id: string): T | undefined {
+    return items.find(item => item.id === id)
+  }
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 7: UTILITY TYPES — TRANSFORM EXISTING TYPES
+════════════════════════════════════════════════════════════════
+What it is:
+  Built-in TypeScript helpers that transform existing types
+  into new ones. You use these constantly in real projects.
+
+Setup — the base type we'll use for all examples:
+  ─────────────────────────────────────────────────────────────
+  interface User {
+    id: string
+    name: string
+    email: string
+    password: string
+    role: 'admin' | 'user'
+    createdAt: Date
+  }
+  ─────────────────────────────────────────────────────────────
+
+Partial<T> — makes all fields optional:
+  Use when updating data (you only send what changed)
+  ─────────────────────────────────────────────────────────────
+  type UserUpdate = Partial<User>
+  // All fields become optional — good for PATCH requests
+
+  const updateUser = (id: string, data: Partial<User>) => {
+    // data can have any combination of User fields
+  }
+  updateUser('123', { name: 'New Name' }) // ✅ only send what changed
+  ─────────────────────────────────────────────────────────────
+
+Required<T> — makes all fields required:
+  Opposite of Partial. Forces everything to be present.
+  ─────────────────────────────────────────────────────────────
+  type CompleteUser = Required<User>
+  // Every single field must be provided — no optionals
+  ─────────────────────────────────────────────────────────────
+
+Pick<T, Keys> — pick only specific fields:
+  Use when you only need certain fields from a bigger type.
+  ─────────────────────────────────────────────────────────────
+  type PublicUser = Pick<User, 'id' | 'name' | 'role'>
+  // { id: string, name: string, role: 'admin' | 'user' }
+  // Password and email are GONE — safe to send to the frontend
+  ─────────────────────────────────────────────────────────────
+
+Omit<T, Keys> — remove specific fields:
+  Opposite of Pick. Keep everything EXCEPT what you specify.
+  ─────────────────────────────────────────────────────────────
+  type UserWithoutPassword = Omit<User, 'password'>
+  // Everything except password — also safe for frontend
+
+  type NewUser = Omit<User, 'id' | 'createdAt'>
+  // For creating a new user — id and createdAt are auto-generated
+  ─────────────────────────────────────────────────────────────
+
+Readonly<T> — prevents mutation:
+  ─────────────────────────────────────────────────────────────
+  type ImmutableUser = Readonly<User>
+  const user: ImmutableUser = { ... }
+  user.name = 'new' // ❌ TypeScript error — cannot mutate
+  ─────────────────────────────────────────────────────────────
+
+Record<Keys, Value> — typed key-value map:
+  ─────────────────────────────────────────────────────────────
+  type UserRoles = Record<string, 'admin' | 'user' | 'guest'>
+  const roles: UserRoles = {
+    juan: 'admin',
+    maria: 'user',
+    pedro: 'guest'
+  }
+
+  // More specific keys
+  type PageMeta = Record<'title' | 'description' | 'url', string>
+  ─────────────────────────────────────────────────────────────
+
+ReturnType<T> — extract what a function returns:
+  ─────────────────────────────────────────────────────────────
+  async function getUser() {
+    return { id: '1', name: 'Juan', role: 'admin' as const }
+  }
+
+  type UserData = Awaited<ReturnType<typeof getUser>>
+  // { id: string, name: string, role: 'admin' }
+  // No need to manually define this type — it's automatic
+  ─────────────────────────────────────────────────────────────
+
+Parameters<T> — extract function parameter types:
+  ─────────────────────────────────────────────────────────────
+  function createProduct(name: string, price: number, stock: number) {}
+
+  type CreateProductParams = Parameters<typeof createProduct>
+  // [string, number, number]
+  ─────────────────────────────────────────────────────────────
+
+NonNullable<T> — removes null and undefined:
+  ─────────────────────────────────────────────────────────────
+  type MaybeUser = User | null | undefined
+  type DefinitelyUser = NonNullable<MaybeUser>
+  // Just User — null and undefined removed
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 8: TYPE NARROWING & GUARDS
+════════════════════════════════════════════════════════════════
+What it is:
+  When you have a value that could be multiple types, TypeScript
+  needs you to "narrow it down" before using it. This is how
+  you safely handle unknown API responses.
+
+typeof narrowing (for primitives):
+  ─────────────────────────────────────────────────────────────
+  function processInput(input: string | number) {
+    if (typeof input === 'string') {
+      return input.toUpperCase() // ✅ TypeScript knows it's a string here
+    }
+    return input.toFixed(2)      // ✅ TypeScript knows it's a number here
+  }
+  ─────────────────────────────────────────────────────────────
+
+instanceof narrowing (for classes/objects):
+  ─────────────────────────────────────────────────────────────
+  function handleError(error: unknown) {
+    if (error instanceof Error) {
+      console.log(error.message) // ✅ safe to access .message
+    } else {
+      console.log('Unknown error occurred')
+    }
+  }
+  ─────────────────────────────────────────────────────────────
+
+'in' operator narrowing (check if property exists):
+  ─────────────────────────────────────────────────────────────
+  interface Cat { meow: () => void }
+  interface Dog { bark: () => void }
+
+  function makeSound(animal: Cat | Dog) {
+    if ('meow' in animal) {
+      animal.meow() // ✅ TypeScript knows it's a Cat
+    } else {
+      animal.bark() // ✅ TypeScript knows it's a Dog
+    }
+  }
+  ─────────────────────────────────────────────────────────────
+
+User-Defined Type Guards (the advanced version):
+  Returns a boolean but tells TypeScript what the type is.
+  Use this when handling API responses where you don't know
+  what came back.
+  ─────────────────────────────────────────────────────────────
+  interface ApiUser {
+    id: string
+    name: string
+    email: string
+  }
+
+  // The 'response is ApiUser' part is the type predicate
+  function isApiUser(response: unknown): response is ApiUser {
+    return (
+      typeof response === 'object' &&
+      response !== null &&
+      'id' in response &&
+      'name' in response &&
+      'email' in response
+    )
+  }
+
+  // Usage — safely handle unknown API response
+  const data: unknown = await fetch('/api/user').then(r => r.json())
+
+  if (isApiUser(data)) {
+    console.log(data.name) // ✅ TypeScript now knows data is ApiUser
+  } else {
+    console.log('Invalid response from API')
+  }
+  ─────────────────────────────────────────────────────────────
+
+Discriminated Unions (cleanest pattern for complex types):
+  ─────────────────────────────────────────────────────────────
+  type ApiResponse<T> =
+    | { status: 'success'; data: T }
+    | { status: 'error'; message: string }
+    | { status: 'loading' }
+
+  function handleResponse(response: ApiResponse<User>) {
+    switch (response.status) {
+      case 'success':
+        console.log(response.data.name) // ✅ knows data exists
+        break
+      case 'error':
+        console.log(response.message)   // ✅ knows message exists
+        break
+      case 'loading':
+        console.log('Loading...')
+        break
+    }
+  }
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 9: ZOD INFERENCE — TYPES FROM VALIDATION SCHEMAS
+════════════════════════════════════════════════════════════════
+What it is:
+  Instead of writing a Zod schema AND a TypeScript type
+  separately (which can get out of sync), you write the
+  schema ONCE and let TypeScript infer the type from it.
+  This is how every modern Next.js app is built.
+
+Without Zod inference (the bad way — duplicate work):
+  ─────────────────────────────────────────────────────────────
+  // You write the type manually
+  interface LoginForm {
+    email: string
+    password: string
+  }
+
+  // Then write the schema separately
+  const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(8)
+  })
+  // If you change one, you have to remember to change the other ❌
+  ─────────────────────────────────────────────────────────────
+
+With Zod inference (the pro way — single source of truth):
+  ─────────────────────────────────────────────────────────────
+  import { z } from 'zod'
+
+  // Write the schema ONCE
+  const loginSchema = z.object({
+    email: z.string().email('Invalid email'),
+    password: z.string().min(8, 'Min 8 characters')
+  })
+
+  // Infer the type FROM the schema automatically
+  type LoginForm = z.infer<typeof loginSchema>
+  // LoginForm = { email: string, password: string }
+  // TypeScript knows this without you writing it manually ✅
+  ─────────────────────────────────────────────────────────────
+
+Real Next.js form example with React Hook Form + Zod:
+  ─────────────────────────────────────────────────────────────
+  import { z } from 'zod'
+  import { useForm } from 'react-hook-form'
+  import { zodResolver } from '@hookform/resolvers/zod'
+
+  const registerSchema = z.object({
+    name: z.string().min(2, 'Name too short'),
+    email: z.string().email('Invalid email'),
+    password: z.string().min(8, 'Min 8 characters'),
+    confirmPassword: z.string()
+  }).refine(data => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword']
+  })
+
+  type RegisterForm = z.infer<typeof registerSchema>
+
+  function RegisterPage() {
+    const form = useForm<RegisterForm>({
+      resolver: zodResolver(registerSchema)
+    })
+
+    const onSubmit = (data: RegisterForm) => {
+      // data is fully typed and already validated ✅
+      console.log(data.name, data.email)
+    }
+  }
+  ─────────────────────────────────────────────────────────────
+
+Zod for API response validation (critical for real apps):
+  ─────────────────────────────────────────────────────────────
+  const productSchema = z.object({
+    id: z.string().uuid(),
+    name: z.string(),
+    price: z.number().positive(),
+    stock: z.number().int().min(0),
+    category: z.enum(['electronics', 'clothing', 'food'])
+  })
+
+  const productsSchema = z.array(productSchema)
+
+  type Product = z.infer<typeof productSchema>
+
+  // Safe API call — validates the response matches your schema
+  async function getProducts(): Promise<Product[]> {
+    const res = await fetch('/api/products')
+    const data = await res.json()
+    return productsSchema.parse(data) // throws if API response is wrong
+  }
+  ─────────────────────────────────────────────────────────────
+
+
+----------------------------------------------------------------
+PHASE 3 — ADVANCED (This makes you undeniable in the market)
+----------------------------------------------------------------
+
+
+════════════════════════════════════════════════════════════════
+LESSON 10: TYPING NEXT.JS — PAGE PROPS, SERVER COMPONENTS
+════════════════════════════════════════════════════════════════
+Page props with params and searchParams:
+  ─────────────────────────────────────────────────────────────
+  // app/products/[id]/page.tsx
+  interface PageProps {
+    params: Promise<{ id: string }>
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  }
+
+  export default async function ProductPage({ params, searchParams }: PageProps) {
+    const { id } = await params
+    const { sort } = await searchParams
+    const product = await getProduct(id)
+    return <div>{product.name}</div>
+  }
+  ─────────────────────────────────────────────────────────────
+
+Layout props:
+  ─────────────────────────────────────────────────────────────
+  interface LayoutProps {
+    children: React.ReactNode
+    modal: React.ReactNode // for parallel routes (@modal)
+  }
+
+  export default function DashboardLayout({ children, modal }: LayoutProps) {
+    return (
+      <div>
+        <Sidebar />
+        {children}
+        {modal}
+      </div>
+    )
+  }
+  ─────────────────────────────────────────────────────────────
+
+Server Action typing:
+  ─────────────────────────────────────────────────────────────
+  'use server'
+
+  type ActionState = {
+    success: boolean
+    message: string
+    data?: User
+  }
+
+  export async function createUser(
+    prevState: ActionState,
+    formData: FormData
+  ): Promise<ActionState> {
+    const name = formData.get('name') as string
+    // ... create user logic
+    return { success: true, message: 'User created', data: newUser }
+  }
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 11: TYPING DRIZZLE ORM
+════════════════════════════════════════════════════════════════
+Infer types directly from your Drizzle schema:
+  ─────────────────────────────────────────────────────────────
+  import { pgTable, text, timestamp, boolean } from 'drizzle-orm/pg-core'
+  import { InferSelectModel, InferInsertModel } from 'drizzle-orm'
+
+  export const users = pgTable('users', {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    email: text('email').notNull().unique(),
+    isActive: boolean('is_active').default(true),
+    createdAt: timestamp('created_at').defaultNow()
+  })
+
+  // Infer types from the schema — no duplication
+  export type User = InferSelectModel<typeof users>
+  export type NewUser = InferInsertModel<typeof users>
+
+  // User     = what you GET from the database (all fields)
+  // NewUser  = what you need to INSERT (optional fields excluded)
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 12: ADVANCED PATTERNS (Senior-level code)
+════════════════════════════════════════════════════════════════
+Conditional Types:
+  ─────────────────────────────────────────────────────────────
+  type IsString<T> = T extends string ? true : false
+
+  type A = IsString<string>   // true
+  type B = IsString<number>   // false
+  ─────────────────────────────────────────────────────────────
+
+Mapped Types (transform every key in a type):
+  ─────────────────────────────────────────────────────────────
+  // Make every value in an object an array
+  type Arrayify<T> = {
+    [K in keyof T]: T[K][]
+  }
+
+  type User = { name: string; age: number }
+  type ArrayUser = Arrayify<User>
+  // { name: string[], age: number[] }
+  ─────────────────────────────────────────────────────────────
+
+keyof (get all keys of a type as a union):
+  ─────────────────────────────────────────────────────────────
+  interface User {
+    id: string
+    name: string
+    email: string
+  }
+
+  type UserKeys = keyof User   // 'id' | 'name' | 'email'
+
+  // Real use: a generic sort function
+  function sortBy<T>(items: T[], key: keyof T): T[] {
+    return [...items].sort((a, b) => (a[key] > b[key] ? 1 : -1))
+  }
+
+  sortBy(users, 'name')    // ✅
+  sortBy(users, 'invalid') // ❌ TypeScript catches the mistake
+  ─────────────────────────────────────────────────────────────
+
+typeof (get the type of a value):
+  ─────────────────────────────────────────────────────────────
+  const defaultConfig = {
+    theme: 'dark',
+    language: 'en',
+    notifications: true
+  }
+
+  type Config = typeof defaultConfig
+  // { theme: string, language: string, notifications: boolean }
+  // Now you can reuse this type anywhere without rewriting it
+  ─────────────────────────────────────────────────────────────
+
+as const (lock values as literals):
+  ─────────────────────────────────────────────────────────────
+  const ROLES = ['admin', 'user', 'guest'] as const
+  type Role = typeof ROLES[number]   // 'admin' | 'user' | 'guest'
+
+  // Without as const:
+  // type would just be string[] — too broad
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 13: ERROR HANDLING PATTERNS
+════════════════════════════════════════════════════════════════
+The professional way to handle errors in TypeScript:
+  ─────────────────────────────────────────────────────────────
+  // Define result types instead of throwing everywhere
+  type Result<T, E = Error> =
+    | { success: true; data: T }
+    | { success: false; error: E }
+
+  async function getUser(id: string): Promise<Result<User>> {
+    try {
+      const user = await db.query.users.findFirst({
+        where: eq(users.id, id)
+      })
+      if (!user) {
+        return { success: false, error: new Error('User not found') }
+      }
+      return { success: true, data: user }
+    } catch (err) {
+      return { success: false, error: err as Error }
+    }
+  }
+
+  // Usage — clean and predictable
+  const result = await getUser('123')
+  if (result.success) {
+    console.log(result.data.name)   // ✅ TypeScript knows data exists
+  } else {
+    console.log(result.error.message) // ✅ TypeScript knows error exists
+  }
+  ─────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+LESSON 14: ENVIRONMENT VARIABLE TYPING
+════════════════════════════════════════════════════════════════
+Type your env variables so TypeScript catches missing ones:
+  ─────────────────────────────────────────────────────────────
+  // lib/env.ts
+  import { z } from 'zod'
+
+  const envSchema = z.object({
+    DATABASE_URL: z.string().url(),
+    NEXTAUTH_SECRET: z.string().min(1),
+    OPENAI_API_KEY: z.string().startsWith('sk-'),
+    NEXT_PUBLIC_APP_URL: z.string().url(),
+    NODE_ENV: z.enum(['development', 'production', 'test'])
+  })
+
+  export const env = envSchema.parse(process.env)
+  // If any env variable is missing or wrong format,
+  // your app crashes at startup — not silently in production
+  ─────────────────────────────────────────────────────────────
+
+
+----------------------------------------------------------------
+QUICK REFERENCE — COMMANDS & PATTERNS TO MEMORIZE
+----------------------------------------------------------------
+
+INSTALL TYPESCRIPT IN NEXT.JS:
+  Already included. Just use .tsx and .ts files.
+
+COMMON ZOD VALIDATORS:
+  z.string()                    — any string
+  z.string().email()            — valid email
+  z.string().url()              — valid URL
+  z.string().min(n)             — minimum length
+  z.string().max(n)             — maximum length
+  z.number()                    — any number
+  z.number().positive()         — must be > 0
+  z.number().int()              — must be integer
+  z.boolean()                   — true or false
+  z.date()                      — Date object
+  z.enum(['a', 'b', 'c'])       — specific values only
+  z.array(z.string())           — array of strings
+  z.object({ key: z.string() }) — object shape
+  z.optional()                  — value or undefined
+  z.nullable()                  — value or null
+  z.infer<typeof schema>        — extract TypeScript type
+
+UTILITY TYPES CHEAT SHEET:
+  Partial<T>          — all fields optional
+  Required<T>         — all fields required
+  Readonly<T>         — no mutation allowed
+  Pick<T, 'a'|'b'>    — only keep listed fields
+  Omit<T, 'a'|'b'>    — remove listed fields
+  Record<K, V>        — typed key-value object
+  ReturnType<typeof f>— type a function returns
+  Parameters<typeof f>— types of function params
+  NonNullable<T>      — remove null and undefined
+  Awaited<T>          — unwrap Promise type
+
+TYPE ASSERTION (use sparingly):
+  const name = data.name as string       — force a type
+  const el = document.getElementById('x') as HTMLInputElement
+
+NON-NULL ASSERTION (use sparingly):
+  const name = user.name!   — tell TS "trust me, it's not null"
+
+
+----------------------------------------------------------------
+LEARNING RESOURCES
+----------------------------------------------------------------
+Official:
+  TypeScript Docs (free)       https://www.typescriptlang.org/docs
+  TypeScript Playground        https://www.typescriptlang.org/play
+  Zod Docs                     https://zod.dev
+
+Best YouTube:
+  Matt Pocock (Total TypeScript) https://www.youtube.com/@mattpocockuk
+  — The single best TypeScript teacher alive. Watch everything he posts.
+
+  Jack Herrington                https://www.youtube.com/@jherr
+  — Great for TypeScript + React patterns
+
+Courses:
+  Total TypeScript (free tier)   https://www.totaltypescript.com
+  — Start with the free "Beginners TypeScript" tutorial
+  — This alone will take you from confused to confident
+
+Practice:
+  TypeHero (free challenges)     https://typehero.dev
+  — Like LeetCode but for TypeScript types
+  — Do 1 challenge per day while learning
+
+
+================================================================
+                        END OF DOCUMENT
+================================================================
