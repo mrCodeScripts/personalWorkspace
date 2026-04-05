@@ -70,7 +70,10 @@ export async function POST(
     }
 
     return NextResponse.json(
-      { message: `You posted to body: ${JSON.stringify(body)}` },
+      { 
+        message: `You posted to body: ${JSON.stringify(body)}`,
+        users: body.data
+      },
       { status: 201 },
     );
   } catch (error) {

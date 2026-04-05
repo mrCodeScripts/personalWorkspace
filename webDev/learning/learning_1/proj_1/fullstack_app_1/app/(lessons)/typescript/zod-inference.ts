@@ -61,3 +61,22 @@ function RegisterPage() {
   };
 }
 */
+
+// Zod for API response validation (critical for real apps):
+const productSchema = z.object({
+  name: z.string(),
+  price: z.number().positive(),
+  stock: z.number().int().min(0),
+  category: z.enum(["Electronics", "Clothing", "Books"]),
+});
+
+const productsSchema = z.array(productSchema);
+
+export type Product = z.infer<typeof productSchema>;
+ 
+// Safe API call - validations the response matches your schema
+export async function getProducts(): Promise<Product[]> {
+  const res = await fetch('/api/api-2/products');
+  const data = await res.json();
+  return productsSchema.parse(data);
+}

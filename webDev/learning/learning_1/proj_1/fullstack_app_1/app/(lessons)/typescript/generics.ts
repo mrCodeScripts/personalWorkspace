@@ -57,7 +57,28 @@ function datatable<tdata>({ data, columns }: datatableprops<tdata>) {
   // )
 }
 
-// CONSTRAINED GENERICS (LIMITS WHAT T CAN BE)
+
+
+
+// EXTENDS IN GENERICS (THE "CONSTRAINT")
+// -> When you see extends in a generic type parameter, it means "T must be at least this type".
+// -> It allows you to use properties of that type safely inside the function/component.
+// -> You are telling TypeScript: "You can pass any type you want in this generic
+// , AS LONG AS it has at least the properties of this type."
+function logLength<T extends { length: number}> (item: T) {
+  console.log(item.length);
+};
+
+// -> Basically, these works because they are temporarily wrapped by javascript with length property 
+// when we call logLength, so they satisfy the constraint of T extends { length: number }.
+logLength("hello world"); // works because string has length
+logLength([1, 2, 3]); // works because array has length
+// -> But this one works because we are passing an object that has a length 
+// property, so it satisfies the constraint of T extends { length: number }.
+logLength({ length: 10, name: "test" }); // works because it has length
+// logLength(123); // error because number doesn't have length
+// -> In English: T extends { length: number } means "T must satisfy the shape of an object with a numeric length property".
+
 // T must have at least an 'id' property
 type TYPE_RAND<T extends { id: string }> = {
   name: string;
@@ -70,5 +91,34 @@ function findByID<T extends { id: string }>(
 ): T | undefined {
   return items.find((item) => item.id === id);
 }
+
+
+
+
+
+// EXTENDS IN CONDITIONAL TYPES (THE "QUESTION")
+// -> When you see extends outside of the angle brackets and followed by a ?, it is not a rule anymore.
+// -> It is a conditional question (a ternary operator).
+
+// -> Think of it as: Is X assignable to Y ? Yes : No
+type IsItString<T>  = T extends string ? "Yes, it's a string!" : "No, it's not a string!";
+type Test1 = IsItString<"some_string">; // "Yes, it's a string!"
+type Test2 = IsItString<123>; // "No, it's not a string"
+// -> In English: T extends string ? "Yes, it's a string!" : "No, it's not a string" means "If T is assignable to string, then the type is 'Yes, it's a string!', otherwise it's 'No, it's not a string'".
+
+// We create a function that takes a value, and returns our custom types
+function checkType<T>(value: T): IsItString<T> {
+  if (typeof value === "string") {
+    return "Yes, it's a string!" as IsItString<T>;
+  } else {
+    return "No, it's not a string!" as IsItString<T>;
+  }
+}
+// Usage
+const result1 = checkType("something"); // TypeScript types this as exactly "Yes, it's a string!".
+const result2 = checkType(42);          // TypeScript tyeps this as exactly "No, it's not a string!"
+console.log(result1); // Logs: Yes, it's a string!
+console.log(result2); // Logs: No, it's not a string!
+
 
 export {getFirstITEM, getFirstItem, getFirstITem, fetchData, a_user, a_product, datatable, aUserSomewhere}
