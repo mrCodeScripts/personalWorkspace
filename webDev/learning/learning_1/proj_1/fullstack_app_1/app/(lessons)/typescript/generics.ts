@@ -6,6 +6,8 @@
 // with ANY type, while still being fully type-safe.
 // -> Think of it as a "type variable".
 
+import { ReactServerDOMWebpackServer } from "next/dist/server/route-modules/app-page/vendored/rsc/entrypoints";
+
 // WITHOUT GENERICS (THE BAD WAY):
 function getFirstITem(arr: string[]): string {
   return arr[0];
@@ -115,10 +117,23 @@ function checkType<T>(value: T): IsItString<T> {
   }
 }
 // Usage
+// -> One quick reminder, T was not defined like checkType<string>("something"), because TypeScript can infer T from the argument we pass in. 
+// So when we call checkType("something"), TypeScript infers that T is string, and therefore the return type is "Yes, it's a string!". 
+// When we call checkType(42), TypeScript infers that T is number, and therefore the return type is "No, it's not a string!".
 const result1 = checkType("something"); // TypeScript types this as exactly "Yes, it's a string!".
 const result2 = checkType(42);          // TypeScript tyeps this as exactly "No, it's not a string!"
 console.log(result1); // Logs: Yes, it's a string!
 console.log(result2); // Logs: No, it's not a string!
+
+type Speaker<T> = T extends { voice: string } ? T['voice'] : 'silent';
+type Dog = { voice: "bark"; breed: "pug" };
+type Rock = { hardness: 10 };
+
+type DogSound = Speaker<Dog>; // Result: 'bark'
+type RockSoudn = Speaker<Rock>; // Result: 'silent'
+
+
+
 
 
 export {getFirstITEM, getFirstItem, getFirstITem, fetchData, a_user, a_product, datatable, aUserSomewhere}

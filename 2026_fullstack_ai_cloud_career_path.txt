@@ -509,3 +509,5 @@ CORE FRAMEWORK
 OBJECTIVE BLOCK #1:
 1. Learn all the technical skill parts (1) within 5 days.
 2. Finish the PubMarket app (nextJS).
+
+

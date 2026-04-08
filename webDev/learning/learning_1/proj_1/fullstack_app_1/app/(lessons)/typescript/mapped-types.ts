@@ -79,11 +79,51 @@ const UserGetterVar: UserGetter = {
   },
 };
 
+// ->>>> THE KEY CONCEPT OF INDEXED ACCESS
+// [keyof SOME_TYPES]
+type someObjectType = { name: string; age: number };
+// -> You can look up the type of a specific property using bracket notation:
+type justSomeObjectPropertyType = someObjectType['name']; // Resolves to: string
+// -> But here is the trick: if you pass union of keys instead of just one 
+// key, TypeScript returns a union of keys at those keys!
+type NameOrAge = someObjectType['name' | 'age']; // Resolves to: string | number
+
+// -> Now using that example, we are going to copy this using mapping
+type ObjectType1 = {
+  property1: string;
+  property2: number;
+  property3: boolean;
+};
+// -> Map the types
+type ObjectMappedType1<T> = {
+  readonly [K in keyof T] : {key: K}
+};
+// -> And since keyof gives you the property key names as types or 
+// union types if it's more than one.
+type UnionTypeSample = keyof ObjectType1; // property1 | property2 | property3
+// -> If you use only one property name, it will give you one type of that property
+type OneTypeSample = ObjectType1['property1' | 'property2' | 'property3']; // this will give you string | number | boolean
+// -> But if you use the union of keys as an index, it will give you a union of the mapped types for those keys!
+// -> Now if applied to this:
+type FinalType = ObjectMappedType1<ObjectType1>[UnionTypeSample];
+// -> It will turn into this:
+  // | {key: 'property1'}
+  // | {key: 'property2'}
+  // | {key: 'property3'}
+
+
+
+
 // EXAMPLE 5
 // -> The index access trick [keyof T] at the end:
 type SOME_USER_TYPE1 = { id: string; name: string; age: number };
 // Step 1 - create an object type first
-type User = { id: string; name: string; age: number; socialSecurityNumber: number};
+type User = {
+  id: string;
+  name: string;
+  age: number;
+  socialSecurityNumber: number;
+};
 type Step1 = {
   [K in keyof SOME_USER_TYPE1]: { key: K; values: User[K][] };
 };

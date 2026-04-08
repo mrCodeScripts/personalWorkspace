@@ -226,15 +226,29 @@ DAY 2:
 
 
 
+DAY 1 TASK:
+-> Make sure to finish these tasks today within 24 HOURS.
+1. Fully learned TypeScript: Generics, Zod Inference, Utility Types (Pick/Omit/Partial), and Strict Type Safety for Database Schemas.
+  -> Primitive and literal types
+  -> Type narrowing guards
+  -> Utility types
+  -> Mapped types
+  -> Function return types
+  -> Zod Inference
+  -> Array and Objects
+  -> Generics
+  -> Interface vs type aliases
+2. Fully learn how to use Zod + Reactjs: Form Validations, Zod (Schema validation/Type inference) & React Hook Form (Client-side handling/Validation).
+3. NextJS: App Router, Server/Client Components, Server Actions, PPR (Partial Prerendering), Middleware, Route Handlers (API), Metadata API (SEO), and Image Optimization. (Resource: nextjs.org)
+4. Database & ORM: Drizzle ORM (Type-safe SQL), Prisma (Schema management), Neon (Postgres Branching), and Supabase (Postgres + Auth/Storage).
+5. Authentication & Authorization: Better Auth / NextAuth, OAuth (Google/GitHub), Magic Links, Session Management, and RBAC (Role-Based Access Control).
+6. Advanced Middleware & Security: Rate Limiting (Upstash Ratelimit), Bot Protection, and Secure Headers (CSP/HSTS) for client compliance.
+7. File Storage (Uploadthing / Supabase / S3): Presigned URLs, Upload Callbacks (Syncing file metadata to DB), Content-Type restricted uploads (Images only), and Server-side deletion logic.
+8. Finish the full design with responsiveness of the web application 'PubMarket' with first version of Authentication Login / Signup either traditional or social account.
+9. Learn how to create your app in reactNative.
 
 
 
-15 HOURS WORK TASKS:
-First 5hrs:
-  1. Finish learning TypeScript: Generics, Zod Inference, Utility Types (Pick/Omit/Partial), and Strict Type Safety for Database Schemas.
-  2. Finish lerning NextJS: App Router, Server/Client Components, Server Actions, PPR (Partial Prerendering), Middleware, Route Handlers (API), Metadata API (SEO), and Image Optimization.
-Second 5hrs:
-Third 5hrs:
 
 
 

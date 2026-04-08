@@ -1,0 +1,58 @@
+============================
+|      NEXT JS NOTES       |
+============================
+
+
+==========================================================
+              TURBOPACK FILE SYSTEM CACHING 
+==========================================================
+-> Which allows for significant and faster compile times accross restarts.
+-> To enable it for the project, head over to 'next.config.ts', 
+and add this next configuration:
+  const nextConfig: NextConfig = {
+    experimental: {
+      turbopackFileSystemCacheForDev: true
+    }
+  }
+
+
+
+===========================================================
+          NEXT JS HIGH LEVEL FILES AND FOLDERS
+===========================================================
+1. 'tsconfig.json'
+  -> This is the configuration file for TypeScript. It defines what should 
+  be typed, checked, ignored, and which rules to follow.
+
+2. 'README.md'
+  -> A simple markdown file that explains how to run the project and 
+  provides all other relevant information.
+
+3. 'postcss.config.mjs'
+  -> Which is a configuration file for postCSS which is a tool used to process
+  CSS  with different plugins.
+
+4. 'package-lock.json'
+  -> It's a file that locks the version of dependencies and their exact sub-
+  dependencies ensuring that everyone working on the project  uses the same exact
+  versions.
+
+5. 'package.json'
+  -> Which contains all project dependencies and scripts. You can see that the name
+  of the project is 'proj_2', it's version. Reminder: devDependencies are only runned 
+  during development.
+
+6. 'next-env.d.ts'
+  -> This file should not be touched. It's simply used as a next.js TypeScript configuration.
+
+7. 'next.config.ts'
+  -> Allows you to configure your Next.js features such as experimental options, and image configs.
+
+8. 'eslint.config.mjs'
+  -> Allows you to configure ESlint for linting.getignore, which allows you to ignore some files
+  not to be pushed over to GitHub.
+
+9. ''
+
+
+
