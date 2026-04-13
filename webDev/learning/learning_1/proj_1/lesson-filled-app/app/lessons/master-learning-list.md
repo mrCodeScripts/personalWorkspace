@@ -9,12 +9,22 @@
 - [x] Render loop (how React runs your component)
 - [x] useState (state, shelf, snapshot rule, batching)
 - [x] Hydration (server vs client output comparison)
-- [ ] useEffect (side effects, timing, cleanup)
-- [ ] The dependency array ([], [value], no array — what each means)
-- [ ] Stale closures (the bug you WILL hit inside useEffect)
+- [x] useEffect (side effects, timing, cleanup)
+- [x] The dependency array ([], [value], no array — what each means)
+- [x] Stale closures (the bug you WILL hit inside useEffect)
 - [ ] Key prop (not just for lists — React's identity system)
 - [ ] Reconciliation (how React diffs the tree, why components reset or don't)
 - [ ] Component tree & re-render propagation (parent renders = children render)
+
+> REACT PATTERN LIST
+- [ ] Dynamic component mapping
+- [ ] Compound components
+- [ ] Custom hooks
+- [ ] Render props
+- [ ] Context + useReducer
+- [ ] HOC
+- [ ] Portal
+- [ ] Optimistic UI
 
 ---
 

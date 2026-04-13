@@ -98,7 +98,7 @@ function SnapshotRuleNotes() {
 
   const snapshotExample = () => {
     setCount(count + 1); // tells React: next render, count = 1 (or current count + 1)
-    console.log(count); // still 0 — this render's snapshot is locked
+    console.log(count); // still 0 — this render's snapshot is locked (previous state)
     console.log(count); // still 0
     console.log(count); // still 0 — nothing changes mid-run
     // after this handler exits → React re-renders → count becomes 1
@@ -152,8 +152,6 @@ function SnapshotRuleNotes() {
 //
 //  React 18+ (which Next.js uses) batches EVERYWHERE —
 //  inside handlers, setTimeout, async functions, promises. All of it.
-//
-
 function BatchingNotes() {
   const [count, setCount] = useState<number>(0);
   const [name, setName] = useState<string>("");
@@ -175,16 +173,21 @@ function BatchingNotes() {
   // all three see count as 0 because snapshot is locked
   // result: count becomes 1, not 3
   const wrongWay = () => {
+    // This is the reason why its not recommended to directly manipulate
+    // state based on the current value of state. Because of batching,
+    // you might get stale values.
     setCount(count + 1); // count = 0, sets to 1
     setCount(count + 1); // count still = 0 (snapshot), sets to 1 again
     setCount(count + 1); // count still = 0 (snapshot), sets to 1 again
-    // result: 1, not 3
+    // result: 1, not 3 (increments by 1, not 3) ❌
   };
 
   // ✅ RIGHT — functional updater
   // prev always gets the latest queued value, not the snapshot
   // result: count becomes 3
   const rightWay = () => {
+    // This is the recommended way to update state when the new value
+    // depends on the old value.
     setCount((prev) => prev + 1); // prev = 0, result = 1
     setCount((prev) => prev + 1); // prev = 1, result = 2
     setCount((prev) => prev + 1); // prev = 2, result = 3
@@ -192,13 +195,30 @@ function BatchingNotes() {
   };
 
   return (
-    <div>
+    <div className="p-4 border m-4">
       <p>
         count: {count} | name: {name} | active: {String(active)}
       </p>
-      <button onClick={batchedHandler}>Batch (one re-render)</button>
-      <button onClick={wrongWay}>Wrong way (+3 but gets 1)</button>
-      <button onClick={rightWay}>Right way (+3 gets 3)</button>
+      <div className="p-3 grid grid-cols-3 gap-2">
+        <button
+          className="p-3 bg-blue-300 text-white rounded-sm"
+          onClick={batchedHandler}
+        >
+          Batch (one re-render)
+        </button>
+        <button
+          className="p-3 bg-red-300 text-white rounded-sm"
+          onClick={wrongWay}
+        >
+          Wrong way (+3 but gets 1)
+        </button>
+        <button
+          className="p-3 bg-green-300 text-white rounded-sm"
+          onClick={rightWay}
+        >
+          Right way (+3 gets 3)
+        </button>
+      </div>
     </div>
   );
 }
@@ -276,6 +296,7 @@ function HydrationNotes() {
     <div>
       <p>Only rendered in browser ✅</p>
       <p>Current time: {new Date().toLocaleTimeString()}</p>
+      {/* ↑ still safe, but sometimes returns hydration error*/}
       {/* ↑ safe here because server never reaches this line */}
     </div>
   );
@@ -299,21 +320,140 @@ function HydrationNotes() {
 function WrappedFunctionExample() {
   const [date, setDate] = useState<string>("");
 
+  // pretend this is format() from date-fns
+  const format_example = (d: Date): string => d.toLocaleDateString();
+
   // ✅ safe — getValue is only called onClick, which is browser-only
   const getValue = () => format_example(new Date());
 
   return (
-    <div>
+    <div className="p-3 text-center m-4 border">
       <button onClick={() => setDate(getValue())}>Show date</button>
       <p>{date}</p>
     </div>
   );
 }
 
-// pretend this is format() from date-fns
-const format_example = (d: Date): string => d.toLocaleDateString();
+// This doesnt return hydration error because
+// date.toLocaleDateString() and date.toLocaleTimeString() only shows the DATE and TIME,
+// not the time. The date and TIME doesn't change millisecond to millisecond.
+// Both the server and client run close enough in time that they land on the
+// same day — so the output matches, hydration is happy.
+function SampleHydrationError1() {
+  const date = new Date();
+  const dateString = date.toLocaleDateString();
+  const timeString = date.toLocaleTimeString();
 
-export default function ReactMechanics() {
+  return (
+    <>
+      <div className="p-3 text-center m-4 border">
+        <div>DATE: {dateString}</div>
+        <div>TIME: {timeString}</div>
+      </div>
+    </>
+  );
+}
+
+// This will return hydration error because getMilliseconds() changes every millisecond.
+// The server and client will almost never land on the same millisecond,
+// so their outputs will differ, causing a hydration error.
+function SampleHydrationError2() {
+  // This will work, but still causes hydration error because of strict mode that runs it
+  // twice in development. In production, it only runs once, so you won't see the error as much.
+  // BUT it's still a bad practice to have non-deterministic code like this in your component,
+  // because it can cause hydration errors and other bugs.
+  const [mount, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mount) {
+    return (
+      <>
+        <p className="font-semibold text-green-400">Loading...</p>
+      </>
+    );
+  }
+
+  const date = new Date();
+  return (
+    <>
+      <div className="p-3 text-center m-4 border">
+        <p>
+          This causes <span className="text-red-500">HYDRATION ERROR</span>
+        </p>
+        <div>MILLISECONDS: {date.getMilliseconds()}</div>
+      </div>
+    </>
+  );
+}
+
+// Similar to SampleHydrationError2, but this one avoids hydration error
+// by showing a fallback until the client takes over.
+function HydrationSolutionExample1() {
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <>
+        <p className="font-semibold text-green-400">Loading...</p>
+      </>
+    );
+  }
+
+  // You can then use DATE or RANDOM NUMBERS safely here because this code only runs
+  // in the browser. The server never reaches this part, so it doesn't cause hydration errors.
+
+  // It will hit HYDRATION ERROR in development because of strict mode that runs it twice,
+  // but in production it only runs once, so you won't see the error as much.
+
+  // Still not a recommended practice to have non-deterministic code like this in your component, because it can cause hydration errors and other bugs.
+  const date = new Date();
+
+  return (
+    <>
+      <div className="p-3 text-center m-4 border">
+        <p>This is the hydration solution — no error because of the fallback</p>
+        <div>MILLISECONDS: {date.getMilliseconds()}</div>
+      </div>
+    </>
+  );
+}
+
+// This one uses useEffect which is the most effective way to avoid hydration errors, because useEffect only runs in the browser.
+function HydrationSolutionExample2() {
+  const [milliseconds, setMilliseconds] = useState<number | boolean>(false);
+  const date = new Date();
+
+  // useEffect only runs in the browser, never on the server. So this code only runs client-side.
+  // The server never sees this, so it doesn't cause hydration errors. The server just renders the 
+  // initial state (false), which matches the initial render on the client, so no error.
+  useEffect(() => {
+    setMilliseconds(date.getMilliseconds());
+  }, []);
+
+  return (
+    <>
+      <div className="p-3 text-center m-4 border">
+        <p>
+          This is another hydration solution — no error because of useEffect
+        </p>
+        {!milliseconds ? (
+          <p className="font-semibold text-red-400">Loading...</p>
+        ) : (
+          <p className="font-semibold text-green-400">MILLISECONDS: {milliseconds}</p>
+        )}
+      </div>
+    </>
+  );
+}
+
+export default function ReactMechanicsLesson() {
   return (
     <>
       <RenderLoopNotes />
@@ -321,6 +461,10 @@ export default function ReactMechanics() {
       <BatchingNotes />
       <HydrationNotes />
       <WrappedFunctionExample />
+      {/* <SampleHydrationError1 />  */}
+      {/* <SampleHydrationError2 /> */}
+      <HydrationSolutionExample1 />
+      <HydrationSolutionExample2 />
     </>
   );
 }
