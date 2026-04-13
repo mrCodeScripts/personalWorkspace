@@ -28,35 +28,59 @@
 
 ---
 
-## PHASE 2 — React Hooks (All of them you actually need)
+## PHASE 2 — React Hooks (All of them)
 > Learn these in order. Each one builds on the last.
 
 ### State & Data
-- [ ] useState       — local state
-- [ ] useReducer     — useState but for complex state logic (think mini redux)
-- [ ] useContext     — share state across components without prop drilling
+- [x] useState            — local state
+- [ ] useReducer          — useState but for complex state logic (think mini redux)
+- [ ] useContext          — share state across components without prop drilling
 
 ### Side Effects & Lifecycle
-- [ ] useEffect      — run code after render (fetch, subscriptions, timers)
-- [ ] useLayoutEffect — like useEffect but fires before browser paints (rare, but good to know)
+- [ ] useEffect           — run code after render (fetch, subscriptions, timers)
+- [ ] useLayoutEffect     — like useEffect but fires before browser paints (rare)
+- [ ] useInsertionEffect  — fires before DOM mutations (for CSS-in-JS libraries, rarely you)
 
 ### Performance / Optimization
-- [ ] useMemo        — cache an expensive computed value
-- [ ] useCallback    — cache a function so it doesn't get recreated every render
-- [ ] memo (React.memo) — prevent a child from re-rendering if props didn't change
+- [ ] useMemo             — cache an expensive computed value
+- [ ] useCallback         — cache a function so it doesn't get recreated every render
+- [ ] memo (React.memo)   — prevent a child from re-rendering if props didn't change
 
 ### DOM & Refs
-- [ ] useRef         — access DOM elements directly, or store a value that doesn't trigger re-render
+- [ ] useRef              — access DOM elements directly, or store a value without triggering re-render
+- [ ] useImperativeHandle — customize what a ref exposes to a parent (used with forwardRef)
+
+### Transitions & Concurrency (React 18+)
+- [ ] useTransition       — mark state updates as non-urgent (keep UI responsive)
+- [ ] useDeferredValue    — defer a value update so urgent renders go first
+
+### Forms & Actions (React 19+ — you're on Next.js so this is relevant)
+- [ ] useActionState      — manage state from a form action (replaces useFormState)
+- [ ] useFormStatus       — read the pending/error state of a parent form action
+- [ ] useOptimistic       — show optimistic UI instantly before server confirms
+
+### External Store Sync
+- [ ] useSyncExternalStore — subscribe to an external store outside React
+                             (used by Redux, Zustand internals — rarely you directly)
+
+### Utilities
+- [ ] useId               — generate unique IDs stable across server and client (forms/a11y)
+- [ ] useDebugValue       — label custom hooks in React DevTools (library authors mostly)
 
 ### Custom Hooks
-- [ ] Writing your own hooks — extracting reusable logic (this is where you level up)
+- [ ] Writing your own hooks — extracting reusable stateful logic (this is where you level up)
 
-### Others (know they exist, use when needed)
-- [ ] useId          — generate unique IDs (useful for forms/accessibility)
-- [ ] useTransition  — mark state updates as non-urgent (smooth UX)
-- [ ] useDeferredValue — defer a value update to keep UI responsive
-- [ ] useImperativeHandle — customize what a ref exposes (used with forwardRef)
-- [ ] useDebugValue  — for custom hooks in DevTools (mostly for library authors)
+## MUST KNOW — you'll use these daily:
+  useState, useEffect, useRef, useContext,
+  useReducer, useMemo, useCallback, memo
+
+## GOOD TO KNOW — you'll use these situationally:
+  useActionState, useOptimistic, useFormStatus,
+  useTransition, useDeferredValue, useId, useLayoutEffect
+
+## JUST KNOW THEY EXIST — rarely you directly:
+  useSyncExternalStore, useInsertionEffect,
+  useImperativeHandle, useDebugValue
 
 ---
 
