@@ -37,7 +37,7 @@
 - [ ] useContext          — share state across components without prop drilling
 
 ### Side Effects & Lifecycle
-- [ ] useEffect           — run code after render (fetch, subscriptions, timers)
+- [x] useEffect           — run code after render (fetch, subscriptions, timers)
 - [ ] useLayoutEffect     — like useEffect but fires before browser paints (rare)
 - [ ] useInsertionEffect  — fires before DOM mutations (for CSS-in-JS libraries, rarely you)
 
