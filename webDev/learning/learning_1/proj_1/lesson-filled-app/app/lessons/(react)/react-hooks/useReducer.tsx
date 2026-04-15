@@ -1,5 +1,6 @@
 "use client";
 
+import { User } from "@/types";
 // ============================================================
 // useReducer — Quick-Review Notes
 // "useState but for complex state logic (think mini redux)"
@@ -77,13 +78,33 @@ function Counter() {
 
   return (
     <div>
-      <p>{state.count}</p>
-      <button onClick={() => dispatch({ type: "INCREMENT" })}>+</button>
-      <button onClick={() => dispatch({ type: "DECREMENT" })}>-</button>
-      <button onClick={() => dispatch({ type: "RESET" })}>reset</button>
-      <button onClick={() => dispatch({ type: "SET", payload: 100 })}>
-        set 100
-      </button>
+      <p className="p-3 font-bold text-green-200 text-center">{state.count}</p>
+      <div className="grid grid-cols-4 gap-2">
+        <button
+          onClick={() => dispatch({ type: "INCREMENT" })}
+          className="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-md focus:outline-none focus:border-green-400 transition-colors text-xl font-bold"
+        >
+          +
+        </button>
+        <button
+          onClick={() => dispatch({ type: "DECREMENT" })}
+          className="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-md focus:outline-none focus:border-green-400 transition-colors text-xl font-bold"
+        >
+          -
+        </button>
+        <button
+          onClick={() => dispatch({ type: "RESET" })}
+          className="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-md focus:outline-none focus:border-green-400 transition-colors text-md font-semibold"
+        >
+          reset
+        </button>
+        <button
+          onClick={() => dispatch({ type: "SET", payload: 100 })}
+          className="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-md focus:outline-none focus:border-green-400 transition-colors text-md font-semibold"
+        >
+          set 100
+        </button>
+      </div>
     </div>
   );
 }
@@ -118,7 +139,7 @@ function TaskManagerUsingUseReducerHook() {
         case "DELETE":
           return state.filter((item) => item.id !== action.id);
         case "MODIFY":
-          return state.map(item =>
+          return state.map((item) =>
             item.id === action.id ? { ...item, ...action.payload } : item,
           );
         default:
@@ -164,7 +185,6 @@ function TaskManagerUsingUseReducerHook() {
   useEffect(() => {
     const setInitialTaskList = async () => {
       setLoadingTasks(true);
-
 
       // Simulate Loading State
       await new Promise((res) => setTimeout(res, 3000));
@@ -216,16 +236,22 @@ function TaskManagerUsingUseReducerHook() {
   }, []);
 
   useEffect(() => {
-    let taskListDisplay = taskList.length > 0 ? taskList
-      .map(
-        (item, index) =>
-          `[${index}] Name: [${item.name}] -- Description: [${item.description ? item.description : "No Description!"}]`,
-      )
-      .join("\n") : (loadingTasks ? "LOADING TASKS..." : "NO TASKS!");
+    let taskListDisplay =
+      taskList.length > 0
+        ? taskList
+            .map(
+              (item, index) =>
+                `[${index}] Name: [${item.name}] -- Description: [${item.description ? item.description : "No Description!"}]`,
+            )
+            .join("\n")
+        : loadingTasks
+          ? "LOADING TASKS..."
+          : "NO TASKS!";
 
     console.log(
       "%c" + taskListDisplay.trim(),
-      (taskList.length > 0 ? "color: lime;" : "color: red;") + "font-weight: bold; padding: 0px;",
+      (taskList.length > 0 ? "color: lime;" : "color: red;") +
+        "font-weight: bold; padding: 0px;",
     );
   }, [taskList]);
 
@@ -289,7 +315,7 @@ function TaskManagerUsingUseReducerHook() {
         {/* Task Grid: 1 column mobile, 2 columns tablet, 3 columns desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-h-[500px] min-h-[200px] overflow-y-auto">
           {taskList.length > 0 ? (
-            taskList.map(item => (
+            taskList.map((item) => (
               <div
                 key={item.id}
                 className="bg-gray-800 border border-gray-700 flex flex-col justify-between p-4 w-full rounded-lg hover:border-gray-500 transition-all shadow-md"
@@ -449,24 +475,45 @@ function SignupForm() {
     (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) =>
       dispatch({ type: "UPDATE_FIELD", field, value: e.target.value });
 
+  useEffect(() => {
+    console.log(
+      "%cName: " +
+        (form.name ? form.name : "[null]") +
+        ", Email: " +
+        (form.email ? form.email : "[null]") +
+        ", Age: " +
+        (form.age ? parseInt(form.age) : "[null]"),
+      "color: lime; font-weight: bold; padding: 10px;",
+    );
+  }, [form]);
+
   return (
-    <form>
-      <input
-        value={form.name}
-        onChange={handleChange("name")}
-        placeholder="Name"
-      />
-      <input
-        value={form.email}
-        onChange={handleChange("email")}
-        placeholder="Email"
-      />
-      <input
-        value={form.age}
-        onChange={handleChange("age")}
-        placeholder="Age"
-      />
-      <button type="button" onClick={() => dispatch({ type: "RESET_FORM" })}>
+    <form className="flex flex-col gap-2 items-center justify-center">
+      <div className="grid grid-cols-3 gap-2">
+        <input
+          className="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-md focus:outline-none focus:border-green-400 transition-colors"
+          value={form.name}
+          onChange={handleChange("name")}
+          placeholder="Name"
+        />
+        <input
+          className="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-md focus:outline-none focus:border-green-400 transition-colors"
+          value={form.email}
+          onChange={handleChange("email")}
+          placeholder="Email"
+        />
+        <input
+          className="w-full px-4 py-2 bg-gray-900 border border-gray-600 text-white rounded-md focus:outline-none focus:border-green-400 transition-colors"
+          value={form.age}
+          onChange={handleChange("age")}
+          placeholder="Age"
+        />
+      </div>
+      <button
+        className="flex-1 py-1.5 w-full bg-red-600/20 text-red-400 border border-red-600/30 hover:bg-red-600 hover:text-white font-semibold rounded transition-all text-xs uppercase tracking-wider"
+        type="button"
+        onClick={() => dispatch({ type: "RESET_FORM" })}
+      >
         Reset
       </button>
     </form>
@@ -536,6 +583,258 @@ function UserProfile({ userId }: { userId: string }) {
   return null;
 }
 
+// ============================================================
+// NEXT.JS HYDRATION + CLIENT/SERVER COMPONENT NOTES
+// ============================================================
+//
+// WHAT IS HYDRATION?
+//   After the server sends HTML to the browser, React runs on
+//   the client and "hydrates" it — it attaches event listeners
+//   and takes over the DOM. For this to work, the client's
+//   first render must produce the EXACT same output as the
+//   server's HTML. If they differ → hydration error.
+//
+// ─────────────────────────────────────────────────────────
+// WHAT "use client" ACTUALLY MEANS
+// ─────────────────────────────────────────────────────────
+//
+//   It does NOT mean "skip server rendering."
+//   The server STILL renders the component for the initial HTML.
+//
+//   What it really means:
+//     → "This is the boundary where server hands off to client."
+//     → Above the boundary: server owns the truth.
+//     → Below the boundary: client owns the truth.
+//
+//   When a Server Component imports a Client Component:
+//     - Next.js SSRs it on the server (commits to HTML)
+//     - Client re-renders it and compares against server HTML
+//     - If they differ → hydration error
+//
+//   When the PARENT is a Client Component ("use client"):
+//     - Server still does a render pass for the initial HTML,
+//       BUT it hands full ownership to the client.
+//     - Client re-renders the subtree freely, no strict match.
+//     - Nothing to mismatch against → no hydration error.
+//
+//   Mental model:
+//     Server Component parent → STRICT handoff (must match exactly)
+//     Client Component parent → LOOSE handoff (client takes over)
+//
+// ─────────────────────────────────────────────────────────
+// COMPONENT COMPOSITION RULES
+// ─────────────────────────────────────────────────────────
+//
+//   ✅  Server → Server → Client     fine, normal pattern
+//   ✅  Client → Client              fine
+//   ❌  Client → Server              not allowed
+//   ❌  Server → Client → Server     not allowed
+//
+//   Server → Server → Client is fine AS LONG AS the Client
+//   Component's first render is identical on server and client.
+//
+// ─────────────────────────────────────────────────────────
+// THE 3 THINGS THAT CAUSE HYDRATION MISMATCHES
+// ─────────────────────────────────────────────────────────
+//
+//   1. Non-deterministic values used during render
+//      ❌  Date.now(), Math.random(), crypto.randomUUID()
+//          called directly in the render body (not in effects)
+//
+//   2. Browser-only APIs used during render
+//      ❌  typeof window, localStorage, navigator, etc.
+//          accessed outside of useEffect
+//
+//   3. Dynamic component patterns
+//      ❌  Defining a component INSIDE another component's
+//          render body — it creates a new function reference
+//          on every render, causing React to unmount/remount
+//          and producing different DOM output server vs client.
+//      ❌  Rendering components from an array/map of refs
+//          where the SSR pass resolves differently than client.
+//
+// ─────────────────────────────────────────────────────────
+// NEVER DEFINE A COMPONENT INSIDE ANOTHER COMPONENT
+// ─────────────────────────────────────────────────────────
+//
+//   ❌  WRONG — new function reference on every render:
+//
+//       function Parent() {
+//         const Child = () => hello; // ← defined inside
+//         return ;
+//       }
+//
+//   ✅  RIGHT — stable identity:
+//
+//       const Child = () => hello; // ← defined outside
+//       function Parent() {
+//         return ;
+//       }
+//
+//   Defining a component inside another's render body means:
+//     - Every render creates a NEW component type
+//     - React unmounts and remounts it (not just re-renders)
+//     - SSR produces different DOM than client → mismatch
+//     - suppressHydrationWarning does NOT fix this
+//
+// ─────────────────────────────────────────────────────────
+// THE "mounted" GUARD PATTERN — escape hatch
+// ─────────────────────────────────────────────────────────
+//
+//   Use when a component CAN'T render the same thing on
+//   server and client (e.g. reads from localStorage, uses
+//   a browser API, renders something truly dynamic at init).
+//
+//   const [mounted, setMounted] = useState(false);
+//   useEffect(() => setMounted(true), []);
+//   if (!mounted) return null;
+//   // ... rest of render
+//
+//   Both server and client commit to `null` on first render.
+//   Nothing to mismatch. Client takes over after mount.
+//
+// ─────────────────────────────────────────────────────────
+// suppressHydrationWarning — what it actually does
+// ─────────────────────────────────────────────────────────
+//
+//   Only suppresses attribute/text mismatches on a single
+//   DOM element. It does NOT suppress errors from:
+//     - Component identity instability (new fn reference)
+//     - Missing/extra elements in the tree
+//     - Structural differences between server and client
+//
+//   It is NOT a general fix for hydration errors.
+//
+// ─────────────────────────────────────────────────────────
+// QUICK MENTAL CHECKLIST
+// ─────────────────────────────────────────────────────────
+//
+//   Before shipping a Client Component, ask:
+//   [ ] Does anything in the render body call Date.now(),
+//       Math.random(), or crypto.randomUUID()?
+//   [ ] Does anything access window, localStorage, or
+//       navigator outside of useEffect?
+//   [ ] Am I defining any component inside this component?
+//   [ ] Am I rendering components dynamically from an array
+//       in a way that might resolve differently on server?
+//   [ ] If yes to any of the above → use useEffect,
+//       move the logic out, or use the mounted guard.
+//
+// ============================================================
+
+type FetchState<T> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; message: string };
+
+type FetchAction<T> =
+  | { type: "fetch-start" }
+  | { type: "fetch-success"; payload: T }
+  | { type: "fetch-error"; message: string }
+  | { type: "fetch-reset" };
+
+type FetchData = User;
+
+const DisplayDataComponent = ({
+  fetchStatus,
+}: {
+  fetchStatus: FetchState<FetchData>;
+}) => {
+  if (fetchStatus.status === "idle")
+    return <div className="text-green-600">Idle..</div>;
+  if (fetchStatus.status === "loading") return <div>Loading...</div>;
+  if (fetchStatus.status === "error")
+    return <div>ERROR: {fetchStatus.message}</div>;
+  if (fetchStatus.status === "success")
+    return (
+      <div>
+        [SUCCESS]
+        <div>
+          <p>Name: {fetchStatus.data.name}</p>
+          <p>Age: {fetchStatus.data.age}</p>
+          <p>Phone Number: {fetchStatus.data.phoneNumber}</p>
+          <p>Email Address: {fetchStatus.data.email}</p>
+        </div>
+      </div>
+    );
+  return null;
+};
+
+function UseReducerOnFetchExample() {
+  // const [mounted, setMounted] = useState<boolean>(false);
+  const [fetchUserStatus, fetchUserStatusDispatcher] = useReducer(
+    <T extends FetchData>(
+      state: FetchState<T>,
+      action: FetchAction<T>,
+    ): FetchState<T> => {
+      switch (action.type) {
+        case "fetch-start":
+          return { status: "loading" };
+        case "fetch-success":
+          return { status: "success", data: action.payload };
+        case "fetch-error":
+          return { status: "error", message: action.message };
+        case "fetch-reset":
+          return { status: "idle" };
+        default:
+          return state;
+      }
+    },
+    { status: "idle" } as FetchState<FetchData>,
+  );
+
+  const fetchUser = async (id: string) => {
+    fetchUserStatusDispatcher({ type: "fetch-start" });
+    try {
+      const res = await fetch(`/api/api-3/${id}`);
+      const data = await res.json();
+
+      // console.log(data);
+      if (res.ok) {
+        fetchUserStatusDispatcher({ type: "fetch-success", payload: data });
+      } else {
+        throw new Error(data.errorMsg);
+      }
+    } catch (error) {
+      fetchUserStatusDispatcher({
+        type: "fetch-error",
+        message: (error as Error).message,
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log(fetchUserStatus);
+    if (fetchUserStatus.status === "success") console.log(fetchUserStatus.data);
+  }, [fetchUserStatus]);
+
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
+
+  // if (!mounted) {
+  //   return <div>Loading...</div>;
+  // }
+
+  return (
+    <>
+      <div>
+        <button
+          type="button"
+          className="p-3 bg-green-800"
+          onClick={() => {
+            fetchUser("1");
+          }}
+        >
+          Fetch User
+        </button>
+        <DisplayDataComponent fetchStatus={fetchUserStatus} />
+      </div>
+    </>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────
 // 6. REAL-WORLD PATTERN — Shopping Cart (CRUD)
 // ─────────────────────────────────────────────────────────────
@@ -596,6 +895,8 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 //
 
 function initFromStorage(defaultCount: number): CounterState {
+  // - A server/client branch `if (typeof window !== 'undefined')`.
+  if (typeof window === "undefined") return { count: defaultCount };
   const saved = localStorage.getItem("count");
   return { count: saved ? Number(saved) : defaultCount };
 }
@@ -603,12 +904,34 @@ function initFromStorage(defaultCount: number): CounterState {
 function PersistentCounter() {
   // initFromStorage(0) called once, not on every render
   const [state, dispatch] = useReducer(counterReducer, 0, initFromStorage);
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem("count")) {
+      localStorage.setItem("count", "1");
+    } else {
+      console.log(state);
+    }
+  }, [])
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <button onClick={() => dispatch({ type: "INCREMENT" })}>
       {state.count}
     </button>
   );
 }
+
+
+
+
 
 // ─────────────────────────────────────────────────────────────
 // 8. COMBINING WITH useContext  (poor man's Redux)
@@ -685,15 +1008,76 @@ function PersistentCounter() {
 // DEFAULT EXPORT — UseReducerLesson
 // Drop this anywhere in your app to browse all lesson components
 // ─────────────────────────────────────────────────────────────
+type ComponentItems<T extends object = Record<string, any>> = {
+  title: string;
+  component: React.ComponentType<T>;
+  parameters?: T;
+  run: boolean;
+};
+
+const componentRenderer = <T extends object = any>({
+  component: Component,
+  parameters,
+}: Pick<ComponentItems<T>, "component" | "parameters">) => {
+  return <Component {...(parameters as T)} />;
+};
 
 export default function UseReducerLesson() {
+  // The function at the top can be written as:
+  /*
+  function renderComponent<T extends object>({ component: Component, parameters }: Pick<ComponentItems<T>, "component" | "parameters">) {
+    return <Component {...(parameters as T)} />;
+  }
+  */
+
+  const components: ComponentItems<{ userId: string }>[] = [
+    {
+      title: "Counter using useReducer() hook.",
+      component: Counter,
+      run: false,
+    },
+    {
+      title: "Signup Form using useReducer() hook.",
+      component: SignupForm,
+      run: false,
+    },
+    {
+      title: "Task manager using useReducer() hook.",
+      component: TaskManagerUsingUseReducerHook,
+      run: false,
+    },
+    {
+      title: "Async fetch lifecyle (press any userId)",
+      component: UserProfile,
+      parameters: { userId: "1" },
+      run: false,
+    },
+    {
+      title: "User Fetching using useReducer() hook for states.",
+      component: UseReducerOnFetchExample,
+      run: false,
+    },
+    {
+      title: "Persistent Counter",
+      component: PersistentCounter,
+      run: true
+    }
+  ];
+
   return (
     <div>
-      {/* Lesson 3 — Basic reducer with counter */}
-      {/* <Counter /> */}
+      {components.map((item, index) =>
+        item.run ? (
+          <div key={item.title}>
+            <div className="text-gray-400 py-5">
+              <span className="font-semibold">{index}.</span> {item.title}
+            </div>
+            {componentRenderer(item)}
+          </div>
+        ) : null,
+      )}
 
-      {/* Lesson 4 — Multi-field form state */}
-      <SignupForm />
+      {/* <UseReducerOnFetchExample /> */}
 
       {/* Lesson 5 — Async fetch lifecycle (pass any userId) */}
       {/* <UserProfile userId="1" /> */}

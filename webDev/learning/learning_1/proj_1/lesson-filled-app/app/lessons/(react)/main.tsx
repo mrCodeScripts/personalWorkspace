@@ -1,3 +1,5 @@
+"use client";
+
 import DynamicComponentMapping from "./dynamic-component-mapping";
 import UseReducerLesson from "./react-hooks/useReducer";
 import UseStateNotes from "./react-hooks/useState";
